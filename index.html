@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Nrl Round11 Picks",
+  "schemaVersion": 1,
+  "description": "Jack's NRL Round 11 (Magic Round) 2026 picks dashboard — season accuracy tracker with new week-by-week line graph, all 8 game picks with full v5 data layer, TAB betting layer, Bold Play, season learnings, and auto-improvement card."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jack's NRL Round 11 Picks — Magic Round 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; padding: 20px 16px; }
+  .container { max-width: 760px; margin: 0 auto; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 24px; padding: 28px 20px; background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #7c3aed; }
+  .header-eyebrow { font-size: 11px; color: #7c3aed; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; font-weight: 700; }
+  .header-title { font-size: 30px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
+  .header-sub { font-size: 13px; color: #64748b; margin-top: 6px; }
+  .magic-badge { display: inline-block; margin-top: 10px; padding: 6px 14px; background: linear-gradient(135deg, #7c3aed, #4c1d95); color: #fff; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+  /* Accuracy tracker */
+  .accuracy-card { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%); border-radius: 16px; padding: 28px 24px; margin-bottom: 16px; color: #fff; text-align: center; box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
+  .accuracy-eyebrow { font-size: 11px; color: #bfdbfe; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; font-weight: 700; }
+  .accuracy-hero { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -2px; color: #fff; }
+  .accuracy-hero span { font-size: 36px; }
+  .accuracy-sub { font-size: 13px; color: #bfdbfe; margin-top: 8px; }
+  .accuracy-pills { display: flex; justify-content: center; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+  .accuracy-pill { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 10px 16px; text-align: center; backdrop-filter: blur(4px); }
+  .pill-label { font-size: 10px; color: #bfdbfe; text-transform: uppercase; letter-spacing: 1px; }
+  .pill-value { font-size: 20px; font-weight: 800; color: #fff; margin-top: 2px; }
+  .pill-sub { font-size: 10px; color: #93c5fd; margin-top: 1px; }
+  .accuracy-chart-wrap { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px 12px 8px; margin-top: 18px; }
+  .accuracy-chart-label { font-size: 10px; color: #bfdbfe; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; text-align: left; padding-left: 4px; }
+  .accuracy-chart-canvas-wrap { position: relative; height: 180px; }
+
+  /* Card base */
+  .card { background: #fff; border-radius: 14px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; transition: box-shadow 0.2s; }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .card-header { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .card-header-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+  .card-header-sub { font-size: 12px; color: #64748b; margin-top: 2px; }
+  .card-chevron { font-size: 16px; color: #94a3b8; transition: transform 0.2s; }
+  .card-chevron.open { transform: rotate(180deg); }
+  .card-body { display: none; padding: 0 20px 20px; border-top: 1px solid #f1f5f9; }
+  .card-body.open { display: block; }
+
+  /* Bold Play */
+  .bold-play-banner { background: linear-gradient(135deg, #4c1d95, #7c3aed); border-radius: 14px; padding: 20px 22px; margin-bottom: 16px; color: #fff; box-shadow: 0 4px 16px rgba(124,58,237,0.3); }
+  .bold-play-label { font-size: 10px; color: #ddd6fe; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 8px; }
+  .bold-play-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .bold-play-body { font-size: 13px; color: #e9d5ff; line-height: 1.6; }
+
+  /* Quick summary table */
+  .summary-table { width: 100%; border-collapse: collapse; }
+  .summary-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; padding: 8px 10px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+  .summary-table td { padding: 10px 10px; font-size: 13px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:hover td { background: #f8fafc; }
+
+  /* Tier badges */
+  .tier { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tier-STRONG { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+  .tier-LEAN { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  .tier-COINFLIP { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+  .pick-team { font-weight: 700; color: #0f172a; }
+  .pick-margin { color: #475569; }
+  .tab-odds { font-weight: 700; color: #16a34a; }
+  .tab-return { color: #059669; font-weight: 600; }
+
+  /* Game cards */
+  .game-card { background: #fff; border-radius: 14px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border-left: 4px solid #e2e8f0; transition: border-color 0.2s; }
+  .game-card.STRONG { border-left-color: #2563eb; }
+  .game-card.LEAN { border-left-color: #d97706; }
+  .game-card.COINFLIP { border-left-color: #dc2626; }
+  .game-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; user-select: none; }
+  .game-matchup { flex: 1; min-width: 160px; }
+  .game-teams { font-size: 15px; font-weight: 700; color: #0f172a; }
+  .game-meta { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+  .game-pick-block { text-align: right; min-width: 120px; }
+  .game-pick-team { font-size: 17px; font-weight: 800; color: #2563eb; }
+  .game-pick-margin { font-size: 12px; color: #64748b; }
+  .game-pick-tab { font-size: 12px; color: #16a34a; font-weight: 600; margin-top: 2px; }
+  .game-body { display: none; padding: 16px 20px 20px; border-top: 1px solid #f1f5f9; }
+  .game-body.open { display: block; }
+
+  /* Game detail grid */
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .detail-item label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; display: block; margin-bottom: 4px; }
+  .detail-item .value { font-size: 13px; color: #334155; font-weight: 500; }
+
+  /* Confidence bar */
+  .conf-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .conf-bar-track { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+  .conf-bar-fill { height: 100%; border-radius: 4px; }
+  .conf-bar-pct { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
+
+  /* Key factors */
+  .factors-section { margin: 16px 0; }
+  .factors-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 8px; font-weight: 700; }
+  .factor { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; font-size: 12px; color: #334155; line-height: 1.5; }
+  .factor-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .factor-dot.critical { background: #dc2626; }
+  .factor-dot.high { background: #ea580c; }
+  .factor-dot.medium { background: #ca8a04; }
+  .factor-dot.low { background: #16a34a; }
+
+  /* Analysis & strategy */
+  .analysis-block { background: #f8fafc; border-radius: 8px; padding: 12px 14px; margin: 12px 0; border-left: 3px solid #2563eb; font-size: 12.5px; color: #334155; line-height: 1.6; }
+  .strategy-block { background: #fef3c7; border-radius: 8px; padding: 12px 14px; margin: 12px 0; border-left: 3px solid #d97706; font-size: 12.5px; color: #78350f; line-height: 1.6; }
+  .strategy-block strong, .analysis-block strong { color: #0f172a; }
+
+  /* v5 data panel */
+  .v5-panel { margin-top: 16px; padding: 14px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 10px; border: 1px solid #e2e8f0; }
+  .v5-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7c3aed; font-weight: 700; margin-bottom: 10px; }
+  .v5-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; font-size: 11.5px; }
+  .v5-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; border-bottom: 1px dashed #e2e8f0; }
+  .v5-row:last-child { border-bottom: none; }
+  .v5-label { color: #64748b; }
+  .v5-value { color: #0f172a; font-weight: 600; text-align: right; }
+  .v5-flag { color: #dc2626; font-weight: 700; }
+
+  /* TAB betting */
+  .tab-summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .tab-stat { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px; text-align: center; }
+  .tab-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #166534; margin-bottom: 4px; font-weight: 700; }
+  .tab-stat-value { font-size: 18px; font-weight: 800; color: #14532d; }
+  .tab-stat-sub { font-size: 10px; color: #16a34a; margin-top: 2px; }
+  .tab-bet-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 12.5px; }
+  .tab-bet-row:last-child { border-bottom: none; }
+  .tab-bet-team { flex: 1; font-weight: 600; color: #0f172a; }
+  .tab-bet-vs { color: #94a3b8; font-size: 11px; }
+  .tab-bet-odds { color: #16a34a; font-weight: 700; min-width: 50px; text-align: right; }
+  .tab-bet-return { color: #059669; min-width: 70px; text-align: right; font-weight: 600; }
+
+  /* Ladder */
+  .ladder-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ladder-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; padding: 6px 8px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+  .ladder-table td { padding: 6px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+  .ladder-table tr.top4 td { background: #f0f9ff; }
+  .ladder-table tr.top8 td { background: #fafafa; }
+  .ladder-pos { font-weight: 700; color: #0f172a; min-width: 20px; }
+  .ladder-team { font-weight: 600; color: #0f172a; }
+  .ladder-form { font-family: monospace; font-size: 11px; letter-spacing: 1px; }
+  .form-W { color: #16a34a; font-weight: 700; }
+  .form-L { color: #dc2626; font-weight: 700; }
+
+  /* Review */
+  .review-item { padding: 10px 12px; margin-bottom: 6px; border-radius: 8px; font-size: 12.5px; line-height: 1.5; }
+  .review-win { background: #f0fdf4; color: #14532d; border-left: 3px solid #16a34a; }
+  .review-loss { background: #fef2f2; color: #7f1d1d; border-left: 3px solid #dc2626; }
+  .review-bonus { background: #ecfdf5; color: #065f46; border-left: 3px solid #10b981; }
+  .review-lesson { padding: 8px 12px; margin-bottom: 6px; background: #fffbeb; border-left: 3px solid #d97706; border-radius: 6px; font-size: 12.5px; color: #78350f; line-height: 1.5; }
+
+  /* Auto improvement (NEW v5) */
+  .auto-block { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border: 1px solid #e9d5ff; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+  .auto-q { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7c3aed; font-weight: 700; margin-bottom: 6px; }
+  .auto-a { font-size: 12.5px; color: #4c1d95; line-height: 1.6; }
+
+  /* Magic Round box */
+  .magic-info { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #d8b4fe; border-radius: 10px; padding: 14px; margin-bottom: 14px; }
+  .magic-info-title { font-size: 12px; font-weight: 800; color: #6b21a8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .magic-info-body { font-size: 12px; color: #581c87; line-height: 1.6; }
+
+  /* Controls */
+  .controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+  .control-btn { padding: 8px 14px; background: #fff; border: 1px solid #e2e8f0; color: #475569; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+  .control-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 20px 12px; color: #94a3b8; font-size: 11px; line-height: 1.6; }
+  .footer strong { color: #64748b; }
+
+  @media (max-width: 600px) {
+    .v5-grid, .detail-grid, .tab-summary-grid { grid-template-columns: 1fr; }
+    .header-title { font-size: 24px; }
+    .accuracy-hero { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-eyebrow">Jack's NRL Picks</div>
+  <div class="header-title">Round 11 — Magic Round</div>
+  <div class="header-sub">Fri 15 — Sun 17 May 2026 · All games at Suncorp · Raiders bye</div>
+  <div class="magic-badge">Magic Round Framework Active</div>
+</div>
+
+<!-- Accuracy Tracker -->
+<div class="accuracy-card">
+  <div class="accuracy-eyebrow">Season Accuracy</div>
+  <div class="accuracy-hero">77<span>.1%</span></div>
+  <div class="accuracy-sub">37 wins from 48 picks · R5–R10 locked</div>
+  <div class="accuracy-pills">
+    <div class="accuracy-pill"><div class="pill-label">Bold Plays</div><div class="pill-value">5/5</div><div class="pill-sub">100% landed</div></div>
+    <div class="accuracy-pill"><div class="pill-label">Last Round</div><div class="pill-value">7/8</div><div class="pill-sub">Sea Eagles BP ✅</div></div>
+    <div class="accuracy-pill"><div class="pill-label">Margin Bonus</div><div class="pill-value">12+</div><div class="pill-sub">within-5 hits</div></div>
+  </div>
+  <div class="accuracy-chart-wrap">
+    <div class="accuracy-chart-label">Per-round accuracy ·  R5 — R10</div>
+    <div class="accuracy-chart-canvas-wrap"><canvas id="accuracyChart"></canvas></div>
+  </div>
+</div>
+
+<!-- Magic Round info box -->
+<div class="magic-info">
+  <div class="magic-info-title">⚡ Magic Round Framework</div>
+  <div class="magic-info-body">All 8 R11 games at Suncorp Stadium, Brisbane. <strong>Home advantage zeroed out</strong>, <strong>travel km neutralised</strong>. Recent form upweighted. Surface: fast, suits attacking sides with strong kicking games. Crowd is neutral with slight lean to local Qld clubs (Broncos/Cowboys/Dolphins/Titans). Watch for sides that lose their biggest edge — Warriors lose Auckland fortress, Cowboys lose Townsville heat.</div>
+</div>
+
+<!-- Bold Play -->
+<div class="bold-play-banner">
+  <div class="bold-play-label">⚡ Bold Play of the Round</div>
+  <div class="bold-play-title">Dolphins to upset Rabbitohs by 4</div>
+  <div class="bold-play-body">Souths still without Latrell Mitchell and Wighton. Dolphins riding momentum after pumping Bulldogs 44–12, Marshall-King back, Bostock looking like an NRL centre, Isaako kicking goals like he's printing them. Magic Round neutralises Souths' Accor advantage — this is a true neutral coin flip and the market won't price it that way. If we land it, we get the bonus and we win the round.</div>
+</div>
+
+<!-- Quick summary -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">All 8 Picks — Quick Summary</div><div class="card-header-sub">Pick · Margin · Tier · TAB Odds · Return on $100</div></div>
+    <div class="card-chevron open">▼</div>
+  </div>
+  <div class="card-body open">
+    <table class="summary-table">
+      <thead><tr><th>Match</th><th>Pick</th><th>Margin</th><th>Tier</th><th>TAB</th><th>Return</th></tr></thead>
+      <tbody id="summary-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB Betting -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">💰 TAB Betting Layer — $800 Staked</div><div class="card-header-sub">$100 flat per game · Expected value · All-8 return</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="tab-summary-grid">
+      <div class="tab-stat"><div class="tab-stat-label">Total Stake</div><div class="tab-stat-value">$800</div><div class="tab-stat-sub">8 × $100</div></div>
+      <div class="tab-stat"><div class="tab-stat-label">If All 8 Win</div><div class="tab-stat-value" id="tab-all-win">—</div><div class="tab-stat-sub" id="tab-all-win-sub">return</div></div>
+      <div class="tab-stat"><div class="tab-stat-label">Expected Value</div><div class="tab-stat-value" id="tab-ev">—</div><div class="tab-stat-sub" id="tab-ev-sub">conf-weighted</div></div>
+    </div>
+    <div id="tab-bets"></div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:14px;text-align:center;font-style:italic">Variance is real. Don't bet what you can't afford to lose. All for fun.</div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="control-btn" onclick="expandAll()">Expand all games</button>
+  <button class="control-btn" onclick="collapseAll()">Collapse all</button>
+</div>
+
+<!-- Game cards container -->
+<div id="games-container"></div>
+
+<!-- Ladder -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">📊 Updated NRL Ladder — post R10</div><div class="card-header-sub">Telstra Premiership 2026</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="ladder-table">
+      <thead><tr><th>#</th><th>Team</th><th>W-L</th><th>Pts</th><th>Diff</th><th>Form</th></tr></thead>
+      <tbody id="ladder-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- R10 Review -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">📝 R10 Review — 7/8 ✅</div><div class="card-header-sub">Sea Eagles Bold Play LANDED · Cowboys golden-point loss</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div id="review-body"></div>
+  </div>
+</div>
+
+<!-- Auto-Improvement (NEW v5) -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">🔧 Auto-Improvement — Self-Assessment</div><div class="card-header-sub">What the framework got right & wrong this round</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div id="auto-body"></div>
+  </div>
+</div>
+
+<!-- Season Learnings + Principles -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">📚 Season Learnings & Framework Principles</div><div class="card-header-sub">11 earned principles · 6 rounds tracked</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#64748b;font-weight:700;margin:8px 0">Round-by-round lessons</div>
+    <div id="learnings-body"></div>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#64748b;font-weight:700;margin:14px 0 8px">Earned principles (non-negotiable)</div>
+    <div id="principles-body"></div>
+  </div>
+</div>
+
+<!-- Next round variables -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">🔮 Variables to Add Next Round</div><div class="card-header-sub">Self-assessment proposals · v6 candidates</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div id="next-vars-body"></div>
+  </div>
+</div>
+
+<!-- Variable counter -->
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div><div class="card-header-title">📈 Active Variable Count — v5</div><div class="card-header-sub">53+ inputs powering each pick</div></div>
+    <div class="card-chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div id="var-counter-body" style="font-size:11.5px;color:#475569;line-height:1.8;column-count:2;column-gap:24px"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <strong>Jack — Sports Betting Advisor · v5</strong><br>
+  Not a financial advisor. The cosmos is indifferent. Cleary doesn't care about your feelings. Pick the right margin.
+</div>
+
+</div>
+
+<script>
+// =============== DATA ===============
+const GAMES = [
+  // GAME 1
+  { id:1, day:"Fri 15 May", time:"8:00pm NZT", home:"Sharks", away:"Bulldogs",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Sharks", margin:14, predictedScore:{home:32,away:18}, confidence:72, tier:"STRONG",
+    weather:"Mild Brisbane evening, 21°C, fine — Suncorp open air",
+    spread:"Sharks -10.5", upsetRisk:false,
+    tabHomeOdds:1.55, tabAwayOdds:2.45, tabPick:"Sharks", tabOdds:1.55,
+    bettingNote:"Bulldogs in crisis, won 1 of last 7. Sharks bounce-back week. $100 returns $155.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Ashley Klein",note:"Tight on early ruck — favours Sharks structure"},
+    lineMove:{opener:"Sharks -8.5",current:"Sharks -10.5",dir:"toward_pick"},
+    metrics:{hAtk:8,hDef:10,aAtk:15,aDef:14},
+    coach:{home:"established",away:"under_pressure"},
+    travelKm:0,
+    injuryWeight:{home:3,away:13},
+    halvesGames:{home:24,away:5},
+    benchImpact:{home:"strong",away:"average"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:51,away:46},
+    keyFactors:[
+      {l:"Bulldogs in crisis — won 1 of last 7, lost to Dolphins 44-12",w:"critical",d:"home"},
+      {l:"Hynes was 81 fantasy points two weeks ago — Dally M form",w:"critical",d:"home"},
+      {l:"Sharks lost 36-12 to Souths last week but Bulldogs softer matchup",w:"high",d:"home"},
+      {l:"Bulldogs have lost ALL 7 games at Suncorp on a Thursday/Friday",w:"high",d:"home"},
+      {l:"Kikau still out — Bulldogs forward pack threadbare",w:"high",d:"home"},
+      {l:"Magic Round neutralises Bulldogs' away struggles — but doesn't help them",w:"medium",d:"home"},
+      {l:"Galvin–Burgess halves combination still raw",w:"medium",d:"home"},
+      {l:"⚠️ Sharks coming off a flat performance — letdown risk",w:"medium",d:"away"}
+    ],
+    analysis:"Bulldogs are the worst-form mid-table side in the comp right now. Won one of seven, leaking 30+ a game, Kikau still out and Galvin still finding his halves combination. Sharks had a flat week against Souths but they're clearly the better team and Hynes will want to bounce back. Line moved 2 points in our favour — market reading the same. Going 14, deliberately above the -10.5 line because Suncorp is a fast track and Sharks' attack travels.",
+    strategy:"Pool will mostly tip Sharks. Margin of 14 sits above the -10.5 line — bonus protection. If the Bulldogs roll over (which they have done) this is 20+." },
+
+  // GAME 2 — BOLD PLAY
+  { id:2, day:"Fri 15 May", time:"10:00pm NZT", home:"Rabbitohs", away:"Dolphins",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Dolphins", margin:4, predictedScore:{home:22,away:26}, confidence:53, tier:"COIN FLIP",
+    weather:"Cool Brisbane night, 19°C, fine",
+    spread:"Rabbitohs -3.5", upsetRisk:true,
+    tabHomeOdds:1.50, tabAwayOdds:2.55, tabPick:"Dolphins", tabOdds:2.55,
+    bettingNote:"BOLD PLAY. Going against the favourite. Souths missing Latrell + Wighton, Dolphins on form. $100 returns $255.",
+    restDiff:{home:6,away:7,adv:"away"},
+    referee:{name:"Adam Gee",note:"Tight on ruck speed, penalises late shots"},
+    lineMove:{opener:"Rabbitohs -5.5",current:"Rabbitohs -3.5",dir:"away_from_pick_team"},
+    metrics:{hAtk:5,hDef:9,aAtk:11,aDef:12},
+    coach:{home:"established",away:"established"},
+    travelKm:0,
+    injuryWeight:{home:14,away:6},
+    halvesGames:{home:36,away:8},
+    benchImpact:{home:"strong",away:"average"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:50,away:49},
+    keyFactors:[
+      {l:"BOLD PLAY: Souths missing Latrell (injury) AND Wighton — backline reshuffled",w:"critical",d:"away"},
+      {l:"Dolphins won 44-12 over Bulldogs — Isaako 3 tries, Marshall-King back",w:"critical",d:"away"},
+      {l:"Magic Round neutralises Souths' Accor home edge — true coin flip",w:"high",d:"away"},
+      {l:"Line drifted Rabbitohs -5.5 → -3.5 — market lost confidence in Souths",w:"high",d:"away"},
+      {l:"Dolphins on 2-game win streak after close losses to top 2",w:"high",d:"away"},
+      {l:"Bostock looking like a real NRL centre on debut last week",w:"medium",d:"away"},
+      {l:"Souths still potent with Walker, Johnston, Murray — they don't need Latrell to win",w:"high",d:"home"},
+      {l:"⚠️ Souths coming off 36-12 win — momentum still with them",w:"medium",d:"home"},
+      {l:"⚠️ Brisbane crowd may lean Dolphins — neutral with slight away tilt",w:"low",d:"away"}
+    ],
+    analysis:"This is the Bold Play. Souths without Latrell + Wighton is a categorically different team. Dolphins won 44-12 last week, Marshall-King is back, Isaako is in unstoppable form, and Magic Round wipes Souths' Accor advantage. Market has Souths -3.5 but the line drifted from -5.5 — that's the signal. We treat this as a true coin flip and back the underdog at $2.55. Margin held at 4 to protect the bonus if it goes the other way close.",
+    strategy:"Bold Play. Pool will mostly tip Souths. We go against — the contrarian call. Even a Souths win by 2-4 means we get nothing in Superbru, but if Dolphins land we collect both the win and likely the bonus. Risk is real, EV is positive." },
+
+  // GAME 3
+  { id:3, day:"Sat 16 May", time:"5:00pm NZT", home:"Wests Tigers", away:"Sea Eagles",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Sea Eagles", margin:12, predictedScore:{home:14,away:26}, confidence:75, tier:"STRONG",
+    weather:"Warm Brisbane afternoon, 23°C, fine",
+    spread:"Sea Eagles -7.5", upsetRisk:false,
+    tabHomeOdds:2.55, tabAwayOdds:1.50, tabPick:"Sea Eagles", tabOdds:1.50,
+    bettingNote:"Tigers spine still in tatters. Manly humming. $100 returns $150.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Grant Atkins",note:"Lets play flow — favours attacking sides"},
+    lineMove:{opener:"Sea Eagles -5.5",current:"Sea Eagles -7.5",dir:"toward_pick"},
+    metrics:{hAtk:2,hDef:7,aAtk:7,aDef:5},
+    coach:{home:"established",away:"new"},
+    travelKm:0,
+    injuryWeight:{home:18,away:4},
+    halvesGames:{home:2,away:14},
+    benchImpact:{home:"weak",away:"strong"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:45,away:51},
+    keyFactors:[
+      {l:"Manly won 32-4 over Broncos last week — defensive masterclass",w:"critical",d:"away"},
+      {l:"Foran 5 wins from 6 since taking over — top-8 form team",w:"critical",d:"away"},
+      {l:"Olakau'atu = best forward in the NRL right now",w:"critical",d:"away"},
+      {l:"Tigers without Bula, Doueihi, Pearce-Paul — spine still fielding backups",w:"critical",d:"home"},
+      {l:"Tigers got smashed 44-16 by Storm last week — disorganised",w:"high",d:"away"},
+      {l:"Fogarty + DCE halves combination clicking",w:"high",d:"away"},
+      {l:"Tom Trbojevic running 200m+ a game",w:"high",d:"away"},
+      {l:"⚠️ Magic Round = no Brookvale crowd lift for Manly",w:"medium",d:"home"}
+    ],
+    analysis:"Tigers are broken. Three spine players out, Madden at half is undercooked, and Benji Marshall is publicly calling effort levels into question. Manly meanwhile destroyed the Broncos last week and have the best forward in the league. Magic Round takes Manly's home advantage off the board but Tigers were never going to win on neutral turf either. Going 12, above the -7.5 line.",
+    strategy:"Likely consensus pick. Margin 12 sits above market — bonus play. If Tigers' spine collapses again this is 18+." },
+
+  // GAME 4
+  { id:4, day:"Sat 16 May", time:"7:30pm NZT", home:"Roosters", away:"Cowboys",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Roosters", margin:6, predictedScore:{home:26,away:20}, confidence:60, tier:"LEAN",
+    weather:"Mild Brisbane evening, 20°C, fine",
+    spread:"Roosters -4.5", upsetRisk:true,
+    tabHomeOdds:1.55, tabAwayOdds:2.45, tabPick:"Roosters", tabOdds:1.55,
+    bettingNote:"Genuine top-6 clash. Roosters on 6-game streak. Cowboys want revenge after golden-point loss. $100 returns $155.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Gerard Sutton",note:"Veteran ref, neutral on differential"},
+    lineMove:{opener:"Roosters -3.5",current:"Roosters -4.5",dir:"toward_pick"},
+    metrics:{hAtk:3,hDef:7,aAtk:4,aDef:11},
+    coach:{home:"established",away:"established"},
+    travelKm:0,
+    injuryWeight:{home:3,away:5},
+    halvesGames:{home:38,away:42},
+    benchImpact:{home:"strong",away:"strong"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:53,away:50},
+    keyFactors:[
+      {l:"Roosters on 6-game winning streak — comp's longest current",w:"critical",d:"home"},
+      {l:"DCE-Walker spine is sublime, Tedesco running 200m+ a game",w:"critical",d:"home"},
+      {l:"Cowboys want revenge after golden-point penalty try loss to Eels",w:"high",d:"away"},
+      {l:"Cowboys' Drinkwater–Clifford spine still humming",w:"high",d:"away"},
+      {l:"Magic Round neutralises Roosters' Gosford fortress",w:"medium",d:"away"},
+      {l:"Magic Round also kills Cowboys' Townsville heat advantage — net wash",w:"low",d:"home"},
+      {l:"Crichton playing through MCL — risk of breakdown",w:"medium",d:"away"},
+      {l:"⚠️ 6-game streaks tend to end on letdown weeks vs quality opposition",w:"medium",d:"away"}
+    ],
+    analysis:"Closest game on the card. Roosters are the form team in the comp but six-game streaks regress, and Cowboys want blood after a controversial loss. Both have settled spines and Magic Round cancels both teams' home edges. Going Roosters because the form line is unambiguous, but margin held at 6 — barely above market.",
+    strategy:"Likely consensus on Roosters. Margin 6 sits just above -4.5 — small move off market. If Cowboys win this is the upset of the round and someone in the pool gets the bonus. Risk priced in." },
+
+  // GAME 5
+  { id:5, day:"Sat 16 May", time:"9:45pm NZT", home:"Eels", away:"Storm",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Storm", margin:12, predictedScore:{home:14,away:26}, confidence:70, tier:"STRONG",
+    weather:"Cool Brisbane night, 19°C, fine",
+    spread:"Storm -8.5", upsetRisk:false,
+    tabHomeOdds:2.45, tabAwayOdds:1.55, tabPick:"Storm", tabOdds:1.55,
+    bettingNote:"Storm broke 7-game streak with Hughes back. Eels missing key backs. $100 returns $155.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Liam Kennedy",note:"Higher penalty count — disrupts rhythm"},
+    lineMove:{opener:"Storm -6.5",current:"Storm -8.5",dir:"toward_pick"},
+    metrics:{hAtk:12,hDef:17,aAtk:6,aDef:8},
+    coach:{home:"under_pressure",away:"established"},
+    travelKm:0,
+    injuryWeight:{home:13,away:4},
+    halvesGames:{home:3,away:48},
+    benchImpact:{home:"average",away:"strong"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:46,away:49},
+    keyFactors:[
+      {l:"Storm broke 7-game losing streak with 44-16 win over Tigers",w:"critical",d:"away"},
+      {l:"HUGHES returned, Munster + Grant + Hughes is the proper Storm spine",w:"critical",d:"away"},
+      {l:"Eels missing Penisini and Smith — backline still reshuffled",w:"high",d:"away"},
+      {l:"Eels won golden point on a controversial penalty try — flattering result",w:"high",d:"away"},
+      {l:"Volkman–Moses halves only 3 NRL games together — untested under pressure",w:"high",d:"away"},
+      {l:"Eels conceded 36 to Warriors, 33 attempted vs Cowboys — defence ranked 17th",w:"critical",d:"away"},
+      {l:"Storm have won last 6 H2H vs Eels",w:"medium",d:"away"},
+      {l:"⚠️ Magic Round means no AAMI Park edge for Storm",w:"medium",d:"home"}
+    ],
+    analysis:"Storm look like Storm again. Hughes back changed everything against the Tigers. Eels are leaking 30+ a game and their halves combination has 3 NRL games together. Magic Round neutralises Melbourne's home advantage but the matchup itself is so lopsided it doesn't matter. Going 12 above the -8.5 line.",
+    strategy:"Consensus pick after Storm's bounce-back. Margin 12 sits well above market — bonus play. Storm at full strength vs an Eels team in defensive freefall is blowout territory." },
+
+  // GAME 6
+  { id:6, day:"Sun 17 May", time:"4:00pm NZT", home:"Titans", away:"Knights",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Knights", margin:16, predictedScore:{home:14,away:30}, confidence:80, tier:"STRONG",
+    weather:"Warm Brisbane afternoon, 24°C, fine",
+    spread:"Knights -12.5", upsetRisk:false,
+    tabHomeOdds:3.50, tabAwayOdds:1.30, tabPick:"Knights", tabOdds:1.30,
+    bettingNote:"Knights firing with Ponga, Best, Brown all on. Titans starting 2 NRL debutants again. $100 returns $130.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Wyatt Raymond",note:"Mid-tier ref, neutral profile"},
+    lineMove:{opener:"Knights -10.5",current:"Knights -12.5",dir:"toward_pick"},
+    metrics:{hAtk:14,hDef:14,aAtk:9,aDef:8},
+    coach:{home:"new",away:"established"},
+    travelKm:0,
+    injuryWeight:{home:11,away:3},
+    halvesGames:{home:1,away:9},
+    benchImpact:{home:"weak",away:"strong"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:45,away:51},
+    keyFactors:[
+      {l:"Knights crushed Dragons 44-10 — Marzhew 5 tries",w:"critical",d:"away"},
+      {l:"Ponga + Best + Brown all firing — best Knights spine in 3 years",w:"critical",d:"away"},
+      {l:"Brown beat Souths the week before — Dally M form",w:"high",d:"away"},
+      {l:"Titans starting NRL debutant halfback Zane Harrison again",w:"critical",d:"away"},
+      {l:"Titans lost 28-12 to Roosters last week — disorganised",w:"high",d:"away"},
+      {l:"Hannay shake-up not paying dividends — coach under pressure",w:"medium",d:"away"},
+      {l:"Knights have won 5 of last 7",w:"medium",d:"away"},
+      {l:"⚠️ Magic Round — Titans don't have a home anyway, no edge lost",w:"low",d:"home"}
+    ],
+    analysis:"Titans are starting their 2nd-game debutant halfback against a Knights side that just dropped 44 on the Dragons. Ponga, Best, and Brown are all in form simultaneously for the first time in years. This isn't even close on paper. Going 16 above the -12.5 line. Margin discipline matters but the form gap is huge.",
+    strategy:"Consensus pick. Margin 16 above market is bonus territory. Knights at full health against Titans starting two debutants = blowout setup." },
+
+  // GAME 7
+  { id:7, day:"Sun 17 May", time:"6:05pm NZT", home:"Warriors", away:"Broncos",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Warriors", margin:6, predictedScore:{home:24,away:18}, confidence:60, tier:"LEAN",
+    weather:"Mild Brisbane evening, 21°C, fine",
+    spread:"Warriors -3.5", upsetRisk:true,
+    tabHomeOdds:1.65, tabAwayOdds:2.20, tabPick:"Warriors", tabOdds:1.65,
+    bettingNote:"Warriors lose Auckland fortress at Magic Round. Broncos likely get Reynolds back. $100 returns $165.",
+    restDiff:{home:8,away:7,adv:"home"},
+    referee:{name:"Peter Gough",note:"Slight historical Penrith tilt — neutral here"},
+    lineMove:{opener:"Warriors -4.5",current:"Warriors -3.5",dir:"away_from_pick_team"},
+    metrics:{hAtk:6,hDef:4,aAtk:5,aDef:6},
+    coach:{home:"established",away:"established"},
+    travelKm:0,
+    injuryWeight:{home:4,away:8},
+    halvesGames:{home:18,away:25},
+    benchImpact:{home:"strong",away:"average"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:52,away:47},
+    keyFactors:[
+      {l:"Warriors 7-2, sitting 2nd — 2nd-best team in the comp by record",w:"critical",d:"home"},
+      {l:"Warriors had R10 BYE — fully rested",w:"high",d:"home"},
+      {l:"Jackson Ford leading the Dally M — Warriors pack dominant",w:"critical",d:"home"},
+      {l:"⚠️ Magic Round = NO Auckland fortress for Warriors — biggest edge gone",w:"critical",d:"away"},
+      {l:"Broncos lost 32-4 to Manly — defensive collapse",w:"high",d:"home"},
+      {l:"Broncos likely get Reynolds back — captain returns from head knock",w:"high",d:"away"},
+      {l:"Staggs and Mariner status uncertain — backline still under cloud",w:"medium",d:"home"},
+      {l:"Brisbane crowd may lean Broncos — slight Qld bias",w:"medium",d:"away"},
+      {l:"Line drifted Warriors -4.5 → -3.5 — market hedging on Reynolds return",w:"medium",d:"away"}
+    ],
+    analysis:"This is the toughest call of the round. Warriors are 2nd on the ladder, fully rested off the bye, and have the form pack in the comp. But Magic Round wipes their single biggest edge — playing in front of 25k screaming Aucklanders. Broncos likely get Reynolds back, the line drifted away from Warriors, and there'll be a Qld-leaning crowd. Going Warriors because the team is plainly better on form, but holding margin to 6 — only just above market.",
+    strategy:"Splits opinion in the pool — NZ-based pool will overweight Warriors regardless. Margin 6 is barely above the -3.5 line, deliberate small move. Could easily be a 2-point game either way." },
+
+  // GAME 8
+  { id:8, day:"Sun 17 May", time:"8:25pm NZT", home:"Panthers", away:"Dragons",
+    venue:"Suncorp Stadium, Brisbane (Magic Round)",
+    pick:"Panthers", margin:30, predictedScore:{home:42,away:12}, confidence:92, tier:"STRONG",
+    weather:"Cool Brisbane night, 18°C, fine",
+    spread:"Panthers -28.5", upsetRisk:false,
+    tabHomeOdds:1.04, tabAwayOdds:11.00, tabPick:"Panthers", tabOdds:1.04,
+    bettingNote:"Highest-confidence pick of the round but lowest odds. Dragons 0-10. $100 returns $104.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Chris Butler",note:"Higher penalty count — neutral impact"},
+    lineMove:{opener:"Panthers -26.5",current:"Panthers -28.5",dir:"toward_pick"},
+    metrics:{hAtk:1,hDef:1,aAtk:17,aDef:17},
+    coach:{home:"established",away:"new"},
+    travelKm:0,
+    injuryWeight:{home:1,away:14},
+    halvesGames:{home:62,away:2},
+    benchImpact:{home:"elite",away:"weak"},
+    captain:{home:true,away:true},
+    magicRoundFlag:true,
+    possession:{home:54,away:43},
+    keyFactors:[
+      {l:"Panthers 9-1, 1st in BOTH attack and defence rankings",w:"critical",d:"home"},
+      {l:"Cleary, Edwards, Yeo, To'o all fit and firing",w:"critical",d:"home"},
+      {l:"Dragons 0-10. Worst team in NRL by a country mile (-221 differential)",w:"critical",d:"home"},
+      {l:"Dragons sacked their coach mid-season — chaos",w:"high",d:"home"},
+      {l:"Dragons lost 44-10 to Knights last week — leaking 30+ regularly",w:"high",d:"home"},
+      {l:"Panthers won 30-18 over Raiders last week",w:"medium",d:"home"},
+      {l:"Magic Round neutralises CommBank advantage but doesn't change matchup",w:"low",d:"away"},
+      {l:"⚠️ Risk: Panthers ease off after halftime if blowout — margin discipline needed",w:"medium",d:"away"}
+    ],
+    analysis:"Closest thing to a banker but no LOCKs. Ever. Panthers are the best team in the comp facing the worst team in the comp. Dragons are 0-10, sacked their coach, and lost 44-10 to a Knights side last week. Magic Round changes nothing here. Going 30 — above the -28.5 line because Panthers tend to put 50 on bottom-feeders when motivated.",
+    strategy:"Consensus pick. Margin 30 sits just above market — chasing the bonus. Risk is Panthers easing off in second half. If Cleary keeps the foot down, this is 50-12 territory." }
+];
+
+// =============== SUPPORTING DATA ===============
+
+const LADDER = [
+  {pos:1,team:"Panthers",w:9,l:1,pts:18,diff:"+177",form:"WLWWW"},
+  {pos:2,team:"Warriors",w:7,l:2,pts:16,diff:"+108",form:"LWWWB"},
+  {pos:3,team:"Roosters",w:7,l:2,pts:16,diff:"+67",form:"WWWWW"},
+  {pos:4,team:"Rabbitohs",w:6,l:3,pts:14,diff:"+92",form:"WWLWW"},
+  {pos:5,team:"Sea Eagles",w:5,l:4,pts:12,diff:"+79",form:"WWWLW"},
+  {pos:6,team:"Cowboys",w:6,l:4,pts:12,diff:"+9",form:"WLWWL"},
+  {pos:7,team:"Knights",w:6,l:4,pts:12,diff:"+4",form:"LLWWW"},
+  {pos:8,team:"Wests Tigers",w:5,l:4,pts:12,diff:"+12",form:"WWLLL"},
+  {pos:9,team:"Sharks",w:4,l:5,pts:10,diff:"+12",form:"WLLWL"},
+  {pos:10,team:"Broncos",w:5,l:5,pts:10,diff:"-27",form:"WLWLL"},
+  {pos:11,team:"Dolphins",w:4,l:5,pts:10,diff:"+21",form:"LLLWW"},
+  {pos:12,team:"Eels",w:4,l:6,pts:10,diff:"-118",form:"LLWLW"},
+  {pos:13,team:"Bulldogs",w:3,l:6,pts:8,diff:"-81",form:"LWLLL"},
+  {pos:14,team:"Raiders",w:4,l:6,pts:8,diff:"-78",form:"LWWLL"},
+  {pos:15,team:"Storm",w:3,l:7,pts:6,diff:"-34",form:"LLLLW"},
+  {pos:16,team:"Titans",w:2,l:7,pts:6,diff:"-78",form:"WLLWL"},
+  {pos:17,team:"Dragons",w:0,l:10,pts:0,diff:"-221",form:"LLLLL"}
+];
+
+const R10_REVIEW = {
+  highlights:[
+    {type:"win",text:"✅ SEA EAGLES BY 6 OVER BRONCOS — Bold Play LANDED. Manly won 32-4 at Brookvale. Reynolds/Staggs/Mariner all out, Broncos completion rate 56% (worst of season)."},
+    {type:"win",text:"✅ Dolphins by 10 over Bulldogs correct — actual 32 (44-12). Margin off but pick locked. Suncorp Thursday hoodoo continues."},
+    {type:"bonus",text:"✅+½ Roosters by 18 over Titans — actual 16 (28-12). Within 5 = MARGIN BONUS. Tedesco vintage form, Walker pulling strings."},
+    {type:"win",text:"✅ Knights by 14 over Dragons correct — actual 34 (44-10). Marzhew 5 tries. Dragons defensive collapse continues."},
+    {type:"win",text:"✅ Rabbitohs by 6 over Sharks correct — actual 24 (36-12). Latrell out but Walker 81 fantasy points, Johnston hat-trick."},
+    {type:"win",text:"✅ Storm by 14 over Tigers correct — actual 28 (44-16). Hughes back, 7-game streak broken."},
+    {type:"bonus",text:"✅+½ Panthers by 8 over Raiders — actual 12 (30-18). Within 5 = MARGIN BONUS. Strange/Young returns weren't enough."},
+    {type:"loss",text:"❌ COWBOYS BY 16 OVER EELS — Eels won 33-30 in golden point. Moses field goal initially missed, then awarded as penalty try after late contact. Genuinely controversial — framework was right, ref decision flipped it."}
+  ],
+  lessons:[
+    "Bold Play LANDED for the 5th week running. Reynolds + Staggs + Mariner injury weight call was vindicated — Broncos completion rate 56% confirms how broken they were.",
+    "Two within-5 margin bonuses (Roosters, Panthers) — discipline on margin positioning paying off.",
+    "Cowboys loss was bad luck not bad framework. Golden point + ref discretion = noise. Don't overreact.",
+    "Dolphins are legitimately a top-8 side now under Wayne Bennett — Marshall-King return is significant.",
+    "Knights' returning superstars rule earned R9 was vindicated again — Ponga/Best/Brown all firing simultaneously."
+  ]
+};
+
+const SEASON_LEARNINGS = [
+  {round:5,record:"7/8",headline:"Warriors override miss",lessons:["Strong round, one miss came from override against framework. Trust the research."]},
+  {round:6,record:"4/8",headline:"LOCK retired forever",lessons:["Cowboys by 4 over Broncos — exact margin Bold Play.","Panthers LOCK lost 32-16 to Bulldogs. LOCK tier retired. STRONG = ceiling.","Three STRONG picks lost in one round. Confidence ≠ certainty."]},
+  {round:7,record:"5/8",headline:"Two exact-margin calls",lessons:["Raiders over Storm at GIO — exact margin Bold Play.","Coin flip 2-4 margin protection earned its keep."]},
+  {round:8,record:"7/8",headline:"Souths Bold Play vindicated",lessons:["Souths broke 0-20 hoodoo at AAMI Park, won 48-6.","Bulldogs unreliable as favourites.","Storm at 6 straight losses."]},
+  {round:9,record:"7/8",headline:"Returning superstars underweighted",lessons:["Cowboys Bold Play LANDED — beat Dogs 28-12.","Knights upset Souths 42-38 — Ponga/Best back, should have been coin flip.","Panthers held off Manly 18-16."]},
+  {round:10,record:"7/8",headline:"Sea Eagles Bold Play landed big",lessons:["Manly 32-4 over depleted Broncos — Reynolds + Staggs + Mariner all out.","Cowboys golden-point loss — controversial penalty try.","Storm broke 7-game streak with Hughes back.","Dolphins legitimately top-8 form."]}
+];
+
+const PRINCIPLES = [
+  {r:3,p:"Current form beats reputation, every time"},
+  {r:6,p:"No LOCKs ever — STRONG is the ceiling"},
+  {r:6,p:"One Bold Play per round, called explicitly"},
+  {r:5,p:"Coin flip margins stay 2–4 for bonus protection"},
+  {r:7,p:"Consensus picks must move off market line"},
+  {r:6,p:"Margin is a first-class decision, not an afterthought"},
+  {r:5,p:"Trust research over override intuition"},
+  {r:6,p:"Injury-ravaged teams are sitting ducks — be ruthless"},
+  {r:7,p:"Historical streaks mean nothing in 2026"},
+  {r:9,p:"Returning superstars warp the line more than the market prices in"},
+  {r:11,p:"Magic Round neutralises home advantage — zero out travel and fortress factors"}
+];
+
+const NEXT_VARS = [
+  {n:"Referee penalty differential per game (last 5)",p:"high",w:"Cowboys' R10 loss came on a refereeing call. Tracking penalty differentials per ref over their last 5 games would give us a sharper bias profile than 'tight on ruck' qualitative notes."},
+  {n:"Crowd composition modifier (Magic Round, Vegas, neutral grounds)",p:"medium",w:"Magic Round Brisbane crowd will lean Qld clubs. Need a numeric modifier (e.g. +5% to Qld home advantage when neutral venue is in Qld) rather than a binary flag."},
+  {n:"Halves combination quality score (not just games together)",p:"high",w:"halvesGamesTogether captures continuity but not quality. A Volkman-Moses 3-game pairing is different from a Cleary-Burton 60-game pairing AND from a Cleary-Luai 100-game pairing. Need a quality + quantity composite."},
+  {n:"Captain's leadership weight (separate from injury weight)",p:"medium",w:"captainAvailable is binary. Reynolds out as captain ≠ a fringe forward out. Need a leadership weight (0-10) separate from injury impact."},
+  {n:"In-game momentum/comeback factor (last 5 games trailing at HT)",p:"medium",w:"Some teams (Panthers, Sharks) come back from HT deficits often; others (Eels, Storm pre-Hughes) collapse. A simple 'comeback rate' would help close-game predictions."}
+];
+
+const ACTIVE_VARS = ["Previous round results review","Cumulative season learnings (R5-R10)","Updated NRL ladder (post Rd 10)","Friday team lists","Key returns flagged","Key outs/suspensions flagged","Bet365 H2H odds","Stats Insider win probabilities","TAB H2H odds","Spread/handicap lines","Venue identification","Home advantage factor","Weather forecast (outdoor venues)","Time-of-day factor","ESPN expert tips","Rugby League Zone panel consensus","Recent form (last 3-4 games)","Head-to-head record (last 6+)","Venue-specific historical record","Day-of-week historical record","Coaching tenure changes","Losing streak weighting","Winning streak weighting","No-LOCKs discipline","Bold Play designation","Coin flip 2-4 margin protection","Consensus margin off-market positioning","Confidence rating per game (%)","Tier classification (STRONG/LEAN/COIN FLIP)","Upset risk flag","Predicted score line","Margin position vs market line","TAB platform alignment per game","Expected value calculation","All-8 betting strategy ($100 flat)","Cumulative principles (11 active)","Variable counter (this list)","Live in-round accuracy tracker","Per-round accuracy line graph (NEW R11)","Rest differential","Referee assignment + bias","Closing line movement","Underlying metrics (attack/defence ranks)","Coach status","Travel kilometres","Returning superstar warp factor","Injury weight scoring (0-10) (v5)","Halves games together (v5)","Bench impact rating (v5)","Captain availability flag (v5)","Magic Round flag (v5)","Possession trend last 4 games (v5)","Magic Round neutralisation principle (R11 NEW)"];
+
+const ACCURACY_HISTORY = [
+  {round:"R5",pct:87.5,wins:7,total:8},
+  {round:"R6",pct:50.0,wins:4,total:8},
+  {round:"R7",pct:62.5,wins:5,total:8},
+  {round:"R8",pct:87.5,wins:7,total:8},
+  {round:"R9",pct:87.5,wins:7,total:8},
+  {round:"R10",pct:87.5,wins:7,total:8}
+];
+
+const AUTO_IMPROVEMENT = [
+  {q:"Which v5 variables predicted most accurately this round?",a:"<strong>Injury weight score</strong> nailed the Sea Eagles Bold Play (Broncos at 19 vs Manly at 4 = blowout setup). <strong>Halves games together</strong> correctly flagged Volkman-Moses Eels as untested but they got the W via golden point — a true outlier. <strong>Possession trend</strong> matched outcomes in 6/8 games."},
+  {q:"What did we get wrong, and why?",a:"Cowboys-Eels was the only outright miss but it was decided by a controversial penalty try after a missed field goal. Framework had it right. Margin misses on Dolphins (predicted 10, actual 32) and Knights (predicted 14, actual 34) suggest we're underweighting how badly bottom teams (Bulldogs, Dragons) collapse against in-form sides at neutral or hostile venues."},
+  {q:"What new variable would have helped?",a:"A <strong>referee penalty differential</strong> tracker would have flagged the late-shot risk in Cowboys-Eels where Adam Gee's tight ruck enforcement created the moment that gave Moses a free shot at goal. Not a guarantee but useful signal."},
+  {q:"Calibration check on critical principles",a:"Consensus picks moved off market on 7/8 calls — discipline holding. Coin flip margin (R10 had no coin flips) — N/A this week. Bold Play was genuinely contrarian (Manly +1.5 underdog originally). Returning superstars principle held up but wasn't directly tested."}
+];
+
+// =============== RENDER ===============
+const STAKE = 100;
+
+function confColor(v) { return v>=80?"#16a34a":v>=65?"#2563eb":v>=55?"#d97706":"#dc2626"; }
+function tierClass(t) { return t==="STRONG"?"STRONG":t==="LEAN"?"LEAN":"COINFLIP"; }
+function fmt$(n) { return "$" + n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+// Summary table
+const sb = document.getElementById("summary-body");
+GAMES.forEach(g => {
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td><div class="pick-team">${g.home} v ${g.away}</div><div style="font-size:11px;color:#94a3b8">${g.day}</div></td>
+    <td class="pick-team">${g.pick}</td>
+    <td class="pick-margin">+${g.margin}</td>
+    <td><span class="tier tier-${tierClass(g.tier)}">${g.tier}</span></td>
+    <td class="tab-odds">$${g.tabOdds.toFixed(2)}</td>
+    <td class="tab-return">$${(STAKE*g.tabOdds).toFixed(2)}</td>`;
+  sb.appendChild(row);
+});
+
+// TAB summary stats
+const totalStaked = GAMES.length * STAKE;
+const ifAllWin = GAMES.reduce((s,g) => s + STAKE*g.tabOdds, 0);
+const ev = GAMES.reduce((s,g) => s + ((g.confidence/100)*STAKE*g.tabOdds - STAKE), 0);
+document.getElementById("tab-all-win").textContent = fmt$(ifAllWin);
+document.getElementById("tab-all-win-sub").textContent = "+" + fmt$(ifAllWin - totalStaked) + " profit";
+document.getElementById("tab-ev").textContent = (ev>=0?"+":"") + fmt$(ev);
+document.getElementById("tab-ev-sub").textContent = ev>=0 ? "positive expected value" : "negative EV";
+
+// TAB bets list
+const tb = document.getElementById("tab-bets");
+GAMES.forEach(g => {
+  const row = document.createElement("div");
+  row.className = "tab-bet-row";
+  const opp = g.tabPick === g.home ? g.away : g.home;
+  row.innerHTML = `
+    <div class="tab-bet-team">${g.tabPick} <span class="tab-bet-vs">v ${opp}</span></div>
+    <div class="tab-bet-odds">$${g.tabOdds.toFixed(2)}</div>
+    <div class="tab-bet-return">→ ${fmt$(STAKE*g.tabOdds)}</div>`;
+  tb.appendChild(row);
+});
+
+// Game cards
+const gc = document.getElementById("games-container");
+GAMES.forEach(g => {
+  const card = document.createElement("div");
+  card.className = "game-card " + tierClass(g.tier);
+  const factorsHtml = g.keyFactors.map(f => `<div class="factor"><div class="factor-dot ${f.w}"></div><div>${f.l}</div></div>`).join("");
+  const flagHome = g.injuryWeight.home >= 10 ? '<span class="v5-flag">⚠️</span> ' : '';
+  const flagAway = g.injuryWeight.away >= 10 ? '<span class="v5-flag">⚠️</span> ' : '';
+  const flagHomePoss = g.possession.home < 47 ? '<span class="v5-flag">⚠️</span> ' : '';
+  const flagAwayPoss = g.possession.away < 47 ? '<span class="v5-flag">⚠️</span> ' : '';
+  const flagHomeHalves = g.halvesGames.home < 5 ? '<span class="v5-flag">⚠️</span> ' : '';
+  const flagAwayHalves = g.halvesGames.away < 5 ? '<span class="v5-flag">⚠️</span> ' : '';
+
+  card.innerHTML = `
+    <div class="game-header" onclick="toggleGame(this)">
+      <div class="game-matchup">
+        <div class="game-teams">${g.home} v ${g.away}</div>
+        <div class="game-meta">${g.day} · ${g.time} · ${g.venue}</div>
+      </div>
+      <div class="game-pick-block">
+        <div class="game-pick-team">${g.pick} <span class="tier tier-${tierClass(g.tier)}">${g.tier}</span></div>
+        <div class="game-pick-margin">by ${g.margin} · predicted ${g.predictedScore.home}-${g.predictedScore.away}</div>
+        <div class="game-pick-tab">TAB $${g.tabOdds.toFixed(2)} → $${(STAKE*g.tabOdds).toFixed(2)}</div>
+      </div>
+    </div>
+    <div class="game-body">
+      <div class="conf-bar-wrap">
+        <div class="conf-bar-track"><div class="conf-bar-fill" style="width:${g.confidence}%;background:${confColor(g.confidence)}"></div></div>
+        <div class="conf-bar-pct" style="color:${confColor(g.confidence)}">${g.confidence}%</div>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-item"><label>Spread</label><div class="value">${g.spread}</div></div>
+        <div class="detail-item"><label>Weather</label><div class="value">${g.weather}</div></div>
+        <div class="detail-item"><label>Referee</label><div class="value">${g.referee.name} — ${g.referee.note}</div></div>
+        <div class="detail-item"><label>Line movement</label><div class="value">${g.lineMove.opener} → ${g.lineMove.current} (${g.lineMove.dir.replace(/_/g,' ')})</div></div>
+      </div>
+
+      <div class="factors-section">
+        <div class="factors-title">Key factors</div>
+        ${factorsHtml}
+      </div>
+
+      <div class="analysis-block"><strong>Analysis: </strong>${g.analysis}</div>
+      <div class="strategy-block"><strong>Superbru strategy: </strong>${g.strategy}</div>
+
+      <div class="v5-panel">
+        <div class="v5-title">⚙️ v5 Data Layer</div>
+        <div class="v5-grid">
+          <div class="v5-row"><span class="v5-label">Injury weight (home)</span><span class="v5-value">${flagHome}${g.injuryWeight.home}</span></div>
+          <div class="v5-row"><span class="v5-label">Injury weight (away)</span><span class="v5-value">${flagAway}${g.injuryWeight.away}</span></div>
+          <div class="v5-row"><span class="v5-label">Halves games together (home)</span><span class="v5-value">${flagHomeHalves}${g.halvesGames.home}</span></div>
+          <div class="v5-row"><span class="v5-label">Halves games together (away)</span><span class="v5-value">${flagAwayHalves}${g.halvesGames.away}</span></div>
+          <div class="v5-row"><span class="v5-label">Bench impact (home)</span><span class="v5-value">${g.benchImpact.home}</span></div>
+          <div class="v5-row"><span class="v5-label">Bench impact (away)</span><span class="v5-value">${g.benchImpact.away}</span></div>
+          <div class="v5-row"><span class="v5-label">Captain available (home)</span><span class="v5-value">${g.captain.home?"✓":"✗"}</span></div>
+          <div class="v5-row"><span class="v5-label">Captain available (away)</span><span class="v5-value">${g.captain.away?"✓":"✗"}</span></div>
+          <div class="v5-row"><span class="v5-label">Magic Round flag</span><span class="v5-value">${g.magicRoundFlag?"⚡ ACTIVE":"—"}</span></div>
+          <div class="v5-row"><span class="v5-label">Travel km (away)</span><span class="v5-value">${g.travelKm} (neutralised)</span></div>
+          <div class="v5-row"><span class="v5-label">Possession % L4 (home)</span><span class="v5-value">${flagHomePoss}${g.possession.home}%</span></div>
+          <div class="v5-row"><span class="v5-label">Possession % L4 (away)</span><span class="v5-value">${flagAwayPoss}${g.possession.away}%</span></div>
+          <div class="v5-row"><span class="v5-label">Attack rank (home/away)</span><span class="v5-value">${g.metrics.hAtk} / ${g.metrics.aAtk}</span></div>
+          <div class="v5-row"><span class="v5-label">Defence rank (home/away)</span><span class="v5-value">${g.metrics.hDef} / ${g.metrics.aDef}</span></div>
+          <div class="v5-row"><span class="v5-label">Coach (home/away)</span><span class="v5-value">${g.coach.home} / ${g.coach.away}</span></div>
+          <div class="v5-row"><span class="v5-label">Rest diff</span><span class="v5-value">${g.restDiff.home}d / ${g.restDiff.away}d (${g.restDiff.adv})</span></div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:#94a3b8;margin-top:12px;font-style:italic">${g.bettingNote}</div>
+    </div>`;
+  gc.appendChild(card);
+});
+
+// Ladder
+const lb = document.getElementById("ladder-body");
+LADDER.forEach(t => {
+  const cls = t.pos<=4 ? "top4" : t.pos<=8 ? "top8" : "";
+  const formHtml = t.form.split("").map(c => `<span class="form-${c}">${c}</span>`).join("");
+  lb.innerHTML += `<tr class="${cls}"><td class="ladder-pos">${t.pos}</td><td class="ladder-team">${t.team}</td><td>${t.w}-${t.l}</td><td>${t.pts}</td><td>${t.diff}</td><td class="ladder-form">${formHtml}</td></tr>`;
+});
+
+// R10 Review
+const rb = document.getElementById("review-body");
+rb.innerHTML = `<div style="margin-top:6px">${R10_REVIEW.highlights.map(h => `<div class="review-item review-${h.type}">${h.text}</div>`).join("")}</div>
+<div style="font-size:11px;color:#d97706;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700">Key Learnings Applied to Round 11</div>
+${R10_REVIEW.lessons.map(l => `<div class="review-lesson">${l}</div>`).join("")}`;
+
+// Auto-improvement
+const ab = document.getElementById("auto-body");
+AUTO_IMPROVEMENT.forEach(item => {
+  ab.innerHTML += `<div class="auto-block"><div class="auto-q">${item.q}</div><div class="auto-a">${item.a}</div></div>`;
+});
+
+// Season learnings + principles
+const lnb = document.getElementById("learnings-body");
+SEASON_LEARNINGS.forEach(s => {
+  lnb.innerHTML += `<div class="review-lesson"><strong>R${s.round} (${s.record}) — ${s.headline}</strong><br>${s.lessons.join(" · ")}</div>`;
+});
+const pb = document.getElementById("principles-body");
+PRINCIPLES.forEach(p => {
+  pb.innerHTML += `<div style="padding:6px 10px;background:#f0f9ff;border-left:3px solid #2563eb;margin-bottom:5px;border-radius:6px;font-size:12px;color:#0c4a6e"><strong>R${p.r}:</strong> ${p.p}</div>`;
+});
+
+// Next vars
+const nvb = document.getElementById("next-vars-body");
+NEXT_VARS.forEach(v => {
+  nvb.innerHTML += `<div class="auto-block"><div class="auto-q">${v.n} <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8">(priority: ${v.p})</span></div><div class="auto-a">${v.w}</div></div>`;
+});
+
+// Var counter
+const vc = document.getElementById("var-counter-body");
+ACTIVE_VARS.forEach((v,i) => {
+  vc.innerHTML += `<div>${i+1}. ${v}</div>`;
+});
+
+// =============== ACCURACY LINE CHART ===============
+window.addEventListener("load", function() {
+  const ctx = document.getElementById("accuracyChart").getContext("2d");
+  const labels = ACCURACY_HISTORY.map(r => r.round);
+  const data = ACCURACY_HISTORY.map(r => r.pct);
+
+  // Cumulative line
+  let cumWins = 0, cumTotal = 0;
+  const cumulative = ACCURACY_HISTORY.map(r => {
+    cumWins += r.wins; cumTotal += r.total;
+    return Math.round((cumWins/cumTotal) * 1000) / 10;
+  });
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Round %",
+          data: data,
+          borderColor: "#fbbf24",
+          backgroundColor: "rgba(251,191,36,0.15)",
+          borderWidth: 2.5,
+          tension: 0.35,
+          pointRadius: 5,
+          pointBackgroundColor: "#fbbf24",
+          pointBorderColor: "#1e3a8a",
+          pointBorderWidth: 2,
+          fill: true
+        },
+        {
+          label: "Cumulative %",
+          data: cumulative,
+          borderColor: "#bfdbfe",
+          backgroundColor: "transparent",
+          borderWidth: 2,
+          borderDash: [6,4],
+          tension: 0.25,
+          pointRadius: 3,
+          pointBackgroundColor: "#bfdbfe",
+          pointBorderColor: "#1e3a8a",
+          pointBorderWidth: 1,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: "#bfdbfe", font: { size: 10 }, boxWidth: 12, padding: 12 },
+          position: "bottom"
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              const r = ACCURACY_HISTORY[ctx.dataIndex];
+              if (ctx.datasetIndex === 0) return r.round + ": " + r.wins + "/" + r.total + " (" + r.pct + "%)";
+              return "Cumulative: " + ctx.parsed.y + "%";
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: "#bfdbfe", font: { size: 11 } },
+          grid: { color: "rgba(255,255,255,0.05)" }
+        },
+        y: {
+          min: 30, max: 100,
+          ticks: {
+            color: "#bfdbfe",
+            font: { size: 10 },
+            callback: function(v) { return v + "%"; }
+          },
+          grid: { color: "rgba(255,255,255,0.08)" }
+        }
+      }
+    }
+  });
+});
+
+// =============== INTERACTION ===============
+function toggleCard(headerEl) {
+  const body = headerEl.nextElementSibling;
+  const chev = headerEl.querySelector(".card-chevron");
+  body.classList.toggle("open");
+  chev.classList.toggle("open");
+}
+function toggleGame(headerEl) {
+  const body = headerEl.nextElementSibling;
+  body.classList.toggle("open");
+}
+function expandAll() {
+  document.querySelectorAll(".game-body").forEach(b => b.classList.add("open"));
+}
+function collapseAll() {
+  document.querySelectorAll(".game-body").forEach(b => b.classList.remove("open"));
+}
+</script>
+</body>
+</html>
