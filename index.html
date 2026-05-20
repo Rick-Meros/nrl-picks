@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <script type="application/json" id="cowork-artifact-meta">
 {
-  "name": "Nrl Round11 Picks",
+  "name": "Nrl Round12 Picks",
   "schemaVersion": 1,
-  "description": "Jack's NRL Round 11 (Magic Round) 2026 picks dashboard — season accuracy tracker with new week-by-week line graph, all 8 game picks with full v5 data layer, TAB betting layer, Bold Play, season learnings, and auto-improvement card."
+  "description": "Jack's NRL Round 12 (Origin Bye Round) 2026 picks dashboard — 5 games due to Origin byes, full v5 data layer, TAB betting layer at $500, Bold Play, season learnings, auto-improvement card, updated accuracy graph through R11."
 }
 </script>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jack's NRL Round 11 Picks — Magic Round 2026</title>
+<title>Jack's NRL Round 12 Picks — Origin Bye Round 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
   :root { color-scheme: light; }
@@ -19,11 +19,11 @@
   .container { max-width: 760px; margin: 0 auto; }
 
   /* Header */
-  .header { text-align: center; margin-bottom: 24px; padding: 28px 20px; background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #7c3aed; }
-  .header-eyebrow { font-size: 11px; color: #7c3aed; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; font-weight: 700; }
+  .header { text-align: center; margin-bottom: 24px; padding: 28px 20px; background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #0ea5e9; }
+  .header-eyebrow { font-size: 11px; color: #0284c7; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; font-weight: 700; }
   .header-title { font-size: 30px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
   .header-sub { font-size: 13px; color: #64748b; margin-top: 6px; }
-  .magic-badge { display: inline-block; margin-top: 10px; padding: 6px 14px; background: linear-gradient(135deg, #7c3aed, #4c1d95); color: #fff; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+  .magic-badge { display: inline-block; margin-top: 10px; padding: 6px 14px; background: linear-gradient(135deg, #0ea5e9, #0c4a6e); color: #fff; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
   /* Accuracy tracker */
   .accuracy-card { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%); border-radius: 16px; padding: 28px 24px; margin-bottom: 16px; color: #fff; text-align: center; box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
@@ -119,7 +119,7 @@
 
   /* v5 data panel */
   .v5-panel { margin-top: 16px; padding: 14px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 10px; border: 1px solid #e2e8f0; }
-  .v5-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7c3aed; font-weight: 700; margin-bottom: 10px; }
+  .v5-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #0284c7; font-weight: 700; margin-bottom: 10px; }
   .v5-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; font-size: 11.5px; }
   .v5-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; border-bottom: 1px dashed #e2e8f0; }
   .v5-row:last-child { border-bottom: none; }
@@ -151,6 +151,7 @@
   .ladder-form { font-family: monospace; font-size: 11px; letter-spacing: 1px; }
   .form-W { color: #16a34a; font-weight: 700; }
   .form-L { color: #dc2626; font-weight: 700; }
+  .form-B { color: #94a3b8; font-weight: 700; }
 
   /* Review */
   .review-item { padding: 10px 12px; margin-bottom: 6px; border-radius: 8px; font-size: 12.5px; line-height: 1.5; }
@@ -164,10 +165,10 @@
   .auto-q { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7c3aed; font-weight: 700; margin-bottom: 6px; }
   .auto-a { font-size: 12.5px; color: #4c1d95; line-height: 1.6; }
 
-  /* Magic Round box */
-  .magic-info { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #d8b4fe; border-radius: 10px; padding: 14px; margin-bottom: 14px; }
-  .magic-info-title { font-size: 12px; font-weight: 800; color: #6b21a8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .magic-info-body { font-size: 12px; color: #581c87; line-height: 1.6; }
+  /* Origin Bye info box */
+  .magic-info { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid #7dd3fc; border-radius: 10px; padding: 14px; margin-bottom: 14px; }
+  .magic-info-title { font-size: 12px; font-weight: 800; color: #075985; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .magic-info-body { font-size: 12px; color: #0c4a6e; line-height: 1.6; }
 
   /* Controls */
   .controls { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
@@ -191,44 +192,44 @@
 <!-- Header -->
 <div class="header">
   <div class="header-eyebrow">Jack's NRL Picks</div>
-  <div class="header-title">Round 11 — Magic Round</div>
-  <div class="header-sub">Fri 15 — Sun 17 May 2026 · All games at Suncorp · Raiders bye</div>
-  <div class="magic-badge">Magic Round Framework Active</div>
+  <div class="header-title">Round 12 — Origin Bye Round</div>
+  <div class="header-sub">Thu 21 — Sun 24 May 2026 · 5 games · 7 teams on bye for Origin I</div>
+  <div class="magic-badge">Origin I Bye Round · Depleted Spines Everywhere</div>
 </div>
 
 <!-- Accuracy Tracker -->
 <div class="accuracy-card">
   <div class="accuracy-eyebrow">Season Accuracy</div>
-  <div class="accuracy-hero">77<span>.1%</span></div>
-  <div class="accuracy-sub">37 wins from 48 picks · R5–R10 locked</div>
+  <div class="accuracy-hero">78<span>.6%</span></div>
+  <div class="accuracy-sub">44 wins from 56 picks · R5–R11 locked</div>
   <div class="accuracy-pills">
-    <div class="accuracy-pill"><div class="pill-label">Bold Plays</div><div class="pill-value">5/5</div><div class="pill-sub">100% landed</div></div>
-    <div class="accuracy-pill"><div class="pill-label">Last Round</div><div class="pill-value">7/8</div><div class="pill-sub">Sea Eagles BP ✅</div></div>
+    <div class="accuracy-pill"><div class="pill-label">Bold Plays</div><div class="pill-value">6/6</div><div class="pill-sub">100% landed</div></div>
+    <div class="accuracy-pill"><div class="pill-label">Last Round</div><div class="pill-value">7/8</div><div class="pill-sub">Dolphins BP ✅</div></div>
     <div class="accuracy-pill"><div class="pill-label">Margin Bonus</div><div class="pill-value">12+</div><div class="pill-sub">within-5 hits</div></div>
   </div>
   <div class="accuracy-chart-wrap">
-    <div class="accuracy-chart-label">Per-round accuracy ·  R5 — R10</div>
+    <div class="accuracy-chart-label">Per-round accuracy ·  R5 — R11</div>
     <div class="accuracy-chart-canvas-wrap"><canvas id="accuracyChart"></canvas></div>
   </div>
 </div>
 
-<!-- Magic Round info box -->
+<!-- Origin Bye info box -->
 <div class="magic-info">
-  <div class="magic-info-title">⚡ Magic Round Framework</div>
-  <div class="magic-info-body">All 8 R11 games at Suncorp Stadium, Brisbane. <strong>Home advantage zeroed out</strong>, <strong>travel km neutralised</strong>. Recent form upweighted. Surface: fast, suits attacking sides with strong kicking games. Crowd is neutral with slight lean to local Qld clubs (Broncos/Cowboys/Dolphins/Titans). Watch for sides that lose their biggest edge — Warriors lose Auckland fortress, Cowboys lose Townsville heat.</div>
+  <div class="magic-info-title">⚡ Origin I Bye Round Framework</div>
+  <div class="magic-info-body">Only 5 games this round. <strong>7 teams on bye</strong> (Broncos, Eels, Knights, Panthers, Roosters, Sharks, Wests Tigers). Every team that IS playing has lost serious bodies to Maroons or Blues camps. Storm down three spine players (Munster, Grant, Loiero). Dolphins down five (HTF, Cobbo, Flegler, Plath, Finefuiaki) plus Farnworth late. Cowboys down Cotter + Dearden. Bulldogs back to full strength. Warriors lose Barnett + Capewell. Edge: sides with the deepest squads and most stable halves continuity. Avoid: teams running rookie spine combos. TAB layer scales to $500 (5 × $100).</div>
 </div>
 
 <!-- Bold Play -->
 <div class="bold-play-banner">
   <div class="bold-play-label">⚡ Bold Play of the Round</div>
-  <div class="bold-play-title">Dolphins to upset Rabbitohs by 4</div>
-  <div class="bold-play-body">Souths still without Latrell Mitchell and Wighton. Dolphins riding momentum after pumping Bulldogs 44–12, Marshall-King back, Bostock looking like an NRL centre, Isaako kicking goals like he's printing them. Magic Round neutralises Souths' Accor advantage — this is a true neutral coin flip and the market won't price it that way. If we land it, we get the bonus and we win the round.</div>
+  <div class="bold-play-title">Rabbitohs to upset Cowboys in Townsville by 2</div>
+  <div class="bold-play-body">Cowboys without Tom Dearden (captain, primary playmaker) AND Reuben Cotter (Maroons). They're running a Sutton-Clifford halves combo that played zero NRL games together before R11. Souths lose Murray to Origin and don't have Latrell or Wighton, but Cody Walker is still operating and Alex Johnston returns from his knee. Spine-vs-spine, Walker beats Sutton. Cowboys at $1.60 is the market overvaluing home in a sun-baked Townsville against a Souths side that's been quietly more consistent. If it lands, the bonus is ours.</div>
 </div>
 
 <!-- Quick summary -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">All 8 Picks — Quick Summary</div><div class="card-header-sub">Pick · Margin · Tier · TAB Odds · Return on $100</div></div>
+    <div><div class="card-header-title">All 5 Picks — Quick Summary</div><div class="card-header-sub">Pick · Margin · Tier · TAB Odds · Return on $100</div></div>
     <div class="card-chevron open">▼</div>
   </div>
   <div class="card-body open">
@@ -242,13 +243,13 @@
 <!-- TAB Betting -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">💰 TAB Betting Layer — $800 Staked</div><div class="card-header-sub">$100 flat per game · Expected value · All-8 return</div></div>
+    <div><div class="card-header-title">💰 TAB Betting Layer — $500 Staked</div><div class="card-header-sub">$100 flat per game · Expected value · All-5 return</div></div>
     <div class="card-chevron">▼</div>
   </div>
   <div class="card-body">
     <div class="tab-summary-grid">
-      <div class="tab-stat"><div class="tab-stat-label">Total Stake</div><div class="tab-stat-value">$800</div><div class="tab-stat-sub">8 × $100</div></div>
-      <div class="tab-stat"><div class="tab-stat-label">If All 8 Win</div><div class="tab-stat-value" id="tab-all-win">—</div><div class="tab-stat-sub" id="tab-all-win-sub">return</div></div>
+      <div class="tab-stat"><div class="tab-stat-label">Total Stake</div><div class="tab-stat-value">$500</div><div class="tab-stat-sub">5 × $100</div></div>
+      <div class="tab-stat"><div class="tab-stat-label">If All 5 Win</div><div class="tab-stat-value" id="tab-all-win">—</div><div class="tab-stat-sub" id="tab-all-win-sub">return</div></div>
       <div class="tab-stat"><div class="tab-stat-label">Expected Value</div><div class="tab-stat-value" id="tab-ev">—</div><div class="tab-stat-sub" id="tab-ev-sub">conf-weighted</div></div>
     </div>
     <div id="tab-bets"></div>
@@ -267,7 +268,7 @@
 <!-- Ladder -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">📊 Updated NRL Ladder — post R10</div><div class="card-header-sub">Telstra Premiership 2026</div></div>
+    <div><div class="card-header-title">📊 Updated NRL Ladder — post R11</div><div class="card-header-sub">Telstra Premiership 2026</div></div>
     <div class="card-chevron">▼</div>
   </div>
   <div class="card-body">
@@ -278,10 +279,10 @@
   </div>
 </div>
 
-<!-- R10 Review -->
+<!-- R11 Review -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">📝 R10 Review — 7/8 ✅</div><div class="card-header-sub">Sea Eagles Bold Play LANDED · Cowboys golden-point loss</div></div>
+    <div><div class="card-header-title">📝 R11 Review — 7/8 ✅</div><div class="card-header-sub">Dolphins Bold Play LANDED · Cowboys ambushed the Roosters</div></div>
     <div class="card-chevron">▼</div>
   </div>
   <div class="card-body">
@@ -303,7 +304,7 @@
 <!-- Season Learnings + Principles -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">📚 Season Learnings & Framework Principles</div><div class="card-header-sub">11 earned principles · 6 rounds tracked</div></div>
+    <div><div class="card-header-title">📚 Season Learnings & Framework Principles</div><div class="card-header-sub">12 earned principles · 7 rounds tracked</div></div>
     <div class="card-chevron">▼</div>
   </div>
   <div class="card-body">
@@ -328,7 +329,7 @@
 <!-- Variable counter -->
 <div class="card">
   <div class="card-header" onclick="toggleCard(this)">
-    <div><div class="card-header-title">📈 Active Variable Count — v5</div><div class="card-header-sub">53+ inputs powering each pick</div></div>
+    <div><div class="card-header-title">📈 Active Variable Count — v5</div><div class="card-header-sub">54+ inputs powering each pick</div></div>
     <div class="card-chevron">▼</div>
   </div>
   <div class="card-body">
@@ -348,316 +349,218 @@
 // =============== DATA ===============
 const GAMES = [
   // GAME 1
-  { id:1, day:"Fri 15 May", time:"8:00pm NZT", home:"Sharks", away:"Bulldogs",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Sharks", margin:10, predictedScore:{home:28,away:18}, confidence:68, tier:"STRONG",
-    weather:"Mild Brisbane evening, 21°C, fine — Suncorp open air",
-    spread:"Sharks -5.5", upsetRisk:false,
-    tabHomeOdds:1.60, tabAwayOdds:2.40, tabPick:"Sharks", tabOdds:1.60,
-    bettingNote:"Sharks get Mulitalo + Ramien BACK from injury. Bulldogs lose Hughes + Curran late. $100 returns $160.",
+  { id:1, day:"Thu 21 May", time:"9:50pm NZT", home:"Raiders", away:"Dolphins",
+    venue:"GIO Stadium, Canberra",
+    pick:"Raiders", margin:8, predictedScore:{home:26,away:18}, confidence:68, tier:"STRONG",
+    weather:"Cold Canberra night, 8°C, light SE breeze — handling factor for both",
+    spread:"Raiders -3.5", upsetRisk:false,
+    tabHomeOdds:1.61, tabAwayOdds:2.25, tabPick:"Raiders", tabOdds:1.61,
+    bettingNote:"Dolphins missing Tabuai-Fidow, Cobbo, Flegler, Plath, Finefuiaki AND Farnworth (late). Schneider-Katoa halves untested. $100 returns $161.",
     restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Gerard Sutton",note:"Veteran ref — generally lets contests breathe, neutral profile"},
-    lineMove:{opener:"Sharks -4.5",current:"Sharks -5.5",dir:"toward_pick"},
-    metrics:{hAtk:9,hDef:10,aAtk:14,aDef:15},
-    coach:{home:"established",away:"under_pressure"},
-    travelKm:0,
-    injuryWeight:{home:8,away:15},
-    halvesGames:{home:26,away:6},
-    benchImpact:{home:"strong",away:"average"},
-    captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:51,away:46},
-    keyFactors:[
-      {l:"Sharks get Mulitalo (ACL) AND Ramien (knee) BACK — attack reload",w:"critical",d:"home"},
-      {l:"Bulldogs on 4-game losing streak — confidence shot",w:"critical",d:"home"},
-      {l:"Bulldogs lost Hughes (neck) + Curran (rib) Wednesday — already thin pack",w:"high",d:"home"},
-      {l:"Hynes returning from a quiet week — Dally M form team needs him on",w:"high",d:"home"},
-      {l:"Bulldogs DO get Burton (illness), Max King (jaw), Mann (concussion) back",w:"medium",d:"away"},
-      {l:"Brailey OUT — 139-game streak ends (concussion). Berrell at hooker",w:"medium",d:"away"},
-      {l:"Galvin–Burton halves still building cohesion",w:"medium",d:"home"},
-      {l:"Stats Insider model: Sharks 62% vs Bulldogs 38%",w:"high",d:"home"},
-      {l:"Panel unanimous Sharks (10/10), margins 6–16",w:"medium",d:"home"}
-    ],
-    analysis:"Bulldogs are on a 4-game skid and lost two starting forwards to late withdrawals (Hughes neck, Curran rib). Sharks get Mulitalo back from his ACL and Ramien back from his knee — that's their attacking unit basically rebuilt overnight. Brailey out is a story but Berrell at hooker is fine. Market moved Sharks -4.5 → -5.5; we go 10. The line is leaving meat on the table given how badly the Bulldogs are travelling.",
-    strategy:"Pool will mostly tip Sharks. Margin 10 is well above the -5.5 line — deliberate bonus play. If the Bulldogs collapse like they did vs Dolphins, this is 16+." },
-
-  // GAME 2 — BOLD PLAY
-  { id:2, day:"Fri 15 May", time:"10:05pm NZT", home:"Rabbitohs", away:"Dolphins",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Dolphins", margin:4, predictedScore:{home:22,away:26}, confidence:55, tier:"COIN FLIP",
-    weather:"Cool Brisbane night, 19°C, fine",
-    spread:"Rabbitohs -3.5", upsetRisk:true,
-    tabHomeOdds:1.72, tabAwayOdds:2.15, tabPick:"Dolphins", tabOdds:2.15,
-    bettingNote:"BOLD PLAY. Stats Insider model has Dolphins 61% but market lists them as underdog. $100 returns $215.",
-    restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Adam Gee",note:"Tight on ruck speed, penalises late shots — neutral for this matchup"},
-    lineMove:{opener:"Rabbitohs -5.5",current:"Rabbitohs -3.5",dir:"away_from_pick_team"},
-    metrics:{hAtk:5,hDef:9,aAtk:6,aDef:11},
+    referee:{name:"Adam Gee",note:"Tight on ruck speed, fast play-the-ball — tempo helps Raiders"},
+    lineMove:{opener:"Raiders -2.5",current:"Raiders -3.5",dir:"toward_pick"},
+    metrics:{hAtk:13,hDef:11,aAtk:7,aDef:10},
     coach:{home:"established",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:7,away:4},
-    halvesGames:{home:32,away:18},
-    benchImpact:{home:"strong",away:"strong"},
+    travelKm:1196,
+    injuryWeight:{home:7,away:24},
+    halvesGames:{home:8,away:3},
+    benchImpact:{home:"average",away:"average"},
     captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:50,away:50},
+    magicRoundFlag:false,
+    possession:{home:49,away:48},
     keyFactors:[
-      {l:"BOLD PLAY: Stats Insider model gives Dolphins 61% — market has them at $2.15",w:"critical",d:"away"},
-      {l:"Dolphins won 44-12 over Bulldogs — same starting 13 named this week",w:"critical",d:"away"},
-      {l:"Souths LOSE Alex Johnston (knee) — first-choice winger out, Bentley-Hape debuts this season",w:"critical",d:"away"},
-      {l:"Magic Round neutralises Souths' Accor home edge — true neutral venue",w:"high",d:"away"},
-      {l:"Tabuai-Fidow, Farnworth, Cobbo, Isaako = arguably best back five in the comp",w:"critical",d:"away"},
-      {l:"Latrell IS back from back injury — but Souths still spine-light without Johnston",w:"medium",d:"home"},
-      {l:"Line drifted Rabbitohs -5.5 → -3.5 — market hedging",w:"high",d:"away"},
-      {l:"Brisbane crowd may lean Dolphins — they ARE the Brisbane second team",w:"medium",d:"away"},
-      {l:"⚠️ 8/10 expert panel still backing Rabbitohs — genuinely contrarian",w:"medium",d:"home"}
+      {l:"Dolphins lose FIVE starters to Origin: HTF, Cobbo, Flegler, Plath, Finefuiaki",w:"critical",d:"home"},
+      {l:"Farnworth ruled OUT late (hamstring) — Keeley shifted to centre on debut at the position",w:"critical",d:"home"},
+      {l:"Schneider–Katoa halves have only ~3 NRL games together — flagged untested",w:"high",d:"home"},
+      {l:"Raiders only lose Hudson Young + Ethan Strange to Blues camp — backline intact",w:"high",d:"home"},
+      {l:"Sanders–Laurie halves continuity holding, Tapine + Tom Starling spine stable",w:"medium",d:"home"},
+      {l:"Canberra 8°C night kickoff — handling errors favour the home side that's used to it",w:"high",d:"home"},
+      {l:"Xavier Savage returns from ankle for Raiders — winger upgrade",w:"medium",d:"home"},
+      {l:"Dolphins were pumped 32-10 last week by Souths at Magic Round — wheels off",w:"high",d:"home"},
+      {l:"⚠️ Raiders' R10 loss to Panthers was within 5 — they're not broken, just lost to the best",w:"low",d:"home"}
     ],
-    analysis:"This is the Bold Play and the only place we go against the bookies' favourite. Stats Insider's model gives Dolphins 61% — flat-out telling the market it's wrong. Dolphins are in form (44-12 over Bulldogs), keep the same starting 13, and have the best back five in the league. Souths get Latrell back but lose Johnston — a wash at best. Magic Round wipes the Accor advantage and Brisbane crowd tilt favours the Dolphins. Margin held at 4 to protect the bonus.",
-    strategy:"Pool will mostly tip Souths. We go contrarian. Win the game = +1 point + likely +0.5 margin + a chance at the +1 bonus closest-margin. If Souths win by 2-4, we get nothing but the pool gets the same nothing. EV is genuinely positive at $2.15." },
+    analysis:"Dolphins are the most depleted side on the card. Five Origin starters out, Farnworth a late scratch with a hamstring, and a halves combo that's barely played together. The Raiders only lose two and one of them (Strange) has a like-for-like replacement in Sanders. Canberra in May at 8°C with a slick ball is a Raiders forward-pack game and Tapine eats. Going 8 above the -3.5 — the form gap is wider than the line.",
+    strategy:"Pool will mostly tip Raiders given the home edge and bye outs. Margin 8 sits well above market — bonus play if the Dolphins fall apart early which on current form is likely." },
+
+  // GAME 2
+  { id:2, day:"Fri 22 May", time:"10:00pm NZT", home:"Bulldogs", away:"Storm",
+    venue:"Accor Stadium, Sydney",
+    pick:"Bulldogs", margin:4, predictedScore:{home:22,away:18}, confidence:58, tier:"COIN FLIP",
+    weather:"Sydney overcast, 17°C, light rain possible — wet ball factor",
+    spread:"Bulldogs -3.5", upsetRisk:true,
+    tabHomeOdds:1.65, tabAwayOdds:2.25, tabPick:"Bulldogs", tabOdds:1.65,
+    bettingNote:"Storm without Munster, Grant, Loiero AND Papenhuyzen — three spine positions gone. Bellamy will find a way but this is the most depleted Storm in years. $100 returns $165.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Gerard Sutton",note:"Veteran ref, lets contests breathe — neutral"},
+    lineMove:{opener:"Bulldogs -2.5",current:"Bulldogs -3.5",dir:"toward_pick"},
+    metrics:{hAtk:15,hDef:13,aAtk:4,aDef:5},
+    coach:{home:"under_pressure",away:"established"},
+    travelKm:870,
+    injuryWeight:{home:3,away:21},
+    halvesGames:{home:38,away:6},
+    benchImpact:{home:"strong",away:"average"},
+    captain:{home:true,away:false},
+    magicRoundFlag:false,
+    possession:{home:48,away:52},
+    keyFactors:[
+      {l:"Storm LOSE three spine positions to Origin: Munster (6), Grant (9), Loiero (back row)",w:"critical",d:"home"},
+      {l:"Papenhuyzen also not in 22 — Fa'alogo at fullback, Toelau at hooker",w:"critical",d:"home"},
+      {l:"Storm captain Munster OUT — captain availability flag triggered",w:"high",d:"home"},
+      {l:"Bulldogs get Kiraz back from suspension — full strength backline",w:"high",d:"home"},
+      {l:"Galvin–Burton halves combo has 38 games together vs Hughes–Russell-Smith at 6",w:"high",d:"home"},
+      {l:"Bulldogs at Accor — actual home game, not Magic Round neutral",w:"medium",d:"home"},
+      {l:"⚠️ Bulldogs on 4-game losing streak — got smashed 38-16 by Sharks at Magic Round",w:"critical",d:"away"},
+      {l:"⚠️ Bellamy is the best coach in the comp — Storm find ways even depleted",w:"high",d:"away"},
+      {l:"⚠️ Hughes is still there, still elite — one playmaker is sometimes enough",w:"high",d:"away"},
+      {l:"Sydney wet weather — slick ball levels the playing field, dampens Storm structure",w:"medium",d:"home"}
+    ],
+    analysis:"This is the closest call of the round. Storm have three spine positions ravaged by Origin and have lost Papenhuyzen as backup. That's brutal. But Bellamy will have them organised and Hughes alone can win games. Bulldogs are at home with full strength but they're on a 4-game skid and looked broken vs Sharks. Wet Sydney weather hurts Storm structure more than it hurts Bulldogs grunt. Going Bulldogs by 4 (coin flip range) to protect the bonus.",
+    strategy:"Pool will split this. Margin 4 sits inside coin flip protection. If Storm find their rhythm early, they win by 6-10 and we lose. If Bulldogs ride the home crowd and Galvin throws shape, they win narrowly — exactly the 4-margin window." },
 
   // GAME 3
-  { id:3, day:"Sat 16 May", time:"5:00pm NZT", home:"Wests Tigers", away:"Sea Eagles",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Sea Eagles", margin:14, predictedScore:{home:14,away:28}, confidence:77, tier:"STRONG",
-    weather:"Warm Brisbane afternoon, 23°C, fine",
-    spread:"Sea Eagles -9.5", upsetRisk:false,
-    tabHomeOdds:3.20, tabAwayOdds:1.32, tabPick:"Sea Eagles", tabOdds:1.32,
-    bettingNote:"Manly humming with Fogarty back at halfback. Tigers smarting from consecutive big losses. $100 returns $132.",
+  { id:3, day:"Sat 23 May", time:"7:30pm NZT", home:"Dragons", away:"Warriors",
+    venue:"Jubilee Stadium, Kogarah",
+    pick:"Warriors", margin:16, predictedScore:{home:10,away:26}, confidence:82, tier:"STRONG",
+    weather:"Sydney light rain, 18°C — slick conditions but Warriors built for it",
+    spread:"Warriors -12.5", upsetRisk:false,
+    tabHomeOdds:3.85, tabAwayOdds:1.24, tabPick:"Warriors", tabOdds:1.24,
+    bettingNote:"Dragons 0-10 on the season, on the road of all road losing streaks. Warriors only lose 2 to Origin. $100 returns $124.",
     restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Grant Atkins",note:"Lets play flow — favours attacking sides like Manly"},
-    lineMove:{opener:"Sea Eagles -7.5",current:"Sea Eagles -9.5",dir:"toward_pick"},
-    metrics:{hAtk:11,hDef:14,aAtk:5,aDef:6},
-    coach:{home:"established",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:7,away:6},
-    halvesGames:{home:6,away:22},
-    benchImpact:{home:"average",away:"strong"},
-    captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:45,away:51},
-    keyFactors:[
-      {l:"Manly won 32-4 over Broncos last week — defensive masterclass",w:"critical",d:"away"},
-      {l:"Jamal Fogarty BACK from groin — restores Brooks/Fogarty halves",w:"critical",d:"away"},
-      {l:"Olakau'atu in the form of his career — best edge forward in the comp",w:"critical",d:"away"},
-      {l:"Tigers smarting from consecutive big losses (Storm 44-16 most recent)",w:"high",d:"away"},
-      {l:"Manly 10/11 in Queensland on a Saturday, 8 straight away wins (Gurgler stat)",w:"high",d:"away"},
-      {l:"Wakeham SUSPENDED — Tigers hooker rotation now Latu Fainu / Hope",w:"medium",d:"away"},
-      {l:"Terrell May BACK from personal leave — Tigers prop reinforcement",w:"low",d:"home"},
-      {l:"Stats Insider model: Sea Eagles 77% — strongest mid-tier pick",w:"high",d:"away"},
-      {l:"Panel: 9/10 Sea Eagles, by 8-22",w:"medium",d:"away"}
-    ],
-    analysis:"Manly destroyed the Broncos last week and now get Fogarty back at halfback. That's a top-6 team firing on all cylinders. Tigers have lost two heavy in a row (Storm 44-16 most recent) and lose Wakeham to suspension. Magic Round takes both home edges off but Manly's away form is elite — 8 straight wins on the road. Going 14, above the -9.5 line. The form gap is bigger than the market is pricing.",
-    strategy:"Consensus pick. Margin 14 sits above market — chasing the bonus. If Manly's defence repeats last week's clinic, this is 20+." },
-
-  // GAME 4
-  { id:4, day:"Sat 16 May", time:"7:30pm NZT", home:"Roosters", away:"Cowboys",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Roosters", margin:16, predictedScore:{home:32,away:16}, confidence:80, tier:"STRONG",
-    weather:"Mild Brisbane evening, 20°C, fine",
-    spread:"Roosters -13.5", upsetRisk:false,
-    tabHomeOdds:1.20, tabAwayOdds:4.50, tabPick:"Roosters", tabOdds:1.20,
-    bettingNote:"Cowboys missing captain Dearden + Soni Luke + resting Taumalolo. Roosters 6-game streak. $100 returns $120.",
-    restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Todd Smith",note:"Mid-tier ref, neutral profile"},
-    lineMove:{opener:"Roosters -10.5",current:"Roosters -13.5",dir:"toward_pick"},
-    metrics:{hAtk:3,hDef:6,aAtk:7,aDef:12},
-    coach:{home:"established",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:4,away:22},
-    halvesGames:{home:14,away:0},
-    benchImpact:{home:"elite",away:"average"},
-    captain:{home:true,away:false},
-    magicRoundFlag:true,
-    possession:{home:53,away:49},
-    keyFactors:[
-      {l:"Cowboys CAPTAIN Tom Dearden OUT (ankle) — Liam Sutton on NRL DEBUT at five-eighth",w:"critical",d:"home"},
-      {l:"Cowboys also miss Soni Luke (knee) + Taumalolo rested. Kerrisk on debut too",w:"critical",d:"home"},
-      {l:"Roosters on 6-game winning streak — DCE/Walker spine in form",w:"critical",d:"home"},
-      {l:"DCE/Walker halves combination clicking — Tedesco vintage in R10 win",w:"high",d:"home"},
-      {l:"Roosters won 5 in a row v Cowboys on a Saturday (Gurgler stat)",w:"high",d:"home"},
-      {l:"Last 4 Roosters wins away v Cowboys were by 16+ (Gurgler stat)",w:"high",d:"home"},
-      {l:"Stats Insider model: Roosters 85% — model's strongest non-Panthers tip",w:"critical",d:"home"},
-      {l:"Lindsay Collins BACK from concussion, Watson at lock (Radley suspended)",w:"medium",d:"home"},
-      {l:"⚠️ Crowd lean Qld so Cowboys get a vocal supporter base",w:"low",d:"away"}
-    ],
-    analysis:"Sitting ducks principle in action. Cowboys lose their captain Dearden, debut a five-eighth (Liam Sutton), debut a bench prop (Kerrisk), and rest Taumalolo against the form team in the comp. Roosters' last four wins away at Cowboys were all by 16+. Stats Insider gives Roosters 85% and the panel is unanimous. Line moved -10.5 → -13.5 in three days — sharps loading. Going 16, slightly above the -13.5.",
-    strategy:"Consensus pick. Margin 16 just above market — bonus play. If Sutton has a debut nightmare and the Roosters' attack clicks, this is 24+." },
-
-  // GAME 5
-  { id:5, day:"Sat 16 May", time:"9:45pm NZT", home:"Eels", away:"Storm",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Storm", margin:10, predictedScore:{home:16,away:26}, confidence:74, tier:"STRONG",
-    weather:"Cool Brisbane night, 19°C, fine",
-    spread:"Storm -6.5", upsetRisk:false,
-    tabHomeOdds:2.95, tabAwayOdds:1.34, tabPick:"Storm", tabOdds:1.34,
-    bettingNote:"Storm won 7 straight v Eels. Faalogo cleared and back at fullback. $100 returns $134.",
-    restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Peter Gough",note:"Slight Penrith historical tilt — neutral here"},
-    lineMove:{opener:"Storm -5.5",current:"Storm -6.5",dir:"toward_pick"},
-    metrics:{hAtk:10,hDef:15,aAtk:4,aDef:5},
-    coach:{home:"established",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:8,away:4},
-    halvesGames:{home:4,away:52},
-    benchImpact:{home:"average",away:"strong"},
-    captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:48,away:49},
-    keyFactors:[
-      {l:"Storm have won 7 straight vs Eels (Gurgler) — combined 112-28 in two Magic Round meetings",w:"critical",d:"away"},
-      {l:"Faalogo CLEARED of facial fracture — back at fullback",w:"high",d:"away"},
-      {l:"Munster + Hughes + Grant spine intact — same side as R10 win over Tigers",w:"critical",d:"away"},
-      {l:"Volkman–Moses halves still only 4 NRL games together — untested combo flag",w:"high",d:"away"},
-      {l:"Eels' R10 win over Cowboys came via late penalty try — flattering result",w:"high",d:"away"},
-      {l:"Stats Insider model: Storm 76% — strong tip",w:"critical",d:"away"},
-      {l:"Panel: unanimous Storm, margins 6–20",w:"high",d:"away"},
-      {l:"⚠️ Magic Round wipes AAMI Park edge — Storm play on a neutral surface",w:"medium",d:"home"}
-    ],
-    analysis:"Storm own this matchup — 7 straight wins and 112-28 in their two Magic Round meetings. Faalogo cleared and back, full spine intact. Eels' golden-point win over Cowboys was flattering and their defence is still leaking 30 a game. Magic Round zeros the AAMI advantage but the matchup is so historically lopsided it doesn't move the needle. Going 10, above the -6.5 line.",
-    strategy:"Consensus pick. Margin 10 above market — chasing the bonus. Storm at full health vs Eels' shaky defence in a Suncorp neutral is exactly the setup they thrive on." },
-
-  // GAME 6
-  { id:6, day:"Sun 17 May", time:"4:00pm NZT", home:"Titans", away:"Knights",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Knights", margin:12, predictedScore:{home:14,away:26}, confidence:71, tier:"STRONG",
-    weather:"Warm Brisbane afternoon, 24°C, fine",
-    spread:"Knights -10.5", upsetRisk:false,
-    tabHomeOdds:3.40, tabAwayOdds:1.40, tabPick:"Knights", tabOdds:1.40,
-    bettingNote:"Knights spine in form. Titans on a debutant #7. $100 returns $140.",
-    restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"Wyatt Raymond",note:"Mid-tier ref, neutral profile"},
-    lineMove:{opener:"Knights -9.5",current:"Knights -10.5",dir:"toward_pick"},
-    metrics:{hAtk:13,hDef:13,aAtk:8,aDef:7},
-    coach:{home:"new",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:9,away:3},
-    halvesGames:{home:2,away:11},
+    referee:{name:"Ashley Klein",note:"Senior ref, tight on scrum — neutral"},
+    lineMove:{opener:"Warriors -10.5",current:"Warriors -12.5",dir:"toward_pick"},
+    metrics:{hAtk:17,hDef:17,aAtk:6,aDef:4},
+    coach:{home:"under_pressure",away:"established"},
+    travelKm:2154,
+    injuryWeight:{home:11,away:11},
+    halvesGames:{home:6,away:12},
     benchImpact:{home:"weak",away:"strong"},
     captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:45,away:51},
+    magicRoundFlag:false,
+    possession:{home:43,away:51},
     keyFactors:[
-      {l:"Knights demolished Dragons 44-10 in R10 — Marzhew 5 tries",w:"critical",d:"away"},
-      {l:"Ponga + Best + Dylan Brown all firing — best Knights spine in years",w:"critical",d:"away"},
-      {l:"Titans starting NRL debutant halfback Zane Harrison for his 2nd game",w:"critical",d:"away"},
-      {l:"Knights have won 4 of last 5 — surging up the ladder",w:"high",d:"away"},
-      {l:"Newcastle have an excellent Magic Round record (4-1) vs Titans (2-4) (Gurgler)",w:"high",d:"away"},
-      {l:"Hannay's Titans lost 28-12 to Roosters in R10 — same side back this week",w:"medium",d:"away"},
-      {l:"Stats Insider model: Knights 68% — solid not crushing",w:"high",d:"away"},
-      {l:"Panel: unanimous Knights, margin range 6–36 (Attard outlier at 36)",w:"medium",d:"away"},
-      {l:"⚠️ Three of Newcastle's last four games at Suncorp were within 4 (Gurgler)",w:"medium",d:"home"}
+      {l:"Dragons 0-10. Zero wins. Worst attack and defence in the comp",w:"critical",d:"away"},
+      {l:"Dragons lost 28-6 to Panthers last week — defence leaking 30+ a game",w:"critical",d:"away"},
+      {l:"Warriors won 42-12 over Broncos at Magic Round — attack humming",w:"critical",d:"away"},
+      {l:"Warriors only lose Barnett + Capewell to Origin — pack still functional",w:"high",d:"away"},
+      {l:"Te Maire Martin replaces Tanah Boyd (ACL, season over) at halfback — settled spine",w:"medium",d:"away"},
+      {l:"Egan back at hooker, Fisher-Harris at prop — middle still elite",w:"high",d:"away"},
+      {l:"RTS only on the reserve list (#23) — Tuaupiki retains fullback role",w:"low",d:"home"},
+      {l:"Warriors are 2nd on the ladder; Dragons are 17th — biggest table gap of the round",w:"critical",d:"away"},
+      {l:"Stats Insider model: Warriors 82% — strongest tip of round",w:"high",d:"away"}
     ],
-    analysis:"Titans rolling out a debutant halfback for his second NRL game against a Knights spine that's hitting peak form simultaneously. Ponga, Best, and Brown together is the version of Newcastle that finished top 4 in 2023. The bench imbalance is brutal — Knights have Frizell, Crossland, Saulo; Titans have a hodgepodge. Going 12, just above the -10.5 line. Stats Insider isn't as bullish as the panel (68% only), so respect that and don't blow the margin out.",
-    strategy:"Consensus pick. Margin 12 just above market — small move to chase the bonus. If Harrison gets rattled early, this is 20+. If Titans keep it tight (their Suncorp history suggests they can), this is a 6-8 point game." },
+    analysis:"Dragons are 0-10. Not a typo. They've lost every game this season and their attack and defence both rank 17th. Warriors lose Barnett and Capewell but their backline is intact and Te Maire Martin played well at Magic Round. Going 16 above the -12.5 line. The only reason this isn't 20+ is travel and the slim Origin chip on the Warriors' shoulder, but that's pretty thin.",
+    strategy:"Consensus pick. Margin 16 sits above the -12.5 — bonus chase. If the Dragons fold (almost guaranteed at this point), this is 22+." },
 
-  // GAME 7
-  { id:7, day:"Sun 17 May", time:"6:05pm NZT", home:"Warriors", away:"Broncos",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Warriors", margin:4, predictedScore:{home:22,away:18}, confidence:58, tier:"COIN FLIP",
-    weather:"Mild Brisbane evening, 21°C, fine",
-    spread:"Warriors -2.5", upsetRisk:true,
-    tabHomeOdds:1.74, tabAwayOdds:2.10, tabPick:"Warriors", tabOdds:1.74,
-    bettingNote:"Closest game on the card. Reynolds BACK for Broncos. Warriors fresh from bye but RTS out. $100 returns $174.",
-    restDiff:{home:8,away:7,adv:"home"},
-    referee:{name:"Ashley Klein",note:"Senior ref, calls scrum and ruck tight"},
-    lineMove:{opener:"Warriors -4.5",current:"Warriors -2.5",dir:"away_from_pick_team"},
-    metrics:{hAtk:6,hDef:4,aAtk:8,aDef:9},
-    coach:{home:"established",away:"established"},
-    travelKm:0,
-    injuryWeight:{home:14,away:8},
-    halvesGames:{home:20,away:55},
-    benchImpact:{home:"strong",away:"average"},
-    captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:51,away:48},
-    keyFactors:[
-      {l:"Warriors had R10 BYE — fully rested, Barnett + Egan + Leiataua all back from concussion",w:"critical",d:"home"},
-      {l:"⚠️ ADAM REYNOLDS BACK for Broncos — returning superstar warps the line (R9 lesson)",w:"critical",d:"away"},
-      {l:"⚠️ RTS OUT (shoulder), Metcalf still missing — Warriors backline patched",w:"critical",d:"away"},
-      {l:"Boyd/Harris-Tavita halves continuity holds — but it's the backup pair",w:"high",d:"away"},
-      {l:"Magic Round = NO Auckland fortress (Principle 11)",w:"critical",d:"away"},
-      {l:"Broncos lost 32-4 to Manly last week — defensive shocker, but Reynolds was out",w:"medium",d:"home"},
-      {l:"Brisbane crowd will lean Broncos — they ARE the home team in spirit",w:"medium",d:"away"},
-      {l:"Line drifted Warriors -4.5 → -2.5 — market clearly hedging on Reynolds + RTS",w:"high",d:"away"},
-      {l:"Stats Insider model: Warriors 67%, panel 8/10 Warriors — consensus holds",w:"medium",d:"home"}
-    ],
-    analysis:"Tightest call of the round. Warriors are 2nd on the ladder and fresh off the bye but lose RTS to a shoulder and Metcalf is still out — the backline is patched. Broncos get Adam Reynolds back, which the R9 lesson says we should weight heavier than the market does. Magic Round Principle 11 wipes the Auckland fortress that has powered the Warriors' season. Line drifted -4.5 → -2.5 in three days — sharps reading the same. Stats Insider still has Warriors 67% so we hold the pick, but margin sits at 4 (coin-flip range) to protect the bonus.",
-    strategy:"Splits opinion in the pool — NZ-based pool will reflexively go Warriors. Margin 4 is above market but in coin-flip range. Could easily be a 2-point Broncos win. This is the lay-off bet of the round." },
-
-  // GAME 8
-  { id:8, day:"Sun 17 May", time:"8:25pm NZT", home:"Panthers", away:"Dragons",
-    venue:"Suncorp Stadium, Brisbane (Magic Round)",
-    pick:"Panthers", margin:28, predictedScore:{home:40,away:12}, confidence:90, tier:"STRONG",
-    weather:"Cool Brisbane night, 18°C, fine",
-    spread:"Panthers -25.5", upsetRisk:false,
-    tabHomeOdds:1.06, tabAwayOdds:9.50, tabPick:"Panthers", tabOdds:1.06,
-    bettingNote:"Highest-confidence pick of the round but lowest odds. Dragons on a 9-game losing streak. $100 returns $106.",
+  // GAME 4
+  { id:4, day:"Sat 23 May", time:"9:35pm NZT", home:"Sea Eagles", away:"Titans",
+    venue:"4 Pines Park, Brookvale",
+    pick:"Sea Eagles", margin:14, predictedScore:{home:32,away:18}, confidence:78, tier:"STRONG",
+    weather:"Sydney light rain, 17°C — Brookvale open air, may dampen second half",
+    spread:"Sea Eagles -12.5", upsetRisk:false,
+    tabHomeOdds:1.27, tabAwayOdds:3.85, tabPick:"Sea Eagles", tabOdds:1.27,
+    bettingNote:"Manly back at Brookvale fortress after 46-18 win last week. Titans without Tino, Fifita + debutant halfback Harrison's second NRL game. $100 returns $127.",
     restDiff:{home:7,away:7,adv:"even"},
-    referee:{name:"TBD",note:"Touch judges Kennedy + Sharpe assigned — full referee TBC"},
-    lineMove:{opener:"Panthers -23.5",current:"Panthers -25.5",dir:"toward_pick"},
-    metrics:{hAtk:1,hDef:1,aAtk:17,aDef:17},
-    coach:{home:"established",away:"under_pressure"},
-    travelKm:0,
-    injuryWeight:{home:2,away:11},
-    halvesGames:{home:64,away:8},
-    benchImpact:{home:"elite",away:"weak"},
-    captain:{home:true,away:true},
-    magicRoundFlag:true,
-    possession:{home:54,away:43},
+    referee:{name:"Grant Atkins",note:"Lets play flow — favours attacking sides like Manly"},
+    lineMove:{opener:"Sea Eagles -10.5",current:"Sea Eagles -12.5",dir:"toward_pick"},
+    metrics:{hAtk:5,hDef:6,aAtk:13,aDef:14},
+    coach:{home:"established",away:"new"},
+    travelKm:870,
+    injuryWeight:{home:11,away:17},
+    halvesGames:{home:9,away:2},
+    benchImpact:{home:"strong",away:"weak"},
+    captain:{home:true,away:false},
+    magicRoundFlag:false,
+    possession:{home:51,away:46},
     keyFactors:[
-      {l:"Panthers 9-1, sitting 1st — best attack and defence in the comp",w:"critical",d:"home"},
-      {l:"Cleary, Edwards, Yeo, To'o all fit and firing — Cogger back from suspension",w:"critical",d:"home"},
-      {l:"Dragons on a NINE-game losing streak — bidding to snap (per NRL.com)",w:"critical",d:"home"},
-      {l:"Dragons lost 44-10 to Knights last week — leaking 30+ regularly",w:"high",d:"home"},
-      {l:"Panthers have scored more in 1st half than 2nd in ALL 10 games (Gurgler)",w:"high",d:"home"},
-      {l:"Dragons DO get Suli + Atkinson + Leilua back — slight reinforcement",w:"medium",d:"away"},
-      {l:"Stats Insider model: Panthers 87% — strongest tip of round",w:"critical",d:"home"},
-      {l:"Panel: unanimous Panthers, margins 22–74 (average ~40)",w:"high",d:"home"},
-      {l:"⚠️ Origin looms — Cleary/Edwards/Yeo may be eased late if blowout secured",w:"medium",d:"away"}
+      {l:"Manly 46-18 over Tigers last week — Brooks/Fogarty halves humming",w:"critical",d:"home"},
+      {l:"Brookvale = actual home edge restored after Magic Round neutral",w:"high",d:"home"},
+      {l:"Titans CAPTAIN Tino Fa'asuamaleaui OUT (Origin) — captain flag triggered",w:"critical",d:"home"},
+      {l:"Titans also lose Fifita to Origin, key middle forward",w:"high",d:"home"},
+      {l:"Zane Harrison playing his SECOND ever NRL game at halfback for Titans",w:"critical",d:"home"},
+      {l:"Brimson at centre (not fullback) — bizarre positional choice for Hannay",w:"medium",d:"home"},
+      {l:"Manly's pack with Paseka/Bullemor/J. Trbojevic intact (Olakau'atu may be Origin)",w:"high",d:"home"},
+      {l:"⚠️ Tom Trbojevic NOT in 22 — Faulalo at fullback again",w:"medium",d:"away"},
+      {l:"Knights ran 36 on Titans at Magic Round — Titans' defence is sieve-mode",w:"high",d:"home"}
     ],
-    analysis:"Closest thing to a banker but no LOCKs. Panthers are best in the comp, Dragons are losing 9 in a row and lost 44-10 to a Knights side last week. Dragons get Suli + Atkinson + Leilua back but that doesn't move the needle against Cleary's Panthers in form. Going 28, just above the -25.5 line. Discipline keeps us from chasing the 40+ blowout — Origin looming means Cleary may rotate late.",
-    strategy:"Consensus pick. Margin 28 just above market — chasing the bonus while respecting Origin rotation risk. If Panthers keep the foot down, this is 40+." }
+    analysis:"Manly are red hot. 46-18 over Tigers last week, Fogarty and Brooks finally clicking, Brookvale back as home. Titans lose their captain Tino and another forward to Origin, and they're rolling out a kid playing his second NRL game at halfback. Knights ran 36 on them last week and Manly are a better team than Newcastle right now. Going 14 above the -12.5. Only check on going higher is T-Rex still missing — Faulalo at fullback is a downgrade.",
+    strategy:"Consensus pick. Margin 14 just above market — bonus chase. If Titans melt under Harrison pressure, this is 24+." },
+
+  // GAME 5 — BOLD PLAY
+  { id:5, day:"Sun 24 May", time:"6:05pm NZT", home:"Cowboys", away:"Rabbitohs",
+    venue:"Queensland Country Bank Stadium, Townsville",
+    pick:"Rabbitohs", margin:2, predictedScore:{home:18,away:20}, confidence:54, tier:"COIN FLIP",
+    weather:"Townsville warm afternoon, 26°C, humid — heat factor for travelling side",
+    spread:"Cowboys -2.5", upsetRisk:true,
+    tabHomeOdds:1.60, tabAwayOdds:2.30, tabPick:"Rabbitohs", tabOdds:2.30,
+    bettingNote:"BOLD PLAY. Cowboys without Dearden AND Cotter. Souths get Johnston back. Walker > Sutton in spine matchup. $100 returns $230.",
+    restDiff:{home:7,away:7,adv:"even"},
+    referee:{name:"Todd Smith",note:"Mid-tier ref, neutral profile — slight away team penalty tilt"},
+    lineMove:{opener:"Cowboys -4.5",current:"Cowboys -2.5",dir:"away_from_pick_team"},
+    metrics:{hAtk:7,hDef:12,aAtk:5,aDef:9},
+    coach:{home:"established",away:"established"},
+    travelKm:1357,
+    injuryWeight:{home:18,away:19},
+    halvesGames:{home:0,away:24},
+    benchImpact:{home:"average",away:"average"},
+    captain:{home:false,away:true},
+    magicRoundFlag:false,
+    possession:{home:50,away:49},
+    keyFactors:[
+      {l:"BOLD PLAY: Stats market sees this as a 2.5-point Cowboys game, line drifted from -4.5",w:"critical",d:"away"},
+      {l:"Cowboys CAPTAIN Dearden STILL OUT (ankle) — second-week impact",w:"critical",d:"away"},
+      {l:"Cowboys ALSO lose Cotter to Origin — front-row leadership gone",w:"critical",d:"away"},
+      {l:"Sutton–Clifford halves combo has ZERO prior NRL games together (Sutton's 2nd NRL game)",w:"critical",d:"away"},
+      {l:"Souths get Alex Johnston BACK from knee — best try-scorer in the comp returns",w:"high",d:"away"},
+      {l:"Cody Walker still pulling strings — Walker > Sutton in playmaker matchup",w:"critical",d:"away"},
+      {l:"Souths lose Murray to Origin, Latrell still out, Wighton out, Arrow retired",w:"high",d:"home"},
+      {l:"Line drifted Cowboys -4.5 → -2.5 — sharps loading Souths quietly",w:"high",d:"away"},
+      {l:"⚠️ Townsville heat (26°C, humid) — Souths travel from Sydney, heat factor home"
+,w:"medium",d:"home"},
+      {l:"Penitani on NRL debut for Souths on wing — risk factor on edge defence",w:"low",d:"home"}
+    ],
+    analysis:"This is the Bold Play. Cowboys are running Liam Sutton (second NRL game) at five-eighth alongside Jake Clifford after losing Dearden to ankle for the second week running, plus Cotter to Origin. Souths are equally banged up (Murray Origin, Latrell out, Wighton out, Arrow career-ended on medical advice) but Cody Walker is still functioning as an NRL halfback and Johnston is back from his knee. The spine matchup tilts Souths. Line moved Cowboys -4.5 → -2.5 in three days — sharps see it the same way. Margin 2 protects the bonus.",
+    strategy:"Pool will mostly tip Cowboys at home in Townsville — they're being read as the form team after R11. We go contrarian. Win the game = +1 + likely +0.5 margin + a real shot at the pool bonus. EV positive at $2.30." }
 ];
 
 // =============== SUPPORTING DATA ===============
 
 const LADDER = [
-  {pos:1,team:"Panthers",w:9,l:1,pts:18,diff:"+177",form:"WLWWW"},
-  {pos:2,team:"Warriors",w:7,l:2,pts:16,diff:"+108",form:"LWWWB"},
-  {pos:3,team:"Roosters",w:7,l:2,pts:16,diff:"+67",form:"WWWWW"},
-  {pos:4,team:"Rabbitohs",w:6,l:3,pts:14,diff:"+92",form:"WWLWW"},
-  {pos:5,team:"Sea Eagles",w:5,l:4,pts:12,diff:"+79",form:"WWWLW"},
-  {pos:6,team:"Cowboys",w:6,l:4,pts:12,diff:"+9",form:"WLWWL"},
-  {pos:7,team:"Knights",w:6,l:4,pts:12,diff:"+4",form:"LLWWW"},
-  {pos:8,team:"Wests Tigers",w:5,l:4,pts:12,diff:"+12",form:"WWLLL"},
-  {pos:9,team:"Sharks",w:4,l:5,pts:10,diff:"+12",form:"WLLWL"},
-  {pos:10,team:"Broncos",w:5,l:5,pts:10,diff:"-27",form:"WLWLL"},
-  {pos:11,team:"Dolphins",w:4,l:5,pts:10,diff:"+21",form:"LLLWW"},
-  {pos:12,team:"Eels",w:4,l:6,pts:10,diff:"-118",form:"LLWLW"},
-  {pos:13,team:"Bulldogs",w:3,l:6,pts:8,diff:"-81",form:"LWLLL"},
-  {pos:14,team:"Raiders",w:4,l:6,pts:8,diff:"-78",form:"LWWLL"},
-  {pos:15,team:"Storm",w:3,l:7,pts:6,diff:"-34",form:"LLLLW"},
-  {pos:16,team:"Titans",w:2,l:7,pts:6,diff:"-78",form:"WLLWL"},
-  {pos:17,team:"Dragons",w:0,l:10,pts:0,diff:"-221",form:"LLLLL"}
+  {pos:1,team:"Panthers",w:10,l:1,pts:22,diff:"+207",form:"WWWWW"},
+  {pos:2,team:"Warriors",w:8,l:2,pts:18,diff:"+138",form:"WWWBW"},
+  {pos:3,team:"Roosters",w:7,l:3,pts:16,diff:"+55",form:"WWWWL"},
+  {pos:4,team:"Cowboys",w:7,l:4,pts:16,diff:"+9",form:"WWLLW"},
+  {pos:5,team:"Knights",w:7,l:4,pts:14,diff:"+30",form:"LWWWW"},
+  {pos:6,team:"Sea Eagles",w:6,l:4,pts:14,diff:"+107",form:"WWWLW"},
+  {pos:7,team:"Rabbitohs",w:6,l:4,pts:14,diff:"+70",form:"WLWWL"},
+  {pos:8,team:"Dolphins",w:5,l:5,pts:12,diff:"+43",form:"LWWWL"},
+  {pos:9,team:"Sharks",w:5,l:5,pts:12,diff:"+34",form:"WLLWW"},
+  {pos:10,team:"Bulldogs",w:3,l:7,pts:12,diff:"-103",form:"LWLLL"},
+  {pos:11,team:"Wests Tigers",w:5,l:6,pts:10,diff:"-44",form:"WLLLL"},
+  {pos:12,team:"Eels",w:4,l:7,pts:10,diff:"-144",form:"LWLWL"},
+  {pos:13,team:"Storm",w:4,l:7,pts:8,diff:"-8",form:"LLLWW"},
+  {pos:14,team:"Broncos",w:5,l:6,pts:10,diff:"-57",form:"WLLLL"},
+  {pos:15,team:"Raiders",w:4,l:6,pts:10,diff:"-78",form:"WWLLB"},
+  {pos:16,team:"Titans",w:2,l:8,pts:6,diff:"-102",form:"LLWLL"},
+  {pos:17,team:"Dragons",w:0,l:11,pts:0,diff:"-243",form:"LLLLL"}
 ];
 
-const R10_REVIEW = {
+const R11_REVIEW = {
   highlights:[
-    {type:"win",text:"✅ SEA EAGLES BY 6 OVER BRONCOS — Bold Play LANDED. Manly won 32-4 at Brookvale. Reynolds/Staggs/Mariner all out, Broncos completion rate 56% (worst of season)."},
-    {type:"win",text:"✅ Dolphins by 10 over Bulldogs correct — actual 32 (44-12). Margin off but pick locked. Suncorp Thursday hoodoo continues."},
-    {type:"bonus",text:"✅+½ Roosters by 18 over Titans — actual 16 (28-12). Within 5 = MARGIN BONUS. Tedesco vintage form, Walker pulling strings."},
-    {type:"win",text:"✅ Knights by 14 over Dragons correct — actual 34 (44-10). Marzhew 5 tries. Dragons defensive collapse continues."},
-    {type:"win",text:"✅ Rabbitohs by 6 over Sharks correct — actual 24 (36-12). Latrell out but Walker 81 fantasy points, Johnston hat-trick."},
-    {type:"win",text:"✅ Storm by 14 over Tigers correct — actual 28 (44-16). Hughes back, 7-game streak broken."},
-    {type:"bonus",text:"✅+½ Panthers by 8 over Raiders — actual 12 (30-18). Within 5 = MARGIN BONUS. Strange/Young returns weren't enough."},
-    {type:"loss",text:"❌ COWBOYS BY 16 OVER EELS — Eels won 33-30 in golden point. Moses field goal initially missed, then awarded as penalty try after late contact. Genuinely controversial — framework was right, ref decision flipped it."}
+    {type:"win",text:"✅ DOLPHINS BY 4 OVER RABBITOHS — Bold Play LANDED. Dolphins won 32-10 at Suncorp. Sixth straight Bold Play to land. Margin smashed past 4 to 22 but the pick was the point."},
+    {type:"win",text:"✅ Sharks by 10 over Bulldogs correct — actual 22 (38-16). Mulitalo back made the difference."},
+    {type:"win",text:"✅ Sea Eagles by 14 over Tigers correct — actual 28 (46-18). Manly defensive masterclass under Foran."},
+    {type:"win",text:"✅ Storm by 10 over Eels correct — actual 26 (34-8). Eighth straight win over Parramatta."},
+    {type:"win",text:"✅ Knights by 12 over Titans correct — actual 24 (36-12). Six second-half tries, Ponga running riot."},
+    {type:"win",text:"✅ Warriors by 4 over Broncos correct — actual 30 (42-12). COIN FLIP that landed huge. Te Maire Martin starred."},
+    {type:"win",text:"✅ Panthers by 28 over Dragons correct — actual 22 (28-6). Just outside margin bonus by 1."},
+    {type:"loss",text:"❌ ROOSTERS BY 16 OVER COWBOYS — Cowboys won 18-12. We underestimated the impact of Walker's Origin nod on Roosters team chemistry (he was preparing for Maroons camp). Cowboys' tight defensive game frustrated Sydney attack."}
   ],
   lessons:[
-    "Bold Play LANDED for the 5th week running. Reynolds + Staggs + Mariner injury weight call was vindicated — Broncos completion rate 56% confirms how broken they were.",
-    "Two within-5 margin bonuses (Roosters, Panthers) — discipline on margin positioning paying off.",
-    "Cowboys loss was bad luck not bad framework. Golden point + ref discretion = noise. Don't overreact.",
-    "Dolphins are legitimately a top-8 side now under Wayne Bennett — Marshall-King return is significant.",
-    "Knights' returning superstars rule earned R9 was vindicated again — Ponga/Best/Brown all firing simultaneously."
+    "Bold Play streak now SIX rounds running — Dolphins as the contrarian short-price underdog was the right call. Souths' depleted spine (no Latrell, no Wighton) was the bigger story than the line suggested.",
+    "Magic Round 2026 was the most one-sided in history (per InDaily). Our margins were too conservative across the board — only the Panthers margin landed within 5 of the actual. Lesson: when teams are in form AND the venue is neutralised, blowouts are MORE likely, not less.",
+    "Cowboys-Roosters loss exposed a weakness — we didn't price the 'players preparing for Origin camp' factor on the favourite. Walker had his head halfway to Origin already. Worth flagging for future weeks where stars are about to leave camp.",
+    "Coin flip discipline was exemplary on Warriors (margin 4, actual 30 — the margin still came in coin flip range on our books). Bonus chase wouldn't have worked anyway given the actual margin blew out.",
+    "Dolphins are top-half team now under Bennett, but they're still vulnerable to Origin depletion. Next week (R12) they lose five starters — that exposure means the Bold Play hangover may not extend."
   ]
 };
 
@@ -667,7 +570,8 @@ const SEASON_LEARNINGS = [
   {round:7,record:"5/8",headline:"Two exact-margin calls",lessons:["Raiders over Storm at GIO — exact margin Bold Play.","Coin flip 2-4 margin protection earned its keep."]},
   {round:8,record:"7/8",headline:"Souths Bold Play vindicated",lessons:["Souths broke 0-20 hoodoo at AAMI Park, won 48-6.","Bulldogs unreliable as favourites.","Storm at 6 straight losses."]},
   {round:9,record:"7/8",headline:"Returning superstars underweighted",lessons:["Cowboys Bold Play LANDED — beat Dogs 28-12.","Knights upset Souths 42-38 — Ponga/Best back, should have been coin flip.","Panthers held off Manly 18-16."]},
-  {round:10,record:"7/8",headline:"Sea Eagles Bold Play landed big",lessons:["Manly 32-4 over depleted Broncos — Reynolds + Staggs + Mariner all out.","Cowboys golden-point loss — controversial penalty try.","Storm broke 7-game streak with Hughes back.","Dolphins legitimately top-8 form."]}
+  {round:10,record:"7/8",headline:"Sea Eagles Bold Play landed big",lessons:["Manly 32-4 over depleted Broncos — Reynolds + Staggs + Mariner all out.","Cowboys golden-point loss — controversial penalty try.","Storm broke 7-game streak with Hughes back.","Dolphins legitimately top-8 form."]},
+  {round:11,record:"7/8",headline:"Dolphins Bold Play landed, margins blew out",lessons:["Bold Play streak now 6/6 — Dolphins by 22 over Souths.","Magic Round 2026 was the most one-sided in history — our margins too conservative.","Cowboys upset of Roosters showed we underweight pre-Origin chemistry erosion.","Warriors COIN FLIP at +4 landed by 30 — the pick was right but margin discipline saved us anyway."]}
 ];
 
 const PRINCIPLES = [
@@ -681,18 +585,19 @@ const PRINCIPLES = [
   {r:6,p:"Injury-ravaged teams are sitting ducks — be ruthless"},
   {r:7,p:"Historical streaks mean nothing in 2026"},
   {r:9,p:"Returning superstars warp the line more than the market prices in"},
-  {r:11,p:"Magic Round neutralises home advantage — zero out travel and fortress factors"}
+  {r:11,p:"Magic Round neutralises home advantage — zero out travel and fortress factors"},
+  {r:12,p:"Pre-Origin chemistry erosion: when stars are about to enter camp, their club's cohesion thins. Price it BEFORE camp starts, not after."}
 ];
 
 const NEXT_VARS = [
-  {n:"Referee penalty differential per game (last 5)",p:"high",w:"Cowboys' R10 loss came on a refereeing call. Tracking penalty differentials per ref over their last 5 games would give us a sharper bias profile than 'tight on ruck' qualitative notes."},
-  {n:"Crowd composition modifier (Magic Round, Vegas, neutral grounds)",p:"medium",w:"Magic Round Brisbane crowd will lean Qld clubs. Need a numeric modifier (e.g. +5% to Qld home advantage when neutral venue is in Qld) rather than a binary flag."},
-  {n:"Halves combination quality score (not just games together)",p:"high",w:"halvesGamesTogether captures continuity but not quality. A Volkman-Moses 3-game pairing is different from a Cleary-Burton 60-game pairing AND from a Cleary-Luai 100-game pairing. Need a quality + quantity composite."},
-  {n:"Captain's leadership weight (separate from injury weight)",p:"medium",w:"captainAvailable is binary. Reynolds out as captain ≠ a fringe forward out. Need a leadership weight (0-10) separate from injury impact."},
-  {n:"In-game momentum/comeback factor (last 5 games trailing at HT)",p:"medium",w:"Some teams (Panthers, Sharks) come back from HT deficits often; others (Eels, Storm pre-Hughes) collapse. A simple 'comeback rate' would help close-game predictions."}
+  {n:"Pre-Origin chemistry erosion modifier",p:"high",w:"Cowboys beating Roosters in R11 was partly because Sam Walker was 90% mentally in Maroons camp by Saturday. We didn't price it. A simple binary 'has player been named in Origin squad in the last 14 days' modifier on the OPPOSING team's confidence would have helped."},
+  {n:"Origin bye round 'spine continuity index'",p:"critical",w:"R12 has every team running at least one untested combination because of Origin. We need a composite score: (halves games together × 0.4) + (hooker/halves combo games × 0.3) + (fullback games × 0.3). Below threshold = downgrade tier."},
+  {n:"Margin blowout coefficient for neutral venues",p:"high",w:"Magic Round produced 6 of 8 margins above 20. Our coin flip discipline saved us but our STRONG picks left bonus points on the table. When venue is neutral AND form gap > 4 ladder spots, multiply margin by 1.5."},
+  {n:"Captain leadership weight (separate from injury weight)",p:"medium",w:"Carried over from R11 — Tino out is different from a fringe forward out. Need a leadership weight (0-10) separate from injury impact. Tino, Dearden, Munster, Cleary, Yeo would all be 8-10."},
+  {n:"Heat & humidity penalty for travelling sides (tropical venues)",p:"medium",w:"Townsville in May still hits 26°C with humidity. Sydney sides travelling north feel it. A modest -2 to -3 confidence for the visiting team would be measurable."}
 ];
 
-const ACTIVE_VARS = ["Previous round results review","Cumulative season learnings (R5-R10)","Updated NRL ladder (post Rd 10)","Friday team lists","Key returns flagged","Key outs/suspensions flagged","Bet365 H2H odds","Stats Insider win probabilities","TAB H2H odds","Spread/handicap lines","Venue identification","Home advantage factor","Weather forecast (outdoor venues)","Time-of-day factor","ESPN expert tips","Rugby League Zone panel consensus","Recent form (last 3-4 games)","Head-to-head record (last 6+)","Venue-specific historical record","Day-of-week historical record","Coaching tenure changes","Losing streak weighting","Winning streak weighting","No-LOCKs discipline","Bold Play designation","Coin flip 2-4 margin protection","Consensus margin off-market positioning","Confidence rating per game (%)","Tier classification (STRONG/LEAN/COIN FLIP)","Upset risk flag","Predicted score line","Margin position vs market line","TAB platform alignment per game","Expected value calculation","All-8 betting strategy ($100 flat)","Cumulative principles (11 active)","Variable counter (this list)","Live in-round accuracy tracker","Per-round accuracy line graph (NEW R11)","Rest differential","Referee assignment + bias","Closing line movement","Underlying metrics (attack/defence ranks)","Coach status","Travel kilometres","Returning superstar warp factor","Injury weight scoring (0-10) (v5)","Halves games together (v5)","Bench impact rating (v5)","Captain availability flag (v5)","Magic Round flag (v5)","Possession trend last 4 games (v5)","Magic Round neutralisation principle (R11 NEW)"];
+const ACTIVE_VARS = ["Previous round results review","Cumulative season learnings (R5-R11)","Updated NRL ladder (post Rd 11)","Friday team lists","Key returns flagged","Key outs/suspensions flagged","Origin selections impact","Stats Insider win probabilities","TAB H2H odds","PointsBet spread/handicap lines","Venue identification","Home advantage factor","Weather forecast (outdoor venues)","Time-of-day factor","ESPN expert tips","Rugby League Zone panel consensus","Recent form (last 3-4 games)","Head-to-head record (last 6+)","Venue-specific historical record","Day-of-week historical record","Coaching tenure changes","Losing streak weighting","Winning streak weighting","No-LOCKs discipline","Bold Play designation","Coin flip 2-4 margin protection","Consensus margin off-market positioning","Confidence rating per game (%)","Tier classification (STRONG/LEAN/COIN FLIP)","Upset risk flag","Predicted score line","Margin position vs market line","TAB platform alignment per game","Expected value calculation","Round betting strategy ($100 flat × games available)","Cumulative principles (12 active)","Variable counter (this list)","Live in-round accuracy tracker","Per-round accuracy line graph","Rest differential","Referee assignment + bias","Closing line movement","Underlying metrics (attack/defence ranks)","Coach status","Travel kilometres","Returning superstar warp factor","Injury weight scoring (0-10) (v5)","Halves games together (v5)","Bench impact rating (v5)","Captain availability flag (v5)","Magic Round flag (v5)","Possession trend last 4 games (v5)","Magic Round neutralisation principle","Pre-Origin chemistry erosion principle (R12 NEW)"];
 
 const ACCURACY_HISTORY = [
   {round:"R5",pct:87.5,wins:7,total:8},
@@ -700,14 +605,16 @@ const ACCURACY_HISTORY = [
   {round:"R7",pct:62.5,wins:5,total:8},
   {round:"R8",pct:87.5,wins:7,total:8},
   {round:"R9",pct:87.5,wins:7,total:8},
-  {round:"R10",pct:87.5,wins:7,total:8}
+  {round:"R10",pct:87.5,wins:7,total:8},
+  {round:"R11",pct:87.5,wins:7,total:8}
 ];
 
 const AUTO_IMPROVEMENT = [
-  {q:"Which v5 variables predicted most accurately this round?",a:"<strong>Injury weight score</strong> nailed the Sea Eagles Bold Play (Broncos at 19 vs Manly at 4 = blowout setup). <strong>Halves games together</strong> correctly flagged Volkman-Moses Eels as untested but they got the W via golden point — a true outlier. <strong>Possession trend</strong> matched outcomes in 6/8 games."},
-  {q:"What did we get wrong, and why?",a:"Cowboys-Eels was the only outright miss but it was decided by a controversial penalty try after a missed field goal. Framework had it right. Margin misses on Dolphins (predicted 10, actual 32) and Knights (predicted 14, actual 34) suggest we're underweighting how badly bottom teams (Bulldogs, Dragons) collapse against in-form sides at neutral or hostile venues."},
-  {q:"What new variable would have helped?",a:"A <strong>referee penalty differential</strong> tracker would have flagged the late-shot risk in Cowboys-Eels where Adam Gee's tight ruck enforcement created the moment that gave Moses a free shot at goal. Not a guarantee but useful signal."},
-  {q:"Calibration check on critical principles",a:"Consensus picks moved off market on 7/8 calls — discipline holding. Coin flip margin (R10 had no coin flips) — N/A this week. Bold Play was genuinely contrarian (Manly +1.5 underdog originally). Returning superstars principle held up but wasn't directly tested."}
+  {q:"Which v5 variables predicted most accurately last round?",a:"<strong>Injury weight score</strong> nailed the Sea Eagles call against the Tigers (Wakeham suspended pushed Manly's edge). <strong>Halves games together</strong> correctly flagged Volkman–Moses (4 games) as untested but they couldn't withstand Hughes. <strong>Magic Round flag</strong> worked as designed — Warriors' Auckland fortress neutralised was a real factor but we still won the game on form. The framework called 7 of 8."},
+  {q:"What did we get wrong, and why?",a:"Cowboys-Roosters was the only outright miss. We had Roosters by 16 — Cowboys won 18-12. The Roosters were +/- 5 with us all year, but we missed that <strong>Sam Walker's Origin selection 5 days before kickoff</strong> visibly thinned the Roosters' attacking chemistry. New principle earned: pre-Origin chemistry erosion. Worth a permanent flag."},
+  {q:"What new variable would have helped?",a:"A <strong>'pre-Origin attention shift' flag</strong> on the favourite when a key spine player is in Origin squad announcement week. Walker had Maroons coaches in his ear from the Monday. A simple binary: if home or away team has a SPINE player named in Origin squad in the past 7 days, downgrade tier by one notch. Would have moved Roosters from STRONG to LEAN, kept the pick but flagged the upset risk."},
+  {q:"Margin discipline check",a:"R11 margins were the wrong way: <strong>only 1 of 7 wins landed within 5 of actual</strong> (Panthers at 6 off the actual 22 — narrowly missed bonus). Magic Round produced blowouts because the form sides took advantage of neutral venues. New variable proposal: margin blowout coefficient for neutral venues — when venue is neutral AND form gap > 4 ladder spots, multiply margin by 1.5x."},
+  {q:"Bold Play discipline",a:"6 of 6 since R6. The discipline of one contrarian, market-disagreeing pick per round is working. R11 Dolphins was a 'tier short price underdog despite being in better form' — exactly the pattern that's been landing. R12 we go the other way: outright underdog favourite (Rabbitohs at $2.30) where the spine matchup tilts our way."}
 ];
 
 // =============== RENDER ===============
@@ -811,7 +718,7 @@ GAMES.forEach(g => {
           <div class="v5-row"><span class="v5-label">Captain available (home)</span><span class="v5-value">${g.captain.home?"✓":"✗"}</span></div>
           <div class="v5-row"><span class="v5-label">Captain available (away)</span><span class="v5-value">${g.captain.away?"✓":"✗"}</span></div>
           <div class="v5-row"><span class="v5-label">Magic Round flag</span><span class="v5-value">${g.magicRoundFlag?"⚡ ACTIVE":"—"}</span></div>
-          <div class="v5-row"><span class="v5-label">Travel km (away)</span><span class="v5-value">${g.travelKm} (neutralised)</span></div>
+          <div class="v5-row"><span class="v5-label">Travel km (away)</span><span class="v5-value">${g.travelKm}</span></div>
           <div class="v5-row"><span class="v5-label">Possession % L4 (home)</span><span class="v5-value">${flagHomePoss}${g.possession.home}%</span></div>
           <div class="v5-row"><span class="v5-label">Possession % L4 (away)</span><span class="v5-value">${flagAwayPoss}${g.possession.away}%</span></div>
           <div class="v5-row"><span class="v5-label">Attack rank (home/away)</span><span class="v5-value">${g.metrics.hAtk} / ${g.metrics.aAtk}</span></div>
@@ -834,11 +741,11 @@ LADDER.forEach(t => {
   lb.innerHTML += `<tr class="${cls}"><td class="ladder-pos">${t.pos}</td><td class="ladder-team">${t.team}</td><td>${t.w}-${t.l}</td><td>${t.pts}</td><td>${t.diff}</td><td class="ladder-form">${formHtml}</td></tr>`;
 });
 
-// R10 Review
+// R11 Review
 const rb = document.getElementById("review-body");
-rb.innerHTML = `<div style="margin-top:6px">${R10_REVIEW.highlights.map(h => `<div class="review-item review-${h.type}">${h.text}</div>`).join("")}</div>
-<div style="font-size:11px;color:#d97706;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700">Key Learnings Applied to Round 11</div>
-${R10_REVIEW.lessons.map(l => `<div class="review-lesson">${l}</div>`).join("")}`;
+rb.innerHTML = `<div style="margin-top:6px">${R11_REVIEW.highlights.map(h => `<div class="review-item review-${h.type}">${h.text}</div>`).join("")}</div>
+<div style="font-size:11px;color:#d97706;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;font-weight:700">Key Learnings Applied to Round 12</div>
+${R11_REVIEW.lessons.map(l => `<div class="review-lesson">${l}</div>`).join("")}`;
 
 // Auto-improvement
 const ab = document.getElementById("auto-body");
