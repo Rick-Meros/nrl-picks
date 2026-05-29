@@ -1,204 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jack's NRL Round 13 Picks</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>NRL Round 13 Picks | TAB + Superbru Engine v6</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
-:root { color-scheme: dark; }
-* { box-sizing: border-box; }
-body { margin:0; background:#0d1117; color:#e6edf3; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-.wrap { max-width:920px; margin:0 auto; padding:20px; }
-h1 { font-size:26px; margin:0 0 2px; color:#fff; }
-.sub { color:#8b949e; font-size:14px; margin-bottom:18px; }
-.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.card { background:#161b22; border:1px solid #30363d; border-radius:12px; padding:18px; margin-bottom:12px; }
-.kpi { font-size:48px; font-weight:800; line-height:1.1; color:#3fb950; }
-.label { font-size:12px; color:#8b949e; text-transform:uppercase; letter-spacing:.5px; }
-.review { border-color:#f85149; }
-.review h3 { color:#f85149; margin:0 0 8px; }
-.flag { border:1px solid #f85149; background:#2d1416; }
-.flag h3 { color:#ff7b72; margin:0 0 8px; }
-.bold { border:2px solid #bb8009; }
-.tier { font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; color:#fff; }
-.STRONG { background:#238636; } .LEAN { background:#1f6feb; } .COINFLIP { background:#9e6a03; }
-table { width:100%; border-collapse:collapse; font-size:13px; }
-th { text-align:left; color:#8b949e; font-weight:600; padding:6px 4px; border-bottom:2px solid #30363d; }
-td { padding:6px 4px; border-bottom:1px solid #21262d; }
-.pickrow { display:flex; gap:18px; flex-wrap:wrap; margin:10px 0; }
-.pickrow div span { display:block; }
-.pickrow .v { font-weight:700; font-size:15px; }
-.pickrow .k { font-size:11px; color:#8b949e; }
-.gtitle { font-size:16px; font-weight:700; }
-.gmeta { font-size:12px; color:#8b949e; }
-.analysis { font-size:13px; line-height:1.55; color:#c9d1d9; margin:8px 0 0; }
-.star { color:#e3b341; font-weight:700; }
-details { margin-top:8px; }
-summary { cursor:pointer; color:#58a6ff; font-size:12px; }
-.factors { margin:8px 0 0; padding-left:18px; }
-.factors li { font-size:12px; color:#adbac7; margin-bottom:3px; }
-.crit { color:#f85149; font-weight:700; } .high { color:#d29922; font-weight:600; }
-.dl { background:#0d1117; border:1px solid #21262d; border-radius:8px; padding:10px; margin-top:8px; }
-.dl div { display:flex; justify-content:space-between; font-size:12px; padding:2px 0; color:#8b949e; }
-.dl div b { color:#e6edf3; font-weight:600; }
-.green { color:#3fb950; } .red { color:#f85149; }
-footer { text-align:center; color:#8b949e; font-size:12px; margin-top:20px; }
-h2 { font-size:20px; margin:18px 0 10px; }
-ol,ul { margin:6px 0; }
-.note { font-size:11px; color:#8b949e; font-style:italic; margin-top:6px; }
-@media(max-width:640px){ .grid2{grid-template-columns:1fr;} }
+  :root{
+    color-scheme: light;
+    --bg:#f4f1ea; --card:#fbfaf6; --card2:#ffffff; --line:#e4dfd1;
+    --ink:#1c1b18; --muted:#6f6a5d; --faint:#9a9485;
+    --green:#1f8a4c; --green-d:#15673a; --red:#b4402f; --amber:#c2841a; --blue:#2f6df0;
+    --gold:#b8902a;
+    --mono:ui-monospace,'SF Mono','JetBrains Mono',Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       line-height:1.5;-webkit-font-smoothing:antialiased;padding:0 0 64px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .mono{font-family:var(--mono)}
+  header{padding:40px 0 24px;text-align:center}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--faint);text-transform:uppercase}
+  h1{font-family:var(--mono);font-size:clamp(34px,7vw,64px);letter-spacing:.04em;margin:6px 0 4px;font-weight:800}
+  .sub{color:var(--muted);font-size:14px}
+  .sub b{color:var(--ink)}
+  .grid{display:grid;gap:18px}
+  .hero{grid-template-columns:1.35fr 1fr}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card.tab{background:linear-gradient(180deg,#10301d 0%,#0c2417 100%);border-color:#0c2417;color:#eafaf0}
+  .ctitle{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pill{font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:3px 8px;border-radius:999px;border:1px solid currentColor;text-transform:uppercase}
+  .tab-figs{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:6px}
+  .fig .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#86c79d}
+  .fig .val{font-family:var(--mono);font-weight:800;font-size:30px;line-height:1.1}
+  .fig .val.sm{font-size:22px}
+  .pos{color:#5fe08a}
+  .tab-body{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center;margin-top:8px}
+  @media(max-width:520px){.tab-body{grid-template-columns:1fr}}
+  .donut-wrap{position:relative;height:170px}
+  .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+  .donut-center .big{font-family:var(--mono);font-weight:800;font-size:22px}
+  .donut-center .cap{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:#86c79d;text-transform:uppercase}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  .tab-table th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#86c79d;text-align:left;padding:4px 6px;border-bottom:1px solid #1f4d33}
+  .tab-table td{padding:6px;border-bottom:1px solid #163a26;font-family:var(--mono)}
+  .tab-table tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:2px 6px;border-radius:5px;text-transform:uppercase;font-weight:700}
+  .t-strong{background:rgba(95,224,138,.16);color:#7fe6a4}
+  .t-lean{background:rgba(255,196,84,.16);color:#ffcf73}
+  .t-coin{background:rgba(120,180,255,.16);color:#9cc4ff}
+  .acc-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+  .acc-num{font-family:var(--mono);font-size:56px;font-weight:800;line-height:1;color:var(--green-d)}
+  .acc-meta{font-size:13px;color:var(--muted)}
+  .acc-meta b{color:var(--ink)}
+  .chip{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;background:#eef0e6;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
+  .chart-box{height:188px;margin-top:10px}
+  .sec{margin-top:30px}
+  .sec-h{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 12px;display:flex;align-items:center;gap:10px}
+  .sec-h .ln{flex:1;height:1px;background:var(--line)}
+  .bold{background:#13110c;color:#f4ecd6;border:1px solid #2a2417;border-radius:16px;padding:22px}
+  .bold .flag{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+  .bold h3{font-family:var(--mono);font-size:26px;margin:6px 0 8px}
+  .bold p{margin:0;color:#cabf9f;font-size:14px;max-width:780px}
+  .bold .odds{font-family:var(--mono);font-weight:800;color:#ffd76a;font-size:15px}
+  .pred-box{height:320px}
+  .games{grid-template-columns:1fr 1fr}
+  @media(max-width:760px){.games{grid-template-columns:1fr}}
+  .game{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .game.bp{border-color:var(--gold)}
+  .game summary{list-style:none;cursor:pointer;padding:14px 16px;display:block}
+  .game summary::-webkit-details-marker{display:none}
+  .g-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .g-match{font-family:var(--mono);font-size:13px;font-weight:700}
+  .g-match .vs{color:var(--faint);font-weight:400}
+  .g-pick{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:3px}
+  .g-pick b{color:var(--green-d)}
+  .g-right{text-align:right;white-space:nowrap}
+  .g-odds{font-family:var(--mono);font-weight:800;font-size:16px}
+  .conf{height:5px;background:#eceadf;border-radius:3px;margin-top:10px;overflow:hidden}
+  .conf > i{display:block;height:100%;background:var(--green)}
+  .g-detail{padding:0 16px 16px;border-top:1px solid var(--line);margin-top:12px;padding-top:12px;font-size:13px;color:var(--muted)}
+  .g-detail .an{color:var(--ink);margin:0 0 10px}
+  .kf{display:flex;gap:7px;font-size:12px;margin:5px 0;align-items:flex-start}
+  .kf .w{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;padding:1px 5px;border-radius:4px;text-transform:uppercase;flex-shrink:0;margin-top:1px}
+  .w-crit{background:#fbe3df;color:#b4402f}.w-high{background:#fdeecf;color:#9a6a12}.w-med{background:#e8ecf6;color:#3a5da8}.w-low{background:#ececec;color:#777}
+  .dlayer{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:12px;font-family:var(--mono);font-size:11px}
+  .dlayer div{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:3px 0}
+  .dlayer span:first-child{color:var(--faint)}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.cols2{grid-template-columns:1fr}}
+  ul.clean{margin:0;padding-left:18px;font-size:13px;color:var(--muted)}
+  ul.clean li{margin:5px 0}
+  .ladder{font-family:var(--mono);font-size:12px}
+  .ladder div{display:flex;gap:8px;padding:3px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .ladder .p{width:20px;color:var(--faint)}
+  .ladder .t{flex:1}
+  .ladder .pts{font-weight:700}
+  .ladder .nt{color:var(--faint);font-size:10px;font-style:italic}
+  .top8{color:var(--green-d);font-weight:700}
+  .princ{display:flex;gap:8px;font-size:12px;margin:6px 0;color:var(--muted)}
+  .princ .n{font-family:var(--mono);color:var(--green-d);flex-shrink:0}
+  .review-lesson{font-size:12px;color:var(--amber);font-style:italic;margin-top:10px}
+  .varcount{text-align:center;font-family:var(--mono);color:var(--muted);font-size:13px;margin-top:26px}
+  .varcount b{font-size:30px;color:var(--ink);display:block}
+  footer{text-align:center;color:var(--faint);font-size:12px;margin-top:34px;font-family:var(--mono)}
+  .updated{text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:6px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🏉 Jack's NRL Round 13 Picks</h1>
-  <div class="sub">29–31 May 2026 · Post-Origin I back-up round · Byes: Dolphins, Titans, Rabbitohs · 7 games</div>
+  <header>
+    <div class="kicker">NRL 2026 · Superbru + TAB Engine v6</div>
+    <h1>ROUND 13</h1>
+    <div class="sub"><b>29-31 May</b> · 7 games · Post-Origin I back-up round · byes: Dolphins, Titans, Rabbitohs</div>
+  </header>
 
-  <div class="grid2">
-    <div class="card">
-      <div class="label">Season accuracy (locked R5–R11)</div>
-      <div class="kpi">78.6%</div>
-      <div class="gmeta">44/56 correct · R12 only Bold Play recoverable (missed)</div>
+  <div class="grid hero">
+    <div class="card tab">
+      <div class="ctitle">💰 TAB Betting Layer <span class="pill" style="color:#5fe08a">Primary objective</span></div>
+      <div class="tab-figs">
+        <div class="fig"><div class="lbl">Staked</div><div class="val" id="fStake">$700</div></div>
+        <div class="fig"><div class="lbl">Return if all win</div><div class="val pos" id="fMax">$1,183</div></div>
+        <div class="fig"><div class="lbl">Net upside</div><div class="val sm pos" id="fNet">+$483</div></div>
+        <div class="fig"><div class="lbl">Round EV</div><div class="val sm pos" id="fEv">+$11</div></div>
+      </div>
+      <div class="tab-body">
+        <div class="donut-wrap">
+          <canvas id="tabDonut"></canvas>
+          <div class="donut-center"><span class="big" id="cMax">$1,183</span><span class="cap">Max payout</span></div>
+        </div>
+        <table class="tab-table">
+          <thead><tr><th>Bet</th><th>Tier</th><th>Odds</th><th>Returns</th></tr></thead>
+          <tbody id="tabRows"></tbody>
+        </table>
+      </div>
     </div>
+
     <div class="card">
-      <div class="label">Active inputs</div>
-      <div class="kpi" style="color:#58a6ff">52+</div>
-      <div class="gmeta">Core 10 · Form 12 · Market 6 · v4 6 · v5 6 · Principles 12</div>
-    </div>
-  </div>
-
-  <div class="card flag">
-    <h3>Late mail — Thu 28 May (pre-kickoff)</h3>
-    <p style="font-size:14px;margin:6px 0"><b>Phantom game pulled.</b> R13 is a seven-game round. Dolphins, Titans AND Rabbitohs are all on the bye. An earlier build wrongly carried a "Dolphins v Titans" game with $100 on it. That fixture doesn't exist. TAB layer this weekend is <b>$700</b>, not $800.</p>
-    <p style="font-size:13px;color:#adbac7;margin:6px 0"><b>Bold Play still live, edge narrowed.</b> Penrith named Cleary, Yeo, To'o and McLean in the reserves to monitor post-Origin, so the premise held. But the Warriors lost Roger Tuivasa-Sheck for the season (ACL) and Liam Martin returns for Penrith. Coin flip now, not the value it looked.</p>
-  </div>
-
-  <div class="card review">
-    <h3>R12 Review — Bold Play streak ends</h3>
-    <p style="font-size:14px;margin:6px 0">Bold Play (Souths over Cowboys away @ $2.30) <b>MISSED</b>. Cowboys won 30-18. First Bold Play loss since R6, streak ends 6/6.</p>
-    <p style="font-size:13px;color:#8b949e;margin:6px 0">Full R12 picks were never archived to project memory, so the other four games can't be honestly graded.</p>
-    <div class="gmeta">Bulldogs 30 Storm 20 · Sea Eagles 12 Titans 10 · Cowboys 30 Rabbitohs 18 · Dolphins 30 Raiders 22 · Warriors 30 Dragons 12 · Sharks bye</div>
-    <p style="font-size:13px;color:#d29922;font-style:italic;margin-top:10px">Lesson: the #12 chemistry-erosion modifier over-read the Cowboys' halves disruption. A settled in-form pack beats a reshuffled spine more often than the modifier assumed. Don't let one variable override a clean form read.</p>
-  </div>
-
-  <h2>The 7 Picks</h2>
-  <div id="games"></div>
-
-  <div class="card">
-    <h3 style="margin:0 0 10px">TAB Layer — $700 staked</h3>
-    <table id="tab"></table>
-    <div id="tabsum" class="gmeta" style="margin-top:10px"></div>
-    <div class="note">Slightly positive EV, carried mostly by the Warriors value. The rest sit at or just under the bookie's margin. Not financial advice. Variance is real.</div>
-  </div>
-
-  <div class="card">
-    <h3 style="margin:0 0 8px">Auto-Improvement (v5)</h3>
-    <p style="font-size:13px;color:#d29922"><b>What broke in R12:</b> the #12 chemistry-erosion modifier cost us the Bold Play. We backed Souths off the Cowboys' Sutton-Clifford disruption; the Cowboys' settled pack overpowered an injury-thin Souths 30-18. A single contextual modifier overrode a clean form read.</p>
-    <p style="font-size:13px;color:#ff7b72"><b>What broke this run:</b> the engine built an eight-game round without checking the bye list against the official draw, which let a phantom Dolphins v Titans game in. Adding a bye-validation step so it can't recur.</p>
-    <ul style="font-size:12px;color:#adbac7">
-      <li>Origin back-up is the round's whole story. Panthers resting their spine is the key signal; the market lagging it is the edge.</li>
-      <li>Bold Play is contrarian vs market (Panthers favourite), but the NZ pool already leans Warriors, so pool-differentiation value is lower than market-contrarian value.</li>
-      <li>Coin-flip margins disciplined — all flips sit at 3-4.</li>
-    </ul>
-    <h4 style="margin:10px 0 4px">Proposed variables (R14)</h4>
-    <ol style="font-size:12px;color:#58a6ff">
-      <li><b>byeValidation</b> — cross-check every fixture against the official draw byes before building. Would have killed the phantom game at source.</li>
-      <li><b>originBackupConfirmed</b> — did each named-in-reserves Origin player actually back up? Resolve via Friday late mail. Directly de-risks the Panthers Bold Play.</li>
-      <li><b>spineContinuityIndex</b> — 0-10 score of how settled the 1/6/7/9 axis is vs baseline. The Cowboys miss shows we need it measured, not vibed.</li>
-    </ol>
-  </div>
-
-  <div class="grid2">
-    <div class="card">
-      <h3 style="margin:0 0 8px">Ladder — after R12</h3>
-      <table id="ladder"></table>
-    </div>
-    <div class="card">
-      <h3 style="margin:0 0 8px">Framework Principles</h3>
-      <ol id="principles" style="font-size:12px;color:#adbac7;padding-left:18px"></ol>
+      <div class="ctitle">🎯 Season Accuracy</div>
+      <div class="acc-top">
+        <div class="acc-num">78.6<span style="font-size:24px">%</span></div>
+        <div class="acc-meta">
+          <div><b>44 / 56</b> correct · locked R5-R11</div>
+          <div style="margin-top:4px"><span class="chip">▲ trending up</span> <span class="chip">ceiling 65-68%</span></div>
+        </div>
+      </div>
+      <div class="chart-box"><canvas id="accChart"></canvas></div>
     </div>
   </div>
 
-  <footer>Not financial advice. All for fun. Variance is real. — Jack</footer>
+  <div class="sec">
+    <div class="bold">
+      <div class="flag">★ Bold Play of the Round</div>
+      <h3>Warriors over Penrith, by 4</h3>
+      <p>Penrith parked Cleary, Yeo, To'o and McLean in the reserves four days after Origin I. A Panthers side without that spine is a different team, and the market still has them favourite at $1.54 on reputation. Principle #8: a gutted spine is a sitting duck. Losing RTS to a season-ending ACL hurts the Warriors, but a top-two side at these odds is the value of the round. The risk is blunt: if Cleary backs up, it blows up. <span class="odds">TAB $2.45 · $100 returns $245</span></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">Margin Predictions vs Market <span class="ln"></span></div>
+    <div class="card">
+      <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Bar spans the market-implied margin (from TAB H2H odds) to our called margin. Green = chasing a bigger margin. Red = pulled under for bonus protection. The Warriors bar crosses zero: the market has them losing, we have them winning.</div>
+      <div class="pred-box"><canvas id="predChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">The 7 Picks <span class="ln"></span></div>
+    <div class="grid games" id="games"></div>
+  </div>
+
+  <div class="sec cols2">
+    <div class="card">
+      <div class="ctitle">📊 Ladder (after R12)</div>
+      <div class="ladder" id="ladder"></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">🧠 Last Round Graded · R12, Bold Play streak ended</div>
+      <ul class="clean" id="review"></ul>
+      <div class="review-lesson" id="lesson"></div>
+    </div>
+  </div>
+
+  <div class="sec cols2">
+    <div class="card">
+      <div class="ctitle">⚖️ Framework Principles · earned the hard way</div>
+      <div id="principles"></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">🔧 Auto-Improvement · proposed for R14</div>
+      <ul class="clean" id="nextvars"></ul>
+    </div>
+  </div>
+
+  <div class="varcount"><b>52+</b>active inputs per round · v6 structure · TAB-first</div>
+
+  <footer>
+    Not financial advice. All for fun. Variance is real.<br>
+    — Jack. The cosmos is indifferent. Cleary doesn't care about your feelings. Pick the right margin.
+    <div class="updated" id="stamp"></div>
+  </footer>
 </div>
 
 <script>
 const GAMES = [
- {h:"Sharks",a:"Sea Eagles",day:"Fri 29 May, 9:50pm NZT",v:"Ocean Protect Stadium",pick:"Sea Eagles",m:3,s:"Sea Eagles 20-17",c:53,t:"COIN FLIP",odds:1.95,bold:false,
-  an:"Sharks losing Hynes is the swing. A debutant No.7 alongside Trindall against a Manly side riding genuine momentum is a real downgrade in steering. Manly's spine is intact (Olakau'atu and Koula only monitored off the bench). Home edge keeps Cronulla live, but the form line and the halves mismatch tip me to the Eagles.",
-  f:[["Hynes (calf) out — debutant Puru at halfback","crit","away"],["Manly on a 5-game streak, 4th","high","away"],["Olakau'atu & Koula on bench (Origin monitor)","med","home"],["McInnes 100th, AFB+Nikora back","med","home"],["Fogarty-Brooks settled vs Trindall-Puru","high","away"]],
-  d:{iw:"8 / 4",hg:"1 / 14",bi:"strong / elite",cap:"Y / Y",pos:"49 / 51"},sb:"Pool's instinct is the home Shark. Taking Manly by a small margin differentiates."},
- {h:"Knights",a:"Eels",day:"Sat 30 May, 5:00pm NZT",v:"McDonald Jones Stadium",pick:"Knights",m:18,s:"Knights 30-12",c:80,t:"STRONG",odds:1.22,bold:false,
-  an:"Parramatta without Moses and Paulo is a shell. Volkman steering and Jack Williams skippering is a big drop in control. Newcastle keep their Magic Round winning side with Ponga backing up. At home this should be comfortable; the only question is margin.",
-  f:[["Eels gutted: Moses (hammy) AND Paulo (knee, 8wks) out","crit","home"],["Ponga+Saifiti back up, same XIII that beat Titans","high","home"],["Volkman at half, Williams captaining patchwork","high","home"],["Knights heavy favourite ($1.22)","high","home"]],
-  d:{iw:"2 / 16",hg:"9 / 3",bi:"strong / average",cap:"Y / N",pos:"51 / 47"},sb:"Consensus winner. Edge is purely margin — push north of the market's ~12."},
- {h:"Tigers",a:"Bulldogs",day:"Sat 30 May, 7:30pm NZT",v:"CommBank Stadium",pick:"Bulldogs",m:4,s:"Bulldogs 22-18",c:54,t:"COIN FLIP",odds:1.80,bold:false,
-  an:"Closer than the table suggests. Wests get a near-full squad back, but Canterbury just beat Melbourne and carry more class through Burton and Galvin with Kiraz flying. Crichton being monitored is the wobble. I lean Dogs on quality, narrowly.",
-  f:[["Dogs beat Storm 30-20 last week","high","away"],["Burton starts; Crichton on extended bench","med","away"],["Tigers get Bula, Koroisau, Twal, Makasini back","high","home"],["Dogs lost Preston (arm)","med","home"]],
-  d:{iw:"6 / 7",hg:"8 / 11",bi:"average / strong",cap:"Y / Y",pos:"48 / 50"},sb:"Likely a split pool. Backing the away Dog by a tight margin protects the bonus."},
- {h:"Storm",a:"Roosters",day:"Sat 30 May, 9:35pm NZT",v:"AAMI Park",pick:"Roosters",m:4,s:"Roosters 24-20",c:56,t:"LEAN",odds:1.65,bold:false,
-  an:"The market backs the Roosters away even with six players backing up from Origin, which tells you what it thinks of Melbourne's season. Storm get their spine back and AAMI is a fortress on paper, but the trend line is ugly. The Origin fatigue is the only thing keeping this from a clearer call.",
-  f:[["Roosters favourite even away — market signal","high","away"],["Storm get Munster, Grant, Loiero back","high","home"],["Roosters heavy Origin load: 6 backing up","high","home"],["Storm 4-8, collapsed 2nd half vs Dogs","med","away"]],
-  d:{iw:"5 / 6",hg:"20 / 7",bi:"strong / elite",cap:"Y / Y",pos:"50 / 52"},sb:"Roosters are the smart-money pick. Margin held modest given fatigue risk."},
- {h:"Broncos",a:"Dragons",day:"Sun 31 May, 4:00pm NZT",v:"Suncorp Stadium",pick:"Broncos",m:20,s:"Broncos 34-14",c:88,t:"STRONG",odds:1.11,bold:false,
-  an:"About as one-sided as the round gets. Brisbane get Haas back, keep their spine and host the bottom side at Suncorp. The Dragons have leaked points all year and arrive thin. The only risk is Brisbane easing off after Origin, which caps the margin, but the winner isn't in doubt.",
-  f:[["Dragons 17th, wooden-spoon track","crit","home"],["Haas returns (first since R7), Piakura back","high","home"],["Staggs, Mam, Carrigan back up from Origin","med","home"],["Broncos $1.11 — as short as it gets","high","home"]],
-  d:{iw:"4 / 12",hg:"14 / 6",bi:"strong / weak",cap:"Y / Y",pos:"52 / 46"},sb:"Consensus banker. Move well off the ~16 line to 20."},
- {h:"Raiders",a:"Cowboys",day:"Sun 31 May, 6:05pm NZT",v:"GIO Stadium",pick:"Raiders",m:6,s:"Raiders 26-20",c:58,t:"LEAN",odds:1.65,bold:false,
-  an:"Cowboys are the form team but again missing Dearden, their best half, running the Sutton-Clifford combo the market still prices cautiously. Add a long trip to a cold Canberra night and the handling favours the home pack. Raiders aren't reliable, so it's a lean, but the spots line up for Canberra.",
-  f:[["Cowboys WITHOUT Dearden — Sutton-Clifford halves","high","home"],["Cowboys travel >1,500km to cold Canberra","med","home"],["Cold GIO affects handling","med","home"],["Cowboys in form: 7 of last 8","high","away"]],
-  d:{iw:"4 / 7",hg:"6 / 4",bi:"average / strong",cap:"Y / Y",pos:"49 / 50"},sb:"Pool likely splits on Cowboys' form. Backing Raiders counters the form bias."},
- {h:"Panthers",a:"Warriors",day:"Sun 31 May, 8:15pm NZT",v:"CommBank Stadium",pick:"Warriors",m:4,s:"Warriors 24-20",c:52,t:"LEAN",odds:2.45,bold:true,
-  an:"This is the Bold Play, and the late mail confirms the premise: Penrith parked Cleary, Yeo, To'o and McLean in the reserves four days after Origin I, with Cogger to cover halfback and Lindsay Smith at lock if the stars sit. A Panthers side without that spine is a different team and the market still has them favourite on reputation. Principle #8: a gutted spine is a sitting duck. The edge has narrowed though — the Warriors lost RTS for the season and Liam Martin returns for Penrith, so this is now a genuine coin flip rather than the value it first looked. The risk is obvious: if Cleary backs up, it blows up.",
-  f:[["Cleary, Yeo, To'o, McLean ALL in reserves — CONFIRMED","crit","away"],["Cogger 7, Lindsay Smith at lock if stars rested","high","away"],["Warriors 2nd on ladder, genuine top side","high","away"],["Warriors lost RTS (ACL, season) — Pompey to centre","high","home"],["Liam Martin returns from knee for Penrith","med","home"]],
-  d:{iw:"22 / 9",hg:"2 / 9",bi:"average / strong",cap:"N / Y",pos:"53 / 50"},sb:"NZ pool already leans Warriors, so differentiation is in margin and conviction. Banking the contrarian-vs-market read."}
+  {home:"Sharks",away:"Sea Eagles",pick:"Sea Eagles",margin:3,tier:"COIN FLIP",conf:53,odds:1.95,score:"20-17",
+   an:"Sharks losing Hynes is the swing. A debutant No.7 against a Manly side on a five-game streak is a real downgrade in the steering department. Manly's spine is intact, only Olakau'atu and Koula monitored off the bench. Home edge keeps Cronulla live, the halves mismatch tips it. Tight.",
+   kf:[["crit","Hynes (calf) out, debutant Puru at 7 for Sharks"],["high","Manly on a 5-game streak, up to 4th"],["high","Fogarty-Brooks settled vs untested Sharks halves"],["med","Sharks home, slight market fav $1.87"]],
+   dl:{Injury:"H 8 / A 4",Halves:"1 / 14",Bench:"strong / elite",Captain:"yes / yes",Possn:"49% / 51%"}},
+  {home:"Knights",away:"Eels",pick:"Knights",margin:18,tier:"STRONG",conf:80,odds:1.22,score:"30-12",
+   an:"Parramatta without Moses and Paulo is a shell. Volkman steering and Jack Williams skippering is a big drop in control. Newcastle keep their Magic Round winning side together with Ponga backing up. At home this should be comfortable; the only question is margin.",
+   kf:[["crit","Eels lose Moses (hammy) AND Paulo (knee, 8wks)"],["high","Ponga + Saifiti back up from Origin"],["high","Knights heavy fav $1.22"],["med","Eels 15th, leakiest defence in the chasing pack"]],
+   dl:{Injury:"H 2 / A 16",Halves:"9 / 3",Bench:"strong / average",Captain:"yes / NO",Possn:"51% / 47%"}},
+  {home:"Tigers",away:"Bulldogs",pick:"Bulldogs",margin:4,tier:"COIN FLIP",conf:54,odds:1.80,score:"22-18",
+   an:"Closer than the form table suggests. Wests get a near-full squad back, but Canterbury just beat Melbourne and carry more class through Burton and Galvin with Kiraz flying at the back. Crichton being monitored is the wobble. Lean Dogs on quality, narrowly. A genuine flip.",
+   kf:[["high","Dogs beat Storm 30-20 last week"],["high","Tigers get Bula, Koroisau, Twal, Makasini back"],["med","Crichton on extended bench (Origin monitor)"],["med","Dogs lost Preston (arm)"]],
+   dl:{Injury:"H 6 / A 7",Halves:"8 / 11",Bench:"average / strong",Captain:"yes / yes",Possn:"48% / 50%"}},
+  {home:"Storm",away:"Roosters",pick:"Roosters",margin:4,tier:"LEAN",conf:56,odds:1.65,score:"24-20",
+   an:"The market backs the Roosters away even with six players backing up from Origin, which tells you what it thinks of Melbourne's season. Storm get their spine back and AAMI is a fortress on paper, but the trend line is ugly. Origin fatigue is the only thing keeping this from a clearer call.",
+   kf:[["high","Roosters favourite even away $1.65, market signal"],["high","Roosters carry 6 Origin back-ups"],["med","Storm get Munster, Grant, Loiero back"],["med","Storm collapsed 2nd half vs Dogs, season 4-8"]],
+   dl:{Injury:"H 5 / A 6",Halves:"20 / 7",Bench:"strong / elite",Captain:"yes / yes",Possn:"50% / 52%"}},
+  {home:"Broncos",away:"Dragons",pick:"Broncos",margin:20,tier:"STRONG",conf:88,odds:1.11,score:"34-14",
+   an:"About as one-sided as the round gets. Brisbane get Haas back, keep their spine and host the bottom side at Suncorp. The Dragons have leaked points all year and arrive thinner. The only risk is Brisbane easing off after Origin, which caps the margin, not the winner.",
+   kf:[["crit","Dragons 17th, on the wooden-spoon track"],["high","Haas returns, first game since R7"],["high","Broncos at Suncorp, $1.11, as short as it gets"],["med","Dragons lost Su'A, Buchanan, Tuipulotu"]],
+   dl:{Injury:"H 4 / A 12",Halves:"14 / 6",Bench:"strong / weak",Captain:"yes / yes",Possn:"52% / 46%"}},
+  {home:"Raiders",away:"Cowboys",pick:"Raiders",margin:6,tier:"LEAN",conf:58,odds:1.65,score:"26-20",
+   an:"Cowboys are the form team but again without Dearden, their best half, running the Sutton-Clifford combo the market still prices cautiously. Add a long trip to a cold Canberra night and the handling favours the home pack. Raiders aren't reliable, which is why this is a lean and not more.",
+   kf:[["high","Cowboys without Dearden again, Sutton-Clifford halves"],["high","Cowboys in form, 7 of last 8, Cotter back as captain"],["med","Cowboys travel 1,500km+ to a cold Canberra night"],["med","Strange + Hudson Young back up for Raiders"]],
+   dl:{Injury:"H 4 / A 7",Halves:"6 / 4",Bench:"average / strong",Captain:"yes / yes",Possn:"49% / 50%"}},
+  {home:"Panthers",away:"Warriors",pick:"Warriors",margin:4,tier:"LEAN",conf:52,odds:2.45,score:"24-20",bold:true,
+   an:"The Bold Play. Penrith parked Cleary, Yeo, To'o and McLean in the reserves four days after Origin I. A Panthers side without that spine is a different team, and the market still has them favourite on reputation. Principle #8 says a gutted spine is a sitting duck. Losing RTS hurts the Warriors, but a top-two side at $2.45 is the value of the round. The risk: if Cleary backs up, it blows up.",
+   kf:[["crit","Cleary, Yeo, To'o, McLean all named in reserves"],["crit","Spine-less Panthers still fav $1.54, overcooked"],["high","Warriors 2nd on the ladder, genuine top side"],["med","Warriors lost RTS (ACL, season), Pompey in"]],
+   dl:{Injury:"H 22 / A 7",Halves:"2 / 9",Bench:"average / strong",Captain:"NO / yes",Possn:"53% / 50%"}},
 ];
-const LADDER=[[1,"Panthers",22,"Resting spine R13"],[2,"Warriors",20,"Lost RTS (ACL)"],[3,"Roosters",18,""],[4,"Sea Eagles",18,"5-game streak"],[5,"Knights",16,""],[6,"Cowboys",16,"7 of last 8"],[7,"Rabbitohs",14,"BYE R13"],[8,"Dolphins",14,"BYE R13"],[9,"Sharks",14,""],[10,"Tigers",14,""],[11,"Bulldogs",12,""],[12,"Broncos",12,""],[13,"Titans",8,"BYE R13"],[14,"Raiders",8,""],[15,"Eels",6,"Moses+Paulo out"],[16,"Storm",8,""],[17,"Dragons",2,"Spoon track"]];
-const PRINC=["Current form beats reputation (R3)","No LOCKs. STRONG is ceiling (R6)","One Bold Play per round (R6)","Coin flips get margins 2-4 (R5)","Consensus picks move off market line (R7)","Margin is a first-class decision (R6)","Trust research over override intuition (R5)","Injury-ravaged teams are sitting ducks (R6)","Historical streaks mean nothing in 2026 (R7)","Returning superstars warp the line (R9)","Magic Round neutralises home advantage (R11)","Pre-Origin chemistry erosion (R12) — UNDER REVIEW"];
 
-const fc=(x)=>x==="crit"?"crit":x==="high"?"high":"";
-let gh="";
-GAMES.forEach((g,i)=>{
-  let facts=g.f.map(f=>`<li><span class="${fc(f[1])}">[${f[1]}]</span> ${f[0]} <em>(${f[2]})</em></li>`).join("");
-  gh+=`<div class="card ${g.bold?'bold':''}">
-   <div style="display:flex;justify-content:space-between;align-items:flex-start">
-     <div><div class="gtitle">${g.h} v ${g.a} ${g.bold?'<span class="star">★ BOLD PLAY</span>':''}</div>
-     <div class="gmeta">${g.day} · ${g.v}</div></div>
-     <span class="tier ${g.t.replace(' ','')}">${g.t}</span>
-   </div>
-   <div class="pickrow">
-     <div><span class="k">PICK</span><span class="v">${g.pick}</span></div>
-     <div><span class="k">MARGIN</span><span class="v">${g.m}</span></div>
-     <div><span class="k">SCORE</span><span class="v">${g.s}</span></div>
-     <div><span class="k">CONF</span><span class="v">${g.c}%</span></div>
-     <div><span class="k">TAB</span><span class="v green">$${g.odds.toFixed(2)}</span></div>
-   </div>
-   <p class="analysis">${g.an}</p>
-   <details><summary>Show data layer + factors</summary>
-     <ul class="factors">${facts}</ul>
-     <div class="dl">
-       <div><span>Injury weight (H/A)</span><b>${g.d.iw}</b></div>
-       <div><span>Halves games together (H/A)</span><b>${g.d.hg}</b></div>
-       <div><span>Bench impact (H/A)</span><b>${g.d.bi}</b></div>
-       <div><span>Captain available (H/A)</span><b>${g.d.cap}</b></div>
-       <div><span>Possession trend % (H/A)</span><b>${g.d.pos}</b></div>
-     </div>
-     <p style="font-size:12px;color:#58a6ff;margin-top:8px"><b>Superbru:</b> ${g.sb}</p>
-   </details>
-  </div>`;
+// Locked accuracy history R5-R11 (each /8)
+const ACC = {rounds:[{r:5,c:7},{r:6,c:4},{r:7,c:5},{r:8,c:7},{r:9,c:7},{r:10,c:7},{r:11,c:7}]};
+
+const LADDER = [
+  [1,"Panthers",22,"Resting spine R13"],[2,"Warriors",20,"Lost RTS (ACL)"],[3,"Roosters",18,""],
+  [4,"Sea Eagles",18,"5-game streak"],[5,"Knights",16,""],[6,"Cowboys",16,"7 of last 8"],
+  [7,"Rabbitohs",14,"BYE R13"],[8,"Dolphins",14,"BYE R13"],[9,"Sharks",14,""],
+  [10,"Tigers",14,""],[11,"Bulldogs",12,""],[12,"Broncos",12,""],
+  [13,"Titans",8,"BYE R13"],[14,"Raiders",8,""],[15,"Eels",6,"Moses + Paulo out"],
+  [16,"Storm",8,""],[17,"Dragons",2,"Wooden spoon track"],
+];
+
+const REVIEW = [
+  "Bold Play streak ended at 6. Souths over Cowboys away @ $2.30 MISSED, Cowboys won 30-18.",
+  "Results: Bulldogs 30 Storm 20 · Sea Eagles 12 Titans 10 · Cowboys 30 Rabbitohs 18 · Dolphins 30 Raiders 22 · Warriors 30 Dragons 12.",
+  "R12 full picks weren't archived, so the other four games can't be honestly graded. Fixed from R13 on.",
+];
+const LESSON = "Lesson: the #12 pre-Origin chemistry-erosion modifier over-read the Cowboys' Sutton-Clifford disruption. A settled, in-form pack beats a reshuffled spine more often than the modifier assumed. #12 now under review.";
+
+const PRINCIPLES = [
+  "Current form beats reputation, every time",
+  "No LOCKs ever, STRONG is the ceiling",
+  "One Bold Play per round, called explicitly",
+  "Coin flip margins stay 2-4 for bonus protection",
+  "Consensus picks must move off market line",
+  "Margin is a first-class decision",
+  "Trust research over override intuition",
+  "Injury-ravaged teams are sitting ducks",
+  "Historical streaks mean nothing in 2026",
+  "Returning superstars warp the line, respect the price-in",
+  "Magic Round neutralises home advantage",
+  "Pre-Origin chemistry erosion (R12) — UNDER REVIEW after the miss",
+];
+
+const NEXTVARS = [
+  "originBackupConfirmed: per-player boolean, did the named-in-reserves Origin player actually back up? Would directly de-risk the Panthers Bold Play.",
+  "spineContinuityIndex: 0-10 score of how settled the 1/6/7/9 axis is vs baseline. The Cowboys miss shows we need it measured, not vibed.",
+  "homePackDominance: last-4-game post-contact metres and ruck-speed differential. Would have flagged the Cowboys' pack as why #12 was wrong.",
+];
+
+const tierClass = t => t==="STRONG"?"t-strong":t==="LEAN"?"t-lean":"t-coin";
+const wClass = w => ({crit:"w-crit",high:"w-high",med:"w-med",low:"w-low"}[w]);
+const tierColor = {STRONG:"#1f8a4c",LEAN:"#c2841a","COIN FLIP":"#2f6df0"};
+// market-implied margin from TAB H2H odds (vig-free approximation)
+const marketMargin = odds => +(((1/odds)-0.5)*40).toFixed(1);
+
+const stake = GAMES.length*100;
+const maxPayout = GAMES.reduce((s,g)=>s+g.odds*100,0);
+const totalEv = GAMES.reduce((s,g)=>s+(g.conf/100*g.odds*100-100),0);
+const money = n => "$"+Math.round(n).toLocaleString();
+document.getElementById("fStake").textContent = money(stake);
+document.getElementById("fMax").textContent = money(maxPayout);
+document.getElementById("fNet").textContent = "+"+money(maxPayout-stake);
+document.getElementById("fEv").textContent = (totalEv>=0?"+":"")+money(totalEv);
+document.getElementById("cMax").textContent = money(maxPayout);
+
+document.getElementById("tabRows").innerHTML = GAMES.map(g=>`
+  <tr><td>${g.pick}</td><td><span class="tag ${tierClass(g.tier)}">${g.tier}</span></td>
+  <td>$${g.odds.toFixed(2)}</td><td>$${(g.odds*100).toFixed(0)}</td></tr>`).join("");
+
+document.getElementById("games").innerHTML = GAMES.map(g=>`
+  <details class="game ${g.bold?"bp":""}">
+    <summary>
+      <div class="g-top">
+        <div><div class="g-match">${g.home} <span class="vs">v</span> ${g.away}</div>
+        <div class="g-pick">${g.bold?"★ ":""}<b>${g.pick}</b> by ${g.margin} · ${g.score} · <span class="tag ${tierClass(g.tier)}">${g.tier}</span></div></div>
+        <div class="g-right"><div class="g-odds">$${g.odds.toFixed(2)}</div><div style="font-size:10px;color:var(--faint);font-family:var(--mono)">conf ${g.conf}%</div></div>
+      </div>
+      <div class="conf"><i style="width:${g.conf}%"></i></div>
+    </summary>
+    <div class="g-detail">
+      <p class="an">${g.an}</p>
+      ${g.kf.map(k=>`<div class="kf"><span class="w ${wClass(k[0])}">${k[0]}</span><span>${k[1]}</span></div>`).join("")}
+      <div class="dlayer">${Object.entries(g.dl).map(([k,v])=>`<div><span>${k}</span><span>${v}</span></div>`).join("")}</div>
+    </div>
+  </details>`).join("");
+
+document.getElementById("ladder").innerHTML = LADDER.map(l=>`
+  <div><span class="p">${l[0]}</span><span class="t ${l[0]<=8?"top8":""}">${l[1]}</span><span class="pts">${l[2]}</span><span class="nt">${l[3]||""}</span></div>`).join("");
+
+document.getElementById("review").innerHTML = REVIEW.map(r=>`<li>${r}</li>`).join("");
+document.getElementById("lesson").textContent = LESSON;
+document.getElementById("principles").innerHTML = PRINCIPLES.map((p,i)=>`<div class="princ"><span class="n">${String(i+1).padStart(2,"0")}</span><span>${p}</span></div>`).join("");
+document.getElementById("nextvars").innerHTML = NEXTVARS.map(v=>`<li>${v}</li>`).join("");
+
+const now = new Date();
+document.getElementById("stamp").textContent = "Dashboard refreshed "+now.toLocaleDateString("en-NZ",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
+
+// ---------- CHARTS ----------
+const line="#e4dfd1";
+Chart.defaults.font.family="ui-monospace,'SF Mono',Menlo,monospace";
+Chart.defaults.font.size=11;
+Chart.defaults.color="#6f6a5d";
+
+new Chart(document.getElementById("tabDonut"),{
+  type:"doughnut",
+  data:{labels:GAMES.map(g=>g.pick),
+    datasets:[{data:GAMES.map(g=>+(g.odds*100).toFixed(0)),
+      backgroundColor:GAMES.map(g=>tierColor[g.tier]),borderColor:"#0c2417",borderWidth:2}]},
+  options:{cutout:"66%",plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>` ${c.label}: returns $${c.parsed}`}}}}
 });
-document.getElementById("games").innerHTML=gh;
 
-let tb=`<thead><tr><th>Pick</th><th>Odds</th><th>Conf</th><th>Return</th><th>EV</th></tr></thead><tbody>`;
-let tev=0,allret=0;
-GAMES.forEach(g=>{let ret=Math.round(g.odds*100);let ev=Math.round(g.c/100*g.odds*100-100);tev+=ev;allret+=ret;
-  tb+=`<tr><td>${g.pick}</td><td>$${g.odds.toFixed(2)}</td><td>${g.c}%</td><td>$${ret}</td><td class="${ev>=0?'green':'red'}">${ev>=0?'+':''}${ev}</td></tr>`;});
-tb+="</tbody>";
-document.getElementById("tab").innerHTML=tb;
-document.getElementById("tabsum").innerHTML=`Confidence-weighted EV: <b class="${tev>=0?'green':'red'}">${tev>=0?'+':''}$${tev}</b> · If all 7 land: <b class="green">$${allret}</b> back (+$${allret-700})`;
+let run=0,tot=0;
+const cum = ACC.rounds.map(o=>{run+=o.c;tot+=8;return +(run/tot*100).toFixed(1);});
+const perRound = ACC.rounds.map(o=>+(o.c/8*100).toFixed(1));
+const labels = ACC.rounds.map(o=>"R"+o.r);
+new Chart(document.getElementById("accChart"),{
+  data:{labels,
+    datasets:[
+      {type:"line",label:"Season cumulative",data:cum,borderColor:"#1f8a4c",backgroundColor:"rgba(31,138,76,.08)",
+       borderWidth:2.5,fill:true,tension:.3,pointRadius:0,order:2},
+      {type:"scatter",label:"Round result",data:perRound,borderColor:"#13110c",backgroundColor:"#13110c",
+       pointRadius:5,pointHoverRadius:7,order:1},
+      {type:"line",label:"Market ~62%",data:labels.map(()=>62),borderColor:"#b4402f",borderDash:[4,4],
+       borderWidth:1.5,pointRadius:0,order:3},
+    ]},
+  options:{maintainAspectRatio:false,
+    scales:{y:{min:40,max:100,ticks:{callback:v=>v+"%",stepSize:20},grid:{color:line}},
+      x:{grid:{display:false}}},
+    plugins:{legend:{labels:{boxWidth:10,font:{size:9.5}}},
+      tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}%`}}}}
+});
 
-document.getElementById("ladder").innerHTML="<tbody>"+LADDER.map(r=>`<tr style="${r[0]<=8?'':'color:#6e7681'}"><td style="width:24px">${r[0]}</td><td style="font-weight:${r[0]<=8?600:400}">${r[1]}</td><td style="text-align:right">${r[2]}</td><td style="font-size:11px;color:#8b949e">${r[3]}</td></tr>`).join("")+"</tbody>";
-document.getElementById("principles").innerHTML=PRINC.map(p=>`<li>${p}</li>`).join("");
+// Predictions: floating bars market-implied -> our margin
+new Chart(document.getElementById("predChart"),{
+  type:"bar",
+  data:{labels:GAMES.map(g=>g.pick),
+    datasets:[{
+      label:"Market → our call",
+      data:GAMES.map(g=>[marketMargin(g.odds),g.margin]),
+      backgroundColor:GAMES.map(g=>g.margin>=marketMargin(g.odds)?"rgba(31,138,76,.78)":"rgba(180,64,47,.78)"),
+      borderColor:GAMES.map(g=>g.margin>=marketMargin(g.odds)?"#15673a":"#8f2f20"),borderWidth:1,
+      borderRadius:4,barPercentage:.62}]},
+  options:{indexAxis:"y",maintainAspectRatio:false,
+    scales:{x:{title:{display:true,text:"Winning margin (points) — negative = market has our pick losing"},grid:{color:line},
+      ticks:{stepSize:4}},y:{grid:{display:false}}},
+    plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>{const g=GAMES[c.dataIndex];const m=marketMargin(g.odds);
+        return ` market ${m} · we call ${g.margin} (${g.margin>=m?"+":""}${(g.margin-m).toFixed(1)})`;}}}}}
+});
 </script>
 </body>
 </html>
