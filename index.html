@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>NRL Round 13 Picks | TAB + Superbru Engine v6</title>
+<title>NRL Round 14 Picks | TAB + Superbru Engine v6</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
   :root{
@@ -37,6 +37,7 @@
   .fig .val{font-family:var(--mono);font-weight:800;font-size:30px;line-height:1.1}
   .fig .val.sm{font-size:22px}
   .pos{color:#5fe08a}
+  .neg{color:#ff9a86}
   .tab-body{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center;margin-top:8px}
   @media(max-width:520px){.tab-body{grid-template-columns:1fr}}
   .donut-wrap{position:relative;height:170px}
@@ -113,23 +114,23 @@
 <div class="wrap">
   <header>
     <div class="kicker">NRL 2026 · Superbru + TAB Engine v6</div>
-    <h1>ROUND 13</h1>
-    <div class="sub"><b>29-31 May</b> · 7 games · Post-Origin I back-up round · byes: Dolphins, Titans, Rabbitohs</div>
+    <h1>ROUND 14</h1>
+    <div class="sub"><b>4-8 Jun</b> · 8 games · Warriors bye · Origin II still 10 days out, full-strength round</div>
   </header>
 
   <div class="grid hero">
     <div class="card tab">
       <div class="ctitle">💰 TAB Betting Layer <span class="pill" style="color:#5fe08a">Primary objective</span></div>
       <div class="tab-figs">
-        <div class="fig"><div class="lbl">Staked</div><div class="val" id="fStake">$700</div></div>
-        <div class="fig"><div class="lbl">Return if all win</div><div class="val pos" id="fMax">$1,183</div></div>
-        <div class="fig"><div class="lbl">Net upside</div><div class="val sm pos" id="fNet">+$483</div></div>
-        <div class="fig"><div class="lbl">Round EV</div><div class="val sm pos" id="fEv">+$11</div></div>
+        <div class="fig"><div class="lbl">Staked</div><div class="val" id="fStake">$800</div></div>
+        <div class="fig"><div class="lbl">Return if all win</div><div class="val pos" id="fMax">$1,214</div></div>
+        <div class="fig"><div class="lbl">Net upside</div><div class="val sm pos" id="fNet">+$414</div></div>
+        <div class="fig"><div class="lbl">Round EV</div><div class="val sm" id="fEv">-$20</div></div>
       </div>
       <div class="tab-body">
         <div class="donut-wrap">
           <canvas id="tabDonut"></canvas>
-          <div class="donut-center"><span class="big" id="cMax">$1,183</span><span class="cap">Max payout</span></div>
+          <div class="donut-center"><span class="big" id="cMax">$1,214</span><span class="cap">Max payout</span></div>
         </div>
         <table class="tab-table">
           <thead><tr><th>Bet</th><th>Tier</th><th>Odds</th><th>Returns</th></tr></thead>
@@ -141,10 +142,10 @@
     <div class="card">
       <div class="ctitle">🎯 Season Accuracy</div>
       <div class="acc-top">
-        <div class="acc-num">78.6<span style="font-size:24px">%</span></div>
+        <div class="acc-num">73.0<span style="font-size:24px">%</span></div>
         <div class="acc-meta">
-          <div><b>44 / 56</b> correct · locked R5-R11</div>
-          <div style="margin-top:4px"><span class="chip">▲ trending up</span> <span class="chip">ceiling 65-68%</span></div>
+          <div><b>46 / 63</b> correct · locked R5-R11 + R13</div>
+          <div style="margin-top:4px"><span class="chip">▼ R13 stung (2/7)</span> <span class="chip">ceiling 65-68%</span></div>
         </div>
       </div>
       <div class="chart-box"><canvas id="accChart"></canvas></div>
@@ -154,31 +155,31 @@
   <div class="sec">
     <div class="bold">
       <div class="flag">★ Bold Play of the Round</div>
-      <h3>Warriors over Penrith, by 4</h3>
-      <p>Penrith parked Cleary, Yeo, To'o and McLean in the reserves four days after Origin I. A Panthers side without that spine is a different team, and the market still has them favourite at $1.54 on reputation. Principle #8: a gutted spine is a sitting duck. Losing RTS to a season-ending ACL hurts the Warriors, but a top-two side at these odds is the value of the round. The risk is blunt: if Cleary backs up, it blows up. <span class="odds">TAB $2.45 · $100 returns $245</span></p>
+      <h3>Raiders over the Roosters, by 6</h3>
+      <p>The market has the Roosters favourite on the road at GIO, which tells you it is still paying the brand and ignoring the form line. The Roosters were shut out 18-4 by Melbourne last week and looked out of ideas. The Raiders just put 26 on the Cowboys, they are home, and a cold Canberra night rewards the side that wants to grind and kick, not the one chasing flash. Principle #1: current form beats reputation, every time. The risk is real, the Raiders run hot and cold, which is why this is a Bold Play and not a STRONG. <span class="odds">TAB $2.20 · $100 returns $220</span></p>
     </div>
   </div>
 
   <div class="sec">
     <div class="sec-h">Margin Predictions vs Market <span class="ln"></span></div>
     <div class="card">
-      <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Bar spans the market-implied margin (from TAB H2H odds) to our called margin. Green = chasing a bigger margin. Red = pulled under for bonus protection. The Warriors bar crosses zero: the market has them losing, we have them winning.</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Bar spans the market-implied margin (from TAB H2H odds) to our called margin. Green = chasing a bigger margin. Red = pulled under for bonus protection. The Raiders bar crosses zero: the market has them losing, we have them winning.</div>
       <div class="pred-box"><canvas id="predChart"></canvas></div>
     </div>
   </div>
 
   <div class="sec">
-    <div class="sec-h">The 7 Picks <span class="ln"></span></div>
+    <div class="sec-h">The 8 Picks <span class="ln"></span></div>
     <div class="grid games" id="games"></div>
   </div>
 
   <div class="sec cols2">
     <div class="card">
-      <div class="ctitle">📊 Ladder (after R12)</div>
+      <div class="ctitle">📊 Ladder (after R13)</div>
       <div class="ladder" id="ladder"></div>
     </div>
     <div class="card">
-      <div class="ctitle">🧠 Last Round Graded · R12, Bold Play streak ended</div>
+      <div class="ctitle">🧠 Last Round Graded · R13, 2/7, worst of the year</div>
       <ul class="clean" id="review"></ul>
       <div class="review-lesson" id="lesson"></div>
     </div>
@@ -190,7 +191,7 @@
       <div id="principles"></div>
     </div>
     <div class="card">
-      <div class="ctitle">🔧 Auto-Improvement · proposed for R14</div>
+      <div class="ctitle">🔧 Auto-Improvement · proposed for R15</div>
       <ul class="clean" id="nextvars"></ul>
     </div>
   </div>
@@ -206,54 +207,62 @@
 
 <script>
 const GAMES = [
-  {home:"Sharks",away:"Sea Eagles",pick:"Sea Eagles",margin:3,tier:"COIN FLIP",conf:53,odds:1.95,score:"20-17",
-   an:"Sharks losing Hynes is the swing. A debutant No.7 against a Manly side on a five-game streak is a real downgrade in the steering department. Manly's spine is intact, only Olakau'atu and Koula monitored off the bench. Home edge keeps Cronulla live, the halves mismatch tips it. Tight.",
-   kf:[["crit","Hynes (calf) out, debutant Puru at 7 for Sharks"],["high","Manly on a 5-game streak, up to 4th"],["high","Fogarty-Brooks settled vs untested Sharks halves"],["med","Sharks home, slight market fav $1.87"]],
-   dl:{Injury:"H 8 / A 4",Halves:"1 / 14",Bench:"strong / elite",Captain:"yes / yes",Possn:"49% / 51%"}},
-  {home:"Knights",away:"Eels",pick:"Knights",margin:18,tier:"STRONG",conf:80,odds:1.22,score:"30-12",
-   an:"Parramatta without Moses and Paulo is a shell. Volkman steering and Jack Williams skippering is a big drop in control. Newcastle keep their Magic Round winning side together with Ponga backing up. At home this should be comfortable; the only question is margin.",
-   kf:[["crit","Eels lose Moses (hammy) AND Paulo (knee, 8wks)"],["high","Ponga + Saifiti back up from Origin"],["high","Knights heavy fav $1.22"],["med","Eels 15th, leakiest defence in the chasing pack"]],
-   dl:{Injury:"H 2 / A 16",Halves:"9 / 3",Bench:"strong / average",Captain:"yes / NO",Possn:"51% / 47%"}},
-  {home:"Tigers",away:"Bulldogs",pick:"Bulldogs",margin:4,tier:"COIN FLIP",conf:54,odds:1.80,score:"22-18",
-   an:"Closer than the form table suggests. Wests get a near-full squad back, but Canterbury just beat Melbourne and carry more class through Burton and Galvin with Kiraz flying at the back. Crichton being monitored is the wobble. Lean Dogs on quality, narrowly. A genuine flip.",
-   kf:[["high","Dogs beat Storm 30-20 last week"],["high","Tigers get Bula, Koroisau, Twal, Makasini back"],["med","Crichton on extended bench (Origin monitor)"],["med","Dogs lost Preston (arm)"]],
-   dl:{Injury:"H 6 / A 7",Halves:"8 / 11",Bench:"average / strong",Captain:"yes / yes",Possn:"48% / 50%"}},
-  {home:"Storm",away:"Roosters",pick:"Roosters",margin:4,tier:"LEAN",conf:56,odds:1.65,score:"24-20",
-   an:"The market backs the Roosters away even with six players backing up from Origin, which tells you what it thinks of Melbourne's season. Storm get their spine back and AAMI is a fortress on paper, but the trend line is ugly. Origin fatigue is the only thing keeping this from a clearer call.",
-   kf:[["high","Roosters favourite even away $1.65, market signal"],["high","Roosters carry 6 Origin back-ups"],["med","Storm get Munster, Grant, Loiero back"],["med","Storm collapsed 2nd half vs Dogs, season 4-8"]],
-   dl:{Injury:"H 5 / A 6",Halves:"20 / 7",Bench:"strong / elite",Captain:"yes / yes",Possn:"50% / 52%"}},
-  {home:"Broncos",away:"Dragons",pick:"Broncos",margin:20,tier:"STRONG",conf:88,odds:1.11,score:"34-14",
-   an:"About as one-sided as the round gets. Brisbane get Haas back, keep their spine and host the bottom side at Suncorp. The Dragons have leaked points all year and arrive thinner. The only risk is Brisbane easing off after Origin, which caps the margin, not the winner.",
-   kf:[["crit","Dragons 17th, on the wooden-spoon track"],["high","Haas returns, first game since R7"],["high","Broncos at Suncorp, $1.11, as short as it gets"],["med","Dragons lost Su'A, Buchanan, Tuipulotu"]],
-   dl:{Injury:"H 4 / A 12",Halves:"14 / 6",Bench:"strong / weak",Captain:"yes / yes",Possn:"52% / 46%"}},
-  {home:"Raiders",away:"Cowboys",pick:"Raiders",margin:6,tier:"LEAN",conf:58,odds:1.65,score:"26-20",
-   an:"Cowboys are the form team but again without Dearden, their best half, running the Sutton-Clifford combo the market still prices cautiously. Add a long trip to a cold Canberra night and the handling favours the home pack. Raiders aren't reliable, which is why this is a lean and not more.",
-   kf:[["high","Cowboys without Dearden again, Sutton-Clifford halves"],["high","Cowboys in form, 7 of last 8, Cotter back as captain"],["med","Cowboys travel 1,500km+ to a cold Canberra night"],["med","Strange + Hudson Young back up for Raiders"]],
-   dl:{Injury:"H 4 / A 7",Halves:"6 / 4",Bench:"average / strong",Captain:"yes / yes",Possn:"49% / 50%"}},
-  {home:"Panthers",away:"Warriors",pick:"Warriors",margin:4,tier:"LEAN",conf:52,odds:2.45,score:"24-20",bold:true,
-   an:"The Bold Play. Penrith parked Cleary, Yeo, To'o and McLean in the reserves four days after Origin I. A Panthers side without that spine is a different team, and the market still has them favourite on reputation. Principle #8 says a gutted spine is a sitting duck. Losing RTS hurts the Warriors, but a top-two side at $2.45 is the value of the round. The risk: if Cleary backs up, it blows up.",
-   kf:[["crit","Cleary, Yeo, To'o, McLean all named in reserves"],["crit","Spine-less Panthers still fav $1.54, overcooked"],["high","Warriors 2nd on the ladder, genuine top side"],["med","Warriors lost RTS (ACL, season), Pompey in"]],
-   dl:{Injury:"H 22 / A 7",Halves:"2 / 9",Bench:"average / strong",Captain:"NO / yes",Possn:"53% / 50%"}},
+  {home:"Sea Eagles",away:"Rabbitohs",pick:"Sea Eagles",margin:6,tier:"LEAN",conf:60,odds:1.58,score:"24-18",
+   an:"Manly host the Thursday opener at Brookvale after a tight 28-22 loss to the Sharks, and Souths roll in fresh off the R13 bye. Rested Souths are always a bit dangerous, but Manly are the more settled side and Brookvale is a genuine edge on a cold night. The spine matchup favours the home team. We push a touch above the line for the bonus, not silly money.",
+   kf:[["high","Manly at Brookvale, settled spine"],["high","Souths fresh off the bye, rest edge"],["med","Manly lost a tight one to Cronulla last week"],["med","Market has Manly -3.5, we sit above for the margin bonus"]],
+   dl:{Injury:"H 4 / A 8",Halves:"15 / 8",Bench:"strong / average",Captain:"yes / yes",Possn:"51% / 49%"}},
+  {home:"Storm",away:"Knights",pick:"Storm",margin:12,tier:"STRONG",conf:68,odds:1.60,score:"30-18",
+   an:"Beating Melbourne in Melbourne is one of the hardest tasks in the game, and the Storm just dismantled the Roosters 18-4. The Knights arrive on a four-game streak but they didn't convince against the Eels, and the trip south is a different test. Class and venue line up. Margin is the only live question, so we sit clearly above market.",
+   kf:[["high","Storm smashed Roosters 18-4, back to their best"],["high","AAMI is a fortress, Knights travel"],["med","Knights on a 4-game run but flat vs Eels"],["med","Storm spine settled, Hughes-Munster steering"]],
+   dl:{Injury:"H 3 / A 5",Halves:"20 / 12",Bench:"elite / strong",Captain:"yes / yes",Possn:"53% / 49%"}},
+  {home:"Raiders",away:"Roosters",pick:"Raiders",margin:6,tier:"LEAN",conf:55,odds:2.20,score:"26-20",bold:true,
+   an:"The Bold Play. The market still has the Roosters favourite away at GIO, which is the brand talking, not the form. The Roosters were held to four points by Melbourne and looked short of ideas. The Raiders are coming off a 26-12 win over the Cowboys, they are home, and a cold Canberra night rewards the grinders. We back current form over reputation and take the home dog at a value price.",
+   kf:[["high","Roosters favourite away $1.64, reputation pricing"],["high","Raiders beat Cowboys 26-12 last week, home"],["high","Roosters shut out 18-4, out of ideas"],["med","Cold Canberra night favours the home pack"]],
+   dl:{Injury:"H 4 / A 5",Halves:"8 / 10",Bench:"strong / strong",Captain:"yes / yes",Possn:"50% / 48%"}},
+  {home:"Cowboys",away:"Dolphins",pick:"Dolphins",margin:6,tier:"LEAN",conf:62,odds:1.52,score:"28-22",
+   an:"The Dolphins come off the bye loaded: Hammer, Farnworth, Cobbo, Flegler, Nikorima and Plath all named in. They are pushing for the top four and the market and panel are heavily with them. But this is a trip to Townsville and the Cowboys at home are never a soft touch. The panel's 18 is overcooked for an away win, so we take the Dolphins but pull the margin well under the consensus.",
+   kf:[["high","Dolphins back to full strength off the bye"],["high","Returning stars warp the line (principle #10)"],["med","Cowboys at home in Townsville, live underdog"],["med","Consensus pick, we move well under the panel margin"]],
+   dl:{Injury:"H 6 / A 3",Halves:"10 / 12",Bench:"average / strong",Captain:"yes / yes",Possn:"49% / 51%"}},
+  {home:"Broncos",away:"Titans",pick:"Broncos",margin:8,tier:"LEAN",conf:63,odds:1.33,score:"28-20",
+   an:"Brisbane host the 16th-placed Titans at Suncorp and should win, but they were dreadful for most of last week's loss to the Dragons and Carrigan is out, which thins the middle. The Titans get Tino back and arrive fresh off the bye. We learned the lesson at R13: do not chase a big margin on a short-priced favourite against a desperate side. So we take the Broncos but stay under the line at eight.",
+   kf:[["crit","Carrigan out, Brisbane middle thinned"],["high","Broncos at Suncorp vs 16th Titans"],["high","R13 lesson: no big margins on short favourites"],["med","Titans fresh off the bye, Tino back"]],
+   dl:{Injury:"H 7 / A 5",Halves:"14 / 8",Bench:"strong / average",Captain:"yes / yes",Possn:"51% / 47%"}},
+  {home:"Tigers",away:"Panthers",pick:"Panthers",margin:16,tier:"STRONG",conf:78,odds:1.18,score:"30-14",
+   an:"Penrith get Cleary, To'o, Yeo and Martin all back from the Origin rest, so the side that scraped past the Warriors is now whole again. The Tigers are scrappy at home and beat the Dogs last week, but the class gap here is large. This is the safest winner on the card. We sit above market because a full-strength Penrith puts these to the sword more often than not.",
+   kf:[["crit","Cleary, To'o, Yeo, Martin all back, full strength"],["high","Panthers 10-1, best side in the comp"],["high","Tigers scrappy at home, beat Dogs last week"],["med","Consensus pick, we push above the line"]],
+   dl:{Injury:"H 6 / A 2",Halves:"6 / 25",Bench:"average / strong",Captain:"yes / yes",Possn:"47% / 53%"}},
+  {home:"Sharks",away:"Dragons",pick:"Sharks",margin:14,tier:"STRONG",conf:75,odds:1.27,score:"32-18",
+   an:"The Dragons snapped a 15-game losing streak by ambushing the Broncos, the sort of emotional one-off that says nothing about the next week. Principle #9: streaks and spikes mean nothing in 2026. The Sharks are home, in form after beating Manly, and carry the class. Cronulla by plenty unless they get sentimental. We sit above the line and back the home side hard.",
+   kf:[["high","Sharks home, beat Manly last week"],["high","Dragons' upset was an emotional one-off (principle #9)"],["med","Dragons travel up after a big emotional win"],["med","Sharks spine intact, class gap"]],
+   dl:{Injury:"H 4 / A 6",Halves:"16 / 8",Bench:"strong / weak",Captain:"yes / yes",Possn:"52% / 47%"}},
+  {home:"Bulldogs",away:"Eels",pick:"Bulldogs",margin:8,tier:"LEAN",conf:62,odds:1.46,score:"26-18",
+   an:"Canterbury get reinforcements back after a flat loss to the Tigers, and the Eels arrive at Accor with a long injury list and no real steering. The Dogs carry more class through Burton and should control this on the Monday. We push a touch above the line for the bonus. Not a banker, but the gap in available talent is clear.",
+   kf:[["high","Bulldogs get reinforcements back"],["high","Eels carrying a long injury list, patched spine"],["med","Bulldogs at Accor, more class through Burton"],["med","Monday night closer, both sides flat last week"]],
+   dl:{Injury:"H 5 / A 9",Halves:"12 / 6",Bench:"strong / average",Captain:"yes / yes",Possn:"51% / 48%"}},
 ];
 
-// Locked accuracy history R5-R11 (each /8)
-const ACC = {rounds:[{r:5,c:7},{r:6,c:4},{r:7,c:5},{r:8,c:7},{r:9,c:7},{r:10,c:7},{r:11,c:7}]};
+// Locked accuracy history (c = correct, t = games graded that round). R12 excluded (not gradeable).
+const ACC = {rounds:[
+  {r:5,c:7,t:8},{r:6,c:4,t:8},{r:7,c:5,t:8},{r:8,c:7,t:8},
+  {r:9,c:7,t:8},{r:10,c:7,t:8},{r:11,c:7,t:8},{r:13,c:2,t:7}
+]};
 
 const LADDER = [
-  [1,"Panthers",22,"Resting spine R13"],[2,"Warriors",20,"Lost RTS (ACL)"],[3,"Roosters",18,""],
-  [4,"Sea Eagles",18,"5-game streak"],[5,"Knights",16,""],[6,"Cowboys",16,"7 of last 8"],
-  [7,"Rabbitohs",14,"BYE R13"],[8,"Dolphins",14,"BYE R13"],[9,"Sharks",14,""],
-  [10,"Tigers",14,""],[11,"Bulldogs",12,""],[12,"Broncos",12,""],
-  [13,"Titans",8,"BYE R13"],[14,"Raiders",8,""],[15,"Eels",6,"Moses + Paulo out"],
-  [16,"Storm",8,""],[17,"Dragons",2,"Wooden spoon track"],
+  [1,"Panthers",22,"10-1, spine back R14"],[2,"Warriors",20,"BYE R14 · lost RTS"],[3,"Roosters",18,"shut out by Storm"],
+  [4,"Knights",18,"4-game streak"],[5,"Sea Eagles",16,""],[6,"Rabbitohs",16,"BYE R13"],
+  [7,"Dolphins",16,"BYE R13 · loaded"],[8,"Sharks",16,"beat Manly"],[9,"Cowboys",16,""],
+  [10,"Tigers",16,"beat Dogs"],[11,"Bulldogs",12,""],[12,"Broncos",12,"Carrigan out"],
+  [13,"Raiders",10,"beat Cowboys"],[14,"Storm",10,"smashed Roosters"],[15,"Eels",8,"injury list"],
+  [16,"Titans",8,"BYE R13 · Tino back"],[17,"Dragons",4,"snapped 15-game skid"],
 ];
 
 const REVIEW = [
-  "Bold Play streak ended at 6. Souths over Cowboys away @ $2.30 MISSED, Cowboys won 30-18.",
-  "Results: Bulldogs 30 Storm 20 · Sea Eagles 12 Titans 10 · Cowboys 30 Rabbitohs 18 · Dolphins 30 Raiders 22 · Warriors 30 Dragons 12.",
-  "R12 full picks weren't archived, so the other four games can't be honestly graded. Fixed from R13 on.",
+  "R13 graded 2/7, the worst round of the season. Only the Knights and Raiders landed.",
+  "Three home underdogs won outright: Sharks beat Manly, Tigers beat Dogs, Dragons beat Broncos.",
+  "Bold Play missed: Warriors lost 20-18 to a rested-spine Penrith. The premise held, but RTS's season-ending ACL gutted the attack and Penrith's depth absorbed the rest.",
+  "TAB return $287 on $700 staked. Net -$413. The Broncos -20 @ $1.11 was the single worst call.",
 ];
-const LESSON = "Lesson: the #12 pre-Origin chemistry-erosion modifier over-read the Cowboys' Sutton-Clifford disruption. A settled, in-form pack beats a reshuffled spine more often than the modifier assumed. #12 now under review.";
+const LESSON = "Lesson: never chase a big margin on a sub-$1.20 favourite against a desperate bottom side. The Dragons did exactly what cellar teams do, played free, and snapped a 15-game streak. Home-dog live value was under-weighted all round.";
 
 const PRINCIPLES = [
   "Current form beats reputation, every time",
@@ -267,13 +276,13 @@ const PRINCIPLES = [
   "Historical streaks mean nothing in 2026",
   "Returning superstars warp the line, respect the price-in",
   "Magic Round neutralises home advantage",
-  "Pre-Origin chemistry erosion (R12) — UNDER REVIEW after the miss",
+  "Pre-Origin chemistry erosion (R12) — UNDER REVIEW",
 ];
 
 const NEXTVARS = [
-  "originBackupConfirmed: per-player boolean, did the named-in-reserves Origin player actually back up? Would directly de-risk the Panthers Bold Play.",
-  "spineContinuityIndex: 0-10 score of how settled the 1/6/7/9 axis is vs baseline. The Cowboys miss shows we need it measured, not vibed.",
-  "homePackDominance: last-4-game post-contact metres and ruck-speed differential. Would have flagged the Cowboys' pack as why #12 was wrong.",
+  "homeDogValueFlag: home underdog priced $1.90-$2.60 gets a tier upgrade in tight games. R13 had three home dogs win outright while we backed travelling favourites.",
+  "favouriteMarginGate: cap the called margin when backing a sub-$1.20 favourite against a bottom-4 side. The Broncos -20 @ $1.11 was the worst call of the season.",
+  "restedDepthModifier: the originBackupConfirmed signal only bites if replacement depth is weak. Penrith rested four stars and still won, their bench absorbed it. Pair the rest flag with a depth score.",
 ];
 
 const tierClass = t => t==="STRONG"?"t-strong":t==="LEAN"?"t-lean":"t-coin";
@@ -289,7 +298,9 @@ const money = n => "$"+Math.round(n).toLocaleString();
 document.getElementById("fStake").textContent = money(stake);
 document.getElementById("fMax").textContent = money(maxPayout);
 document.getElementById("fNet").textContent = "+"+money(maxPayout-stake);
-document.getElementById("fEv").textContent = (totalEv>=0?"+":"")+money(totalEv);
+const evEl = document.getElementById("fEv");
+evEl.textContent = (totalEv>=0?"+":"-")+money(Math.abs(totalEv));
+evEl.classList.add(totalEv>=0?"pos":"neg");
 document.getElementById("cMax").textContent = money(maxPayout);
 
 document.getElementById("tabRows").innerHTML = GAMES.map(g=>`
@@ -340,8 +351,8 @@ new Chart(document.getElementById("tabDonut"),{
 });
 
 let run=0,tot=0;
-const cum = ACC.rounds.map(o=>{run+=o.c;tot+=8;return +(run/tot*100).toFixed(1);});
-const perRound = ACC.rounds.map(o=>+(o.c/8*100).toFixed(1));
+const cum = ACC.rounds.map(o=>{run+=o.c;tot+=o.t;return +(run/tot*100).toFixed(1);});
+const perRound = ACC.rounds.map(o=>+(o.c/o.t*100).toFixed(1));
 const labels = ACC.rounds.map(o=>"R"+o.r);
 new Chart(document.getElementById("accChart"),{
   data:{labels,
@@ -354,7 +365,7 @@ new Chart(document.getElementById("accChart"),{
        borderWidth:1.5,pointRadius:0,order:3},
     ]},
   options:{maintainAspectRatio:false,
-    scales:{y:{min:40,max:100,ticks:{callback:v=>v+"%",stepSize:20},grid:{color:line}},
+    scales:{y:{min:20,max:100,ticks:{callback:v=>v+"%",stepSize:20},grid:{color:line}},
       x:{grid:{display:false}}},
     plugins:{legend:{labels:{boxWidth:10,font:{size:9.5}}},
       tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}%`}}}}
