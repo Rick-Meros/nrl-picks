@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JACK · NRL Prediction Engine v7</title>
-<meta name="description" content="Live NRL prediction engine. Meros Power Ratings, calibrated win probabilities, TAB layer and self-auditing model. Updated daily.">
+<title>NRL Prediction Engine · v7</title>
+<meta name="description" content="Live NRL prediction engine. Meros Power Ratings, calibrated win probabilities, TAB layer and self-auditing model. Updated nightly.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2327d17f'/%3E%3Cstop offset='1' stop-color='%234b9bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cellipse cx='32' cy='32' rx='17' ry='11' fill='none' stroke='%23081020' stroke-width='4'/%3E%3Cline x1='17' y1='32' x2='47' y2='32' stroke='%23081020' stroke-width='3.5'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NRL Prediction Engine">
+<meta property="og:title" content="NRL Prediction Engine">
+<meta property="og:description" content="Calibrated NRL win probabilities, built on Meros Power Ratings. A self-auditing model that grades itself every night.">
+<meta property="og:image" content="https://rick-meros.github.io/nrl-picks/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://rick-meros.github.io/nrl-picks/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NRL Prediction Engine">
+<meta name="twitter:description" content="Calibrated NRL win probabilities, updated nightly.">
+<meta name="twitter:image" content="https://rick-meros.github.io/nrl-picks/og.png">
 <style>
   :root{
     --bg:#0a0e14; --bg2:#0e141d; --panel:#121a26; --panel2:#16202e;
@@ -209,7 +222,7 @@
   <div class="wrap bar">
     <div class="logo">
       <div class="mark">🏉</div>
-      <div><b>JACK</b> <span>NRL ENGINE · V7</span></div>
+      <div><b>NRL Prediction Engine</b> <span>v7 · 2026 SEASON</span></div>
     </div>
     <nav class="navlinks">
       <a href="#live">Live</a>
@@ -247,7 +260,7 @@
             <div class="num"><b id="accNum">73<small style="font-size:18px">%</small></b><small>winners hit</small></div>
           </div>
           <div class="benchlist">
-            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Jack v7 (locked, R5–R13)</span><span class="v">73.0%</span></div>
+            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (locked, R5–R13)</span><span class="v">73.0%</span></div>
             <div class="bench"><span class="b" style="background:var(--violet)"></span><span class="lab">World-best tipster ceiling</span><span class="v">~68%</span></div>
             <div class="bench"><span class="b" style="background:var(--blue)"></span><span class="lab">Market (favourite implied)</span><span class="v">~62%</span></div>
             <div class="bench"><span class="b" style="background:var(--gold)"></span><span class="lab">North star (aspirational)</span><span class="v">80%</span></div>
@@ -447,7 +460,7 @@
 <footer>
   <div class="wrap">
     <div class="disc">
-      <b style="color:var(--ink)">Jack v7 · Meros NRL Prediction Engine.</b> Not financial advice. All for fun. Variance is real and the cosmos is indifferent. Don't stake what you can't afford to lose. Data: NRL.com, ESPN, Rugby League Zone, PuntGuide. Odds indicative.
+      <b style="color:var(--ink)">NRL Prediction Engine · v7.</b> Not financial advice. All for fun. Variance is real and the cosmos is indifferent. Don't stake what you can't afford to lose. Data: NRL.com, ESPN, Rugby League Zone, PuntGuide. Odds indicative.
     </div>
     <div class="selfimprove">
       <span class="dot"></span>
@@ -458,7 +471,7 @@
 
 <script>
 /* ============================================================
-   JACK v7 — Meros NRL Prediction Engine (client-side model)
+   NRL PREDICTION ENGINE v7 — Meros Power Ratings (client-side model)
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
