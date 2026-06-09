@@ -279,8 +279,8 @@
         <div style="display:flex;flex-direction:column;gap:13px">
           <div>
             <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Live slate</div>
-            <div style="font-size:19px;font-weight:800">Round 15 · pre-Origin II</div>
-            <div style="font-size:12.5px;color:var(--muted)">Thu 11 – Sun 14 June · 5 games · 7 byes · full strength</div>
+            <div style="font-size:19px;font-weight:800">Round 15 · Origin II week</div>
+            <div style="font-size:12.5px;color:var(--muted)">Thu 11 – Sun 14 June · 5 games · 7 byes · reps rested for Origin</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div>
@@ -320,7 +320,7 @@
       <span class="meta">v7 predictions · five games, seven byes</span>
       <span class="right">Thu 11 – Sun 14 June · all times NZT</span>
     </div>
-    <p class="lead">Five games, all full strength. Origin II is 17 June, the week after this round, so the reps play their clubs before camp. That kills the Origin-asymmetry edge the round was first built on. Picks below revert to class, form, venue and market, with no Bold Play. Team lists firm up Tue/Wed, so treat odds and late mail as indicative.</p>
+    <p class="lead">Correction from the Tuesday build: this round is heavily Origin-hit. The team lists dropped and reps are rested across the board ahead of Origin II (17 June), so every game is missing frontline players. The Roosters lose seven, the Broncos and Dolphins a handful each, the Sharks lose Fonua-Blake and Nikora. Picks below run on availability-adjusted class plus the market anchor. No Bold Play: where a real availability edge exists (the Warriors), the market has already priced it.</p>
     <div class="games" id="liveGames"></div>
   </div>
 </section>
@@ -333,7 +333,7 @@
       <span class="meta">post-Origin II back-up · availability-sensitive</span>
       <span class="right">Fri 19 – Sun 21 June</span>
     </div>
-    <p class="lead">R16 is the real Origin-affected round: it follows Origin II (17 June), so this is where reps are rested or backing up and the availability edge actually lives. The engine builds R16 once team lists drop on the Tuesday after Origin. This is the round to watch for genuine asymmetry, not R15.</p>
+    <p class="lead">R16 follows Origin II (17 June), so the reps who sat out this week will be backing up from camp, some rested again, some carrying knocks. The availability picture shifts club by club. The engine builds R16 once those team lists drop on the Tuesday after Origin, when the real backup-versus-rested asymmetry becomes visible.</p>
     <div class="games" id="nextGames"></div>
   </div>
 </section>
@@ -439,7 +439,7 @@
       </div>
       <div class="card pad">
         <div class="card-h"><span class="ic">↟</span> What v7 got right &amp; the watch list</div>
-        <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Roosters smashed the Raiders 26–0</b><span>v7's class floor would never have made that the Bold Play. Raiders MPR 56 vs Roosters 80 — the old "form" call ignored a 24-point class gap. Same trap we just refused on the R15 Warriors Bold Play.</span></div></div>
+        <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Roosters smashed the Raiders 26–0</b><span>v7's class floor would never have made that the Bold Play. Raiders MPR 56 vs Roosters 80 — the old "form" call ignored a 24-point class gap. The class floor now anchors every R15 pick, and it is why no Bold Play was forced this week.</span></div></div>
         <div class="fix"><div class="ico" style="background:var(--amberDk);color:var(--amber)">!</div><div class="tx"><b>Storm 32–30 Knights</b><span>Two-point game. Exactly the kind of coin flip v7 tiers as 1–4 margin, not a confident call.</span></div></div>
         <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Manly 28–14 Souths</b><span>Class (+103 diff) over a Souths side on a three-loss slide. v7 had Manly STRONG.</span></div></div>
       </div>
@@ -475,7 +475,7 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-06-09T00:35:00+12:00",
+  updated: "2026-06-10T00:20:00+12:00",
   season: { locked: "53/71", pct: 74.6 },
 
   /* Meros Power Ratings (class), derived from season points differential,
@@ -557,22 +557,22 @@ const DATA = {
   ],
 
   nextR15:[
-    {h:"Rabbitohs",a:"Broncos",ven:"Accor Stadium",when:"Thu 11 Jun 9:50pm",odH:1.80,odA:2.00,homeEdge:3.4,avail:[0,0],
-      notes:[["Full strength: Origin II is 17 Jun, the week AFTER, so reps play this round","high","neutral"],["Souths slightly higher class floor (MPR 69 v 62)","medium","home"],["Both sides poor for form — Souths LLLL, Broncos scraped past the Titans","medium","neutral"],["Home edge and market both lean Souths, narrowly","medium","home"]]},
-    {h:"Dolphins",a:"Roosters",ven:"Suncorp Stadium",when:"Fri 12 Jun 10:00pm",odH:2.10,odA:1.72,homeEdge:3.6,avail:[0,0],
-      notes:[["Roosters higher class (MPR 80 v 75), off a 26–0 statement","high","away"],["Dolphins red-hot (WWWW) and at Suncorp","high","home"],["Model likes the home dog at $2.10 — flagged home-dog value","high","home"],["NOT a Bold Play: that edge is form-over-class, the exact shape of three failed contrarian calls","critical","neutral"]]},
-    {h:"Warriors",a:"Sharks",ven:"Go Media Stadium",when:"Sat 13 Jun 7:30pm",odH:1.65,odA:2.25,homeEdge:4.0,avail:[0,0],
-      notes:[["Premise corrected: no Origin asymmetry this round — Origin II (17 Jun) is the following week, Sharks keep Nikora/Hynes","critical","neutral"],["Warriors still favoured on class (MPR 83 v 72) + Go Media + fresh off the bye","high","home"],["A straight LEAN now, not the inflated Bold Play it was built as","high","home"],["Sharks are in form (WWWW) — keeps it honest, not a blowout","medium","away"]]},
-    {h:"Eels",a:"Raiders",ven:"CommBank Stadium",when:"Sat 13 Jun 9:30pm",odH:2.05,odA:1.75,homeEdge:3.3,avail:[0,0],
-      notes:[["Raiders more class than Eels but coming off a 0–26 humbling","medium","away"],["Eels worst differential in the comp (−152), full strength either way","high","away"],["Near coin flip leaning Raiders, margin kept short","medium","neutral"],["Low-quality game, low confidence","low","neutral"]]},
-    {h:"Tigers",a:"Titans",ven:"Leichhardt Oval",when:"Sun 14 Jun 6:05pm",odH:1.62,odA:2.30,homeEdge:3.5,avail:[0,0],
-      notes:[["Class gap is real: Tigers MPR 62 v Titans 51, bottom of the table","high","home"],["Tigers at Leichhardt, Titans on a four-loss slide","high","home"],["Full strength — Origin doesn't bite until next week","low","neutral"],["STRONG, but margin gated against a short home price","medium","neutral"]]}
+    {h:"Rabbitohs",a:"Broncos",ven:"Accor Stadium",when:"Thu 11 Jun 9:50pm",odH:1.46,odA:2.55,homeEdge:3.4,avail:[3,4],
+      notes:[["Both sides gutted by Origin and injury — Souths lose Murray plus Graham (calf) and no Latrell named; Broncos lose Walsh, Haas, Carrigan, Staggs","critical","neutral"],["Broncos lose the bigger slab of class to Origin, four frontline reps to Souths' spine hits","high","home"],["Souths home and a class tier up (MPR 69 v 62); market firmed them to $1.46","medium","home"],["Reynolds and Hunt still steer Brisbane — keeps it a LEAN, not a rout","medium","away"]]},
+    {h:"Dolphins",a:"Roosters",ven:"Suncorp Stadium",when:"Fri 12 Jun 10:00pm",odH:1.46,odA:2.55,homeEdge:3.6,avail:[5,7],
+      notes:[["Roosters lose SEVEN Origin reps — Tedesco out, DCE patching halfback, a debutant in the centres","critical","home"],["Dolphins lose five (Tabuai-Fidow, Cobbo, Flegler) but keep their spine: Katoa, Nikorima, Farnworth, Isaako, Bostock","high","home"],["Tier flip from Tuesday: the market moved Dolphins from $2.10 dog to $1.46 favourite once the seven-out Roosters list dropped","high","home"],["Borderline STRONG/LEAN — both lineups are chaos, so respect the variance","medium","neutral"]]},
+    {h:"Warriors",a:"Sharks",ven:"Go Media Stadium",when:"Sat 13 Jun 7:35pm",odH:1.35,odA:3.10,homeEdge:4.0,avail:[1,3],
+      notes:[["Origin asymmetry is REAL after all: Sharks lose Fonua-Blake and Nikora to Origin and stay without Hynes; Warriors lose only JFH (calf)","critical","home"],["Warriors class tier up (MPR 83 v 72), home at Go Media, Sharks pack reshuffled (Colquhoun to prop, Burns to edge)","high","home"],["The Saturday Bold Play premise was right — but the market already priced it, Warriors into $1.35. No divergence left to exploit","critical","neutral"],["JFH out is a genuine dent, and Sharks keep Trindall/McInnes/Mulitalo — STRONG, not a blowout lock","medium","away"]]},
+    {h:"Eels",a:"Raiders",ven:"CommBank Stadium",when:"Sat 13 Jun 9:35pm",odH:2.25,odA:1.65,homeEdge:3.3,avail:[1,1],
+      notes:[["Eels lose Mitchell Moses to Origin — their best player and only real organiser, replaced by Volkman/Papalii","high","away"],["Raiders lose only Strange and shuffle Laurie into the halves; far less damage than Parramatta","medium","away"],["Eels worst differential in the comp (−152) and home, but Raiders the better side even off a 0–26 humbling","medium","neutral"],["Near coin flip leaning Raiders, margin kept short — scrappy, low-confidence game","low","neutral"]]},
+    {h:"Tigers",a:"Titans",ven:"Leichhardt Oval",when:"Sun 14 Jun 6:05pm",odH:1.45,odA:2.60,homeEdge:3.5,avail:[2,2],
+      notes:[["Titans lose captain Tino Fa'asuamaleaui and Jojo Fifita to Origin — their two best forwards, a debutant on the bench","high","home"],["Tigers lose Koroisau (camp) and Hunt (pec) but keep Luai to run it at Leichhardt","high","home"],["Class gap real: Tigers MPR 62 v Titans 51, bottom of the table on a slide","high","home"],["Model edges nine points above market here (the biggest on the card) but a short home favourite isn't a contrarian Bold Play","medium","neutral"]]}
   ],
 
   boldPlay:{
     title:"No Bold Play this round",
-    body:"The R15 Warriors-over-Sharks call was built as a Bold Play on Origin asymmetry: Sharks lose NSW players, Warriors lose nobody. That premise was wrong on timing. Origin II is 17 June, the week AFTER this round, so the Sharks keep Nikora and Hynes and play at full strength on Saturday. With the availability edge gone, the divergence collapses to about five points and the pick reverts to a straight LEAN on class and home ground. Nothing else on the five-game card clears the bar with a valid named cause.",
-    note:"This is the discipline working, not failing. Three forced contrarian Bold Plays in a row missed (Souths, Warriors, Raiders). A fourth, propped up by a premise that doesn't survive a look at the calendar, is exactly the kind of call v7 exists to refuse. The Dolphins home-dog at $2.10 is the only real divergence, and it's form-over-class — so it stays a flagged lean, not a Bold Play."
+    body:"The Warriors-over-Sharks Origin-asymmetry premise turned out to be right: the Tuesday team lists confirmed Cronulla lose Fonua-Blake and Nikora to Origin and stay without Hynes, while the Warriors lose only James Fisher-Harris to a calf. So the edge is real. The problem is the market got there first — the Warriors were bet from $1.65 into $1.35 the moment those lists dropped, which prices them around 73%. The model agrees at 72%. A Bold Play needs the market to be wrong, not the model to be right about something already in the price. Zero divergence, no Bold Play.",
+    note:"Fourth round running with no Bold Play firing, and that is the gate doing its job. The biggest model-vs-market gap on the whole card is the Tigers at nine points, still short of the ten-point bar, and a short home favourite isn't a contrarian call anyway. When every Origin out is public and the bookies have moved, there is no free contrarian money. The engine would rather sit out than manufacture a hero call — the last three forced ones (Souths, Warriors, Raiders) all lost."
   }
 };
 
