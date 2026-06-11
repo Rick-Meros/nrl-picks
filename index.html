@@ -260,14 +260,14 @@
             <div class="num"><b id="accNum">74<small style="font-size:18px">%</small></b><small>winners hit</small></div>
           </div>
           <div class="benchlist">
-            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (locked, R5–R14)</span><span class="v">73.2%</span></div>
+            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R15, running)</span><span class="v">73.6%</span></div>
             <div class="bench"><span class="b" style="background:var(--violet)"></span><span class="lab">World-best tipster ceiling</span><span class="v">~68%</span></div>
             <div class="bench"><span class="b" style="background:var(--blue)"></span><span class="lab">Market (favourite implied)</span><span class="v">~62%</span></div>
             <div class="bench"><span class="b" style="background:var(--gold)"></span><span class="lab">North star (aspirational)</span><span class="v">80%</span></div>
           </div>
         </div>
         <div class="statrow">
-          <div class="stat"><div class="k">Locked record</div><div class="v">52<span style="color:var(--muted);font-size:14px">/71</span></div></div>
+          <div class="stat"><div class="k">Season record</div><div class="v">53<span style="color:var(--muted);font-size:14px">/72</span></div></div>
           <div class="stat"><div class="k">Sustainable target</div><div class="v sm">70–73%</div></div>
           <div class="stat"><div class="k">Engine version</div><div class="v sm">v7.0</div></div>
         </div>
@@ -285,8 +285,8 @@
           <div style="height:1px;background:var(--line)"></div>
           <div>
             <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Just graded</div>
-            <div style="font-size:15px;font-weight:700">Round 14 · complete · 6/8 winners</div>
-            <div style="font-size:12.5px;color:var(--muted)">Raiders Bold Play and Broncos both missed (Titans won 28–23)</div>
+            <div style="font-size:15px;font-weight:700">R15 opener · Souths 22–12 Broncos ✓</div>
+            <div style="font-size:12.5px;color:var(--muted)">Rabbitohs STRONG landed, margin within 5 — first margin bonus in weeks. R14 closed 6/8 (Bulldogs 14–12 Eels confirmed).</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -475,8 +475,8 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-06-11T00:20:00+12:00",
-  season: { locked: "52/71", pct: 73.2 },
+  updated: "2026-06-12T00:20:00+12:00",
+  season: { locked: "53/72", pct: 73.6 },
 
   /* Meros Power Ratings (class), derived from season points differential,
      form and roster quality. 1=worst … higher=better. ~42–92 scale. */
@@ -538,7 +538,7 @@ const DATA = {
     ["Cowboys","Dolphins",null,null,"wonA"],
     ["Tigers","Panthers",null,null,"wonA"],
     ["Broncos","Titans",23,28,"done"],
-    ["Bulldogs","Eels",null,null,"wonH"]
+    ["Bulldogs","Eels",14,12,"done"]
   ],
 
   /* fixtures: home, away, venue, when, neutral?, homeAvail/awayAvail (0=full),
@@ -557,8 +557,8 @@ const DATA = {
   ],
 
   nextR15:[
-    {h:"Rabbitohs",a:"Broncos",ven:"Accor Stadium",when:"Thu 11 Jun 9:50pm",odH:1.46,odA:2.55,homeEdge:3.4,avail:[3,4],
-      notes:[["Both sides gutted by Origin and injury — Souths lose Murray plus Graham (calf) and no Latrell named; Broncos lose Walsh, Haas, Carrigan, Staggs","critical","neutral"],["Broncos lose the bigger slab of class to Origin, four frontline reps to Souths' spine hits","high","home"],["Souths home and a class tier up (MPR 69 v 61); market firmed them to $1.46","medium","home"],["Broncos now 0 from their last 4 and gutted — model firms Souths to a narrow STRONG, but Reynolds and Hunt keep the margin gated, not a rout","medium","away"]]},
+    {h:"Rabbitohs",a:"Broncos",ven:"Accor Stadium",when:"Thu 11 Jun 9:50pm",odH:1.46,odA:2.55,homeEdge:3.4,avail:[3,4],result:{hs:22,as:12},
+      notes:[["GRADED: Souths led 18-0 at the half and held on 22-12 (Cook, Mitchell, Koloamatangi, Johnston). Pick landed, margin within 5 — first margin bonus in weeks","critical","home"],["Both sides gutted by Origin and injury — Souths lose Murray plus Graham (calf) and no Latrell named; Broncos lose Walsh, Haas, Carrigan, Staggs","critical","neutral"],["Broncos lose the bigger slab of class to Origin, four frontline reps to Souths' spine hits","high","home"],["Souths home and a class tier up (MPR 69 v 61); market firmed them to $1.46","medium","home"],["Broncos now 0 from their last 4 and gutted — model firms Souths to a narrow STRONG, but Reynolds and Hunt keep the margin gated, not a rout","medium","away"]]},
     {h:"Dolphins",a:"Roosters",ven:"Suncorp Stadium",when:"Fri 12 Jun 10:00pm",odH:1.46,odA:2.55,homeEdge:3.6,avail:[5,7],
       notes:[["Roosters lose SEVEN Origin reps — Tedesco out, DCE patching halfback, a debutant in the centres","critical","home"],["Dolphins lose five (Tabuai-Fidow, Cobbo, Flegler) but keep their spine: Katoa, Nikorima, Farnworth, Isaako, Bostock","high","home"],["Tier flip from Tuesday: the market moved Dolphins from $2.10 dog to $1.46 favourite once the seven-out Roosters list dropped","high","home"],["Borderline STRONG/LEAN — both lineups are chaos, so respect the variance","medium","neutral"]]},
     {h:"Warriors",a:"Sharks",ven:"Go Media Stadium",when:"Sat 13 Jun 7:35pm",odH:1.35,odA:3.10,homeEdge:4.0,avail:[2,3],
@@ -621,12 +621,24 @@ function gameCard(g,idx,pfx){
   const hWinPct=r.pH, aWinPct=100-r.pH;
   const pickIsHome=r.homeWins;
   const bullets=g.notes.map(n=>`<li><span class="tag">[${n[1]}]</span> ${n[0]}</li>`).join("");
-  return `<div class="game">
+  let gradeStrip="";
+  if(g.result){
+    const hs=g.result.hs, as=g.result.as, homeWon=hs>as;
+    const pickWon=(homeWon===r.homeWins);
+    const marginHit=Math.abs(Math.abs(hs-as)-r.margin)<=5;
+    gradeStrip=`<div style="display:flex;align-items:center;gap:10px;padding:9px 16px;background:${pickWon?'var(--greenDk)':'var(--redDk)'};border-bottom:1px solid var(--line);font-size:12px;font-weight:800">
+      <span style="font-family:var(--mono)">FT ${hs}–${as}</span>
+      <span style="color:${pickWon?'var(--green)':'var(--red)'}">${pickWon?'✓ PICK LANDED':'✗ PICK MISSED'}</span>
+      <span style="margin-left:auto;font-weight:700;color:${marginHit?'var(--green)':'var(--muted)'}">margin ${marginHit?'✓ within 5':'✗ missed'}</span>
+    </div>`;
+  }
+  return `<div class="game" style="${g.result?'opacity:.96':''}">
     <div class="top">
       <span class="when">${g.when}</span>
       <span class="tier ${tierClass(r.tier)}">${r.tier}</span>
       <span class="ven">${g.ven}</span>
     </div>
+    ${gradeStrip}
     <div class="matchup">
       <div class="team ${pickIsHome?'win':''}">
         ${chip(g.h)}<span class="nm">${g.h}${pickIsHome?'<span class="pickflag">PICK</span>':''}</span>
