@@ -55,9 +55,6 @@
   .logo span{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:2px}
   .live{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);font-weight:600}
   .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(39,209,127,.6);animation:pulse 2.2s infinite}
-  /* stale state: no pulse, amber — shown when the nightly refresh hasn't run */
-  .dot.stale{background:var(--amber);box-shadow:none;animation:none}
-  .live.stale{color:var(--amber)}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(39,209,127,.55)}70%{box-shadow:0 0 0 11px rgba(39,209,127,0)}100%{box-shadow:0 0 0 0 rgba(39,209,127,0)}}
   .navlinks{display:flex;gap:4px;margin-left:8px}
   .navlinks a{font-size:12.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:9px;font-weight:600}
@@ -235,7 +232,7 @@
       <a href="#recal">Recalibration</a>
       <a href="#ladder">Ladder</a>
     </nav>
-    <div class="live" id="livebadge"><span class="dot" id="livedot"></span> <span id="updstamp">updating…</span></div>
+    <div class="live"><span class="dot"></span> LIVE · <span id="updstamp">updating…</span></div>
   </div>
 </header>
 
@@ -263,14 +260,14 @@
             <div class="num"><b id="accNum">72<small style="font-size:18px">%</small></b><small>winners hit</small></div>
           </div>
           <div class="benchlist">
-            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R15 complete)</span><span class="v">72.4%</span></div>
+            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R16, live)</span><span class="v">72.7%</span></div>
             <div class="bench"><span class="b" style="background:var(--violet)"></span><span class="lab">World-best tipster ceiling</span><span class="v">~68%</span></div>
             <div class="bench"><span class="b" style="background:var(--blue)"></span><span class="lab">Market (favourite implied)</span><span class="v">~62%</span></div>
             <div class="bench"><span class="b" style="background:var(--gold)"></span><span class="lab">North star (aspirational)</span><span class="v">80%</span></div>
           </div>
         </div>
         <div class="statrow">
-          <div class="stat"><div class="k">Season record</div><div class="v">55<span style="color:var(--muted);font-size:14px">/76</span></div></div>
+          <div class="stat"><div class="k">Season record</div><div class="v">56<span style="color:var(--muted);font-size:14px">/77</span></div></div>
           <div class="stat"><div class="k">Sustainable target</div><div class="v sm">70–73%</div></div>
           <div class="stat"><div class="k">Engine version</div><div class="v sm">v7.0</div></div>
         </div>
@@ -282,14 +279,14 @@
         <div style="display:flex;flex-direction:column;gap:13px">
           <div>
             <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Live slate</div>
-            <div style="font-size:19px;font-weight:800">Round 16 · post-Origin II backup</div>
-            <div style="font-size:12.5px;color:var(--muted)">Fri 19 – Sun 21 June · 7 games · byes: Broncos, Eels, Souths · team lists confirmed (most reps back up)</div>
+            <div style="font-size:19px;font-weight:800">Round 16 · post-Origin II</div>
+            <div style="font-size:12.5px;color:var(--muted)">Fri 19 – Sun 21 June · 7 games · 3 byes · opener graded: Knights 22–20 ✓</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div>
-            <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Just graded</div>
-            <div style="font-size:15px;font-weight:700">R15 closed · Tigers 36–28 ✓ (+ margin), Eels 15–12 Raiders ✗</div>
-            <div style="font-size:12.5px;color:var(--muted)">Round 15 final 3/5: Souths ✓, Dolphins ✓, Tigers ✓ (margin bonus); Warriors ✗ (Sharks upset 10–8), Raiders ✗ (Eels 15–12). Season 55/76 (72.4%). Two margin bonuses this round (Souths, Tigers) vs 0/8 in R14. Scores confirmed via Zero Tackle full-time + Rugby League Zone results.</div>
+            <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Round 15 closed · 3/5</div>
+            <div style="font-size:15px;font-weight:700">Tigers ✓ &middot; Eels upset Raiders ✗</div>
+            <div style="font-size:12.5px;color:var(--muted)">The last Origin-week round closed 3/5 — Souths, Dolphins and Tigers in; the Warriors and Raiders both rolled by the lighter-rated side in low-margin upsets. Season now 56/77 (72.7%) with the R16 opener graded. Box-confirm against rugbyleagueproject corrected two banked scorelines: Souths beat Broncos 48–6 (not 22–12) and Dolphins beat the Roosters 48–10 (not 34–12) — winners unchanged, the Souths margin bonus withdrawn. R16 is the post-Origin back-up: the reps are back, the asymmetry is gone, the model runs on class plus the market anchor.</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -320,23 +317,23 @@
   <div class="wrap">
     <div class="sechead">
       <h2>Round 16 · live slate</h2>
-      <span class="meta">v7 predictions · five games, seven byes</span>
-      <span class="right">Thu 11 – Sun 14 June · all times NZT</span>
+      <span class="meta">v7 predictions · seven games, three byes</span>
+      <span class="right">Fri 19 – Sun 21 June · all times NZT</span>
     </div>
-    <p class="lead">Correction from the Tuesday build: this round is heavily Origin-hit. The team lists dropped and reps are rested across the board ahead of Origin II (17 June), so every game is missing frontline players. The Roosters lose seven, the Broncos and Dolphins a handful each, the Sharks lose Fonua-Blake and Nikora. Picks below run on availability-adjusted class plus the market anchor. No Bold Play: where a real availability edge exists (the Warriors), the market has already priced it.</p>
+    <p class="lead">Resolved off the official NRL draw PDF: Round 16 is a seven-game round, byes to the Broncos, Eels and Rabbitohs. It follows Origin II (Wed 17 June at the MCG, Queensland won to level the series 1-1), so this is the post-Origin back-up. The reps are back — Tedesco, Walker and Crichton return for the Roosters, Fonua-Blake and Nikora for the Sharks, Tino and Fifita for the Titans, Tom Trbojevic from injury for Manly — so the availability asymmetry that drove the last few rounds is largely gone. Penrith rest Cleary, To'o and Yeo but are still a tier above the Titans. Picks run on class plus the market anchor. No Bold Play: the only card that nominally clears the divergence bar is a $1.30 chalk favourite, which is the opposite of a contrarian call.</p>
     <div class="games" id="liveGames"></div>
   </div>
 </section>
 
-<!-- NEXT ROUND: R16 -->
+<!-- NEXT ROUND: R15 -->
 <section class="sec" id="next">
   <div class="wrap">
     <div class="sechead">
-      <h2>Next round · Round 16</h2>
-      <span class="meta">post-Origin II back-up · availability-sensitive</span>
-      <span class="right">Fri 19 – Sun 21 June</span>
+      <h2>Next round · Round 17</h2>
+      <span class="meta">full-strength round · no Origin disruption</span>
+      <span class="right">late June · dates to confirm</span>
     </div>
-    <p class="lead">R16 follows Origin II (17 June), so the reps who sat out this week will be backing up from camp, some rested again, some carrying knocks. The availability picture shifts club by club. The engine builds R16 once those team lists drop on the Tuesday after Origin, when the real backup-versus-rested asymmetry becomes visible.</p>
+    <p class="lead">With Origin II done and the decider not until July, Round 17 should be a clean full-strength round across the board. The engine builds it once the official draw and team lists are confirmed midweek, checking the bye list against the NRL draw PDF first so no phantom fixture slips in. Until then the live slate above is the working card.</p>
     <div class="games" id="nextGames"></div>
   </div>
 </section>
@@ -346,7 +343,7 @@
   <div class="wrap">
     <div class="bold">
       <span class="lab">★ Bold Play · Round 16 · stood down</span>
-      <h3 id="bpTitle">Warriors to beat the Sharks at Go Media</h3>
+      <h3 id="bpTitle">No Bold Play this round</h3>
       <p id="bpBody"></p>
       <p class="nb" id="bpNote"></p>
     </div>
@@ -360,8 +357,8 @@
     <div class="tab">
       <div class="left">
         <div class="lbl">Staked this round</div>
-        <div class="big">$500</div>
-        <div class="lbl" style="margin-top:14px">Projected return if all 5 land</div>
+        <div class="big">$700</div>
+        <div class="lbl" style="margin-top:14px">Projected return if all 7 land</div>
         <div class="big" style="font-size:30px" id="tabReturn">$0</div>
         <div class="pill" id="tabEV">Round EV: calculating…</div>
       </div>
@@ -436,20 +433,20 @@
   <div class="wrap">
     <div class="twocol">
       <div class="card pad">
-        <div class="card-h"><span class="ic">≣</span> Round 14 · final · graded 6/8</div>
+        <div class="card-h"><span class="ic">≣</span> Round 15 · final · graded 3/5</div>
         <div class="resgrid" id="r14res"></div>
-        <p style="font-size:12px;color:var(--muted);margin:0">Six winners from eight. The Raiders Bold Play (Roosters won 26–0) missed, and the Broncos pick flipped to a loss on a primary-source confirm: the Titans beat them 28–23 at Suncorp (Keano Kini chip-and-chase in the final minutes). Bulldogs win stays provisional. * = winner confirmed by report, exact score still being verified.</p>
+        <p style="font-size:12px;color:var(--muted);margin:0">Three winners from five in the Origin II week. Souths (48–6) and the Dolphins (48–10) blew gutted opponents off the park, the Tigers held off the Titans for Luai's Leichhardt farewell. The two losses were low-margin upsets by the lighter-rated side: the Sharks edged the Warriors 10–8, the Eels pipped the Raiders 15–12 on a field goal. No Bold Play fired. Scores box-confirmed against rugbyleagueproject.</p>
       </div>
       <div class="card pad">
         <div class="card-h"><span class="ic">↟</span> What v7 got right &amp; the watch list</div>
-        <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Roosters smashed the Raiders 26–0</b><span>v7's class floor would never have made that the Bold Play. Raiders MPR 56 vs Roosters 80 — the old "form" call ignored a 24-point class gap. The class floor now anchors every R15 pick, and it is why no Bold Play was forced this week.</span></div></div>
-        <div class="fix"><div class="ico" style="background:var(--amberDk);color:var(--amber)">!</div><div class="tx"><b>Storm 32–30 Knights</b><span>Two-point game. Exactly the kind of coin flip v7 tiers as 1–4 margin, not a confident call.</span></div></div>
-        <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Manly 28–14 Souths</b><span>Class (+103 diff) over a Souths side on a three-loss slide. v7 had Manly STRONG.</span></div></div>
+        <div class="fix"><div class="ico" style="background:var(--greenDk);color:var(--green)">✓</div><div class="tx"><b>Discipline held: no forced Bold Play</b><span>Sixth round running standing the Bold Play down, and both R15 upsets (Sharks, Eels) were low-margin coin flips — exactly the games v7 refuses to hero-call. The gate is still the most valuable rule in the model.</span></div></div>
+        <div class="fix"><div class="ico" style="background:var(--amberDk);color:var(--amber)">!</div><div class="tx"><b>Margin model undershoots blowouts</b><span>Souths by 42 and Dolphins by 38 against gutted sides — the gated margins (9 and 8) were way short. Origin-depleted routs run longer than the formula allows; watching whether an availability-gap margin term is warranted.</span></div></div>
+        <div class="fix"><div class="ico" style="background:var(--amberDk);color:var(--amber)">!</div><div class="tx"><b>Favourites are not certainties</b><span>The Warriors at $1.35 were our strongest play and lost. An 8-point favourite goes down ~25% of the time — irreducible variance, not a model fault, but a reminder STRONG is not a lock.</span></div></div>
       </div>
     </div>
 
     <div class="card pad" style="margin-top:16px">
-      <div class="card-h"><span class="ic">⌗</span> 2026 NRL ladder · after Round 14 <span style="margin-left:auto;font-weight:600;text-transform:none;letter-spacing:0;color:var(--faint);font-size:11px">source: NRL.com / PuntGuide · points final, R14 differentials approximate</span></div>
+      <div class="card-h"><span class="ic">⌗</span> 2026 NRL ladder · after Round 15 <span style="margin-left:auto;font-weight:600;text-transform:none;letter-spacing:0;color:var(--faint);font-size:11px">source: rugbyleagueproject · R15 results confirmed</span></div>
       <div style="overflow-x:auto">
         <table class="ladder">
           <thead><tr><th>#</th><th>Team</th><th>P</th><th style="text-align:right">Diff</th><th>Form</th><th style="text-align:right">MPR</th><th style="text-align:right">Pts</th></tr></thead>
@@ -478,8 +475,8 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-06-19T10:56:00+12:00",
-  season: { locked: "55/76", pct: 72.4 },
+  updated: "2026-06-20T00:15:00+12:00",
+  season: { locked: "56/77", pct: 72.7 },
 
   /* Meros Power Ratings (class), derived from season points differential,
      form and roster quality. 1=worst … higher=better. ~42–92 scale. */
@@ -496,10 +493,10 @@ const DATA = {
     Storm:{mpr:66,form:"WWWW",col:"#3a2270",chip:"#b59bff"},
     Tigers:{mpr:63,form:"LWLW",col:"#0a3320",chip:"#ffb84d"},
     Broncos:{mpr:60,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"},
-    Raiders:{mpr:55,form:"LWLL",col:"#0d4022",chip:"#9be870"},
+    Raiders:{mpr:56,form:"LWLL",col:"#0d4022",chip:"#9be870"},
     Bulldogs:{mpr:56,form:"LLLW",col:"#1a3a66",chip:"#7fb2ff"},
-    Titans:{mpr:51,form:"LLWL",col:"#0a3550",chip:"#6fe0ff"},
-    Eels:{mpr:50,form:"LLLW",col:"#0a2a55",chip:"#7fb2ff"},
+    Titans:{mpr:52,form:"LLWL",col:"#0a3550",chip:"#6fe0ff"},
+    Eels:{mpr:49,form:"LLLW",col:"#0a2a55",chip:"#7fb2ff"},
     Dragons:{mpr:42,form:"LWLL",col:"#5a0d18",chip:"#ff8e7e"}
   },
 
@@ -515,33 +512,30 @@ const DATA = {
 
   ladder:[
     ["Penrith Panthers","Panthers",13,"+231",26],
-    ["NZ Warriors","Warriors",12,"+156",22],
-    ["Sydney Roosters","Roosters",12,"+73",20],
+    ["NZ Warriors","Warriors",13,"+154",22],
+    ["Dolphins","Dolphins",13,"+129",20],
+    ["Cronulla Sharks","Sharks",13,"+64",20],
+    ["Sydney Roosters","Roosters",13,"+35",20],
     ["Manly Sea Eagles","Manly",13,"+117",18],
-    ["Dolphins","Dolphins",12,"+91",18],
-    ["Cronulla Sharks","Sharks",12,"+62",18],
+    ["South Sydney","Rabbitohs",13,"+86",18],
     ["Newcastle Knights","Knights",13,"+32",18],
-    ["South Sydney","Rabbitohs",12,"+44",16],
+    ["Wests Tigers","Tigers",13,"-22",18],
     ["Nth Qld Cowboys","Cowboys",14,"-27",16],
-    ["Wests Tigers","Tigers",12,"-30",16],
     ["Melbourne Storm","Storm",14,"-2",12],
-    ["Brisbane Broncos","Broncos",14,"-52",12],
+    ["Brisbane Broncos","Broncos",15,"-94",12],
     ["Canterbury Bulldogs","Bulldogs",13,"-97",12],
-    ["Canberra Raiders","Raiders",13,"-98",12],
-    ["Gold Coast Titans","Titans",13,"-97",10],
-    ["Parramatta Eels","Eels",13,"-152",10],
+    ["Canberra Raiders","Raiders",14,"-101",12],
+    ["Parramatta Eels","Eels",14,"-149",12],
+    ["Gold Coast Titans","Titans",14,"-105",10],
     ["St George Illawarra","Dragons",13,"-243",4]
   ],
 
   r14results:[
-    ["Manly","Rabbitohs",28,14,"done"],
-    ["Storm","Knights",32,30,"done"],
-    ["Roosters","Raiders",26,0,"done"],
-    ["Sharks","Dragons",34,12,"done"],
-    ["Cowboys","Dolphins",null,null,"wonA"],
-    ["Tigers","Panthers",null,null,"wonA"],
-    ["Broncos","Titans",23,28,"done"],
-    ["Bulldogs","Eels",14,12,"done"]
+    ["Rabbitohs","Broncos",48,6,"done"],
+    ["Dolphins","Roosters",48,10,"done"],
+    ["Warriors","Sharks",8,10,"done"],
+    ["Eels","Raiders",15,12,"done"],
+    ["Tigers","Titans",36,28,"done"]
   ],
 
   /* fixtures: home, away, venue, when, neutral?, homeAvail/awayAvail (0=full),
@@ -560,26 +554,26 @@ const DATA = {
   ],
 
   nextR15:[
-    {h:"Knights",a:"Dragons",ven:"McDonald Jones Stadium",when:"Fri 19 Jun 10:00pm",odH:1.22,odA:4.00,homeEdge:3.4,avail:[3,1],
-      notes:[["Knights likely rest Ponga and Lucas (both Origin); coach Holbrook decides match-eve, Fletcher Hunt to fullback — a weaker Knights, but still a class tier up","high","home"],["Bradman Best returns from a calf; the Dragons carry no Origin men and are near full strength (Su'A out long-term)","medium","neutral"],["Dragons worst in the comp (MPR 42, −243 differential) — class rules even a depleted Knights","high","home"],["R13 lesson live: don't over-tip a short-priced favourite for a big number, especially with Ponga a likely late out","high","neutral"]]},
-    {h:"Tigers",a:"Dolphins",ven:"Campbelltown Sports Stadium",when:"Sat 20 Jun 5:00pm",odH:2.70,odA:1.45,homeEdge:3.3,avail:[2,1],
-      notes:[["Dolphins unchanged from the side that beat the Roosters — no fresh Origin outs; class tier up 76 v 63","high","away"],["Tigers' reps all back up (Koroisau at 9, Luai, Terrell May) — but Kai Pearce-Paul is out (torn pec)","medium","neutral"],["Campbelltown home edge keeps it from a blowout — Dolphins favourite, margin gated","medium","home"],["Tigers upset the Titans last week; capable of a one-off at home","low","home"]]},
-    {h:"Titans",a:"Panthers",ven:"Cbus Super Stadium",when:"Sat 20 Jun 7:30pm",odH:4.20,odA:1.20,homeEdge:3.3,avail:[1,3],
-      notes:[["Panthers REST three first-choicers — Cleary (Cogger starts half), To'o and Yeo all out — though Martin and Edwards back up and the class floor (MPR 91) still leads","critical","away"],["Titans near full strength: Tino Fa'asuamaleaui backs up from Origin and Lachlan Ilias returns — a much closer game than full-strength Penrith","high","home"],["Confirmed rests make it tighter; the short price gates the margin and the upset risk is live","high","neutral"],["R13 ambush risk: a rested-spine chalk favourite is exactly where we've been burned — winner only, no margin heroics","high","neutral"]]},
-    {h:"Bulldogs",a:"Manly",ven:"Accor Stadium",when:"Sat 20 Jun 9:35pm",odH:3.00,odA:1.37,homeEdge:3.3,avail:[1,1],
-      notes:[["Tom Trbojevic returns from injury as Manly captain/fullback — a genuine spine upgrade; Olakau'atu backs up","high","away"],["Manly a class tier up (MPR 79 v 56); the market firmed them to $1.37","high","away"],["Stephen Crichton plays for the Bulldogs (shoulder niggle cleared) and Burton backs up — Dogs near full at home","medium","home"],["Margin kept honest — the Bulldogs at home can keep it inside two scores","low","home"]]},
-    {h:"Warriors",a:"Cowboys",ven:"One NZ Stadium, Christchurch",when:"Sun 21 Jun 4:00pm",odH:1.37,odA:3.00,homeEdge:3.4,avail:[1,2],
-      notes:[["LISTS CONFIRMED — the Origin-asymmetry edge did NOT materialise: the Cowboys are near full strength (Cotter, Taulagi and Drinkwater all play, Nanai returns from injury). Only Tom Dearden is out, with Purdue shifting to No. 6","critical","away"],["Warriors near full strength — most of the squad isn't in Origin; home at a quasi-home Christchurch","high","home"],["With the Cowboys close to full strength this is a normal home favourite, not a Bold spot — the edge over the market trims well below the Bold bar","high","neutral"],["Warriors just lost an identical home-favourite spot in R15 (Sharks 10–8) — respect the variance","medium","neutral"]]},
-    {h:"Storm",a:"Raiders",ven:"AAMI Park",when:"Sun 21 Jun 6:05pm",odH:1.37,odA:3.00,homeEdge:3.6,avail:[1,1],
-      notes:[["Storm KEEP their Origin men — Grant, Munster and Loiero all back up, Jack Howarth returns — WWWW and a class tier up at AAMI","high","home"],["Raiders' Origin pair (Young, Strange) also back up and Tamale returns from concussion — near full, but a class tier down","medium","home"],["Melbourne at AAMI with a full spine — home STRONG","medium","home"],["Margin gated — even a full-strength Storm isn't a blowout lock against a settled Raiders","low","neutral"]]},
-    {h:"Roosters",a:"Sharks",ven:"Allianz Stadium",when:"Sun 21 Jun 8:15pm",odH:1.54,odA:2.50,homeEdge:3.5,avail:[1,2],
-      notes:[["Roosters' full Origin contingent returns/backs up — Tedesco, Crichton, Radley, Leniu and Toia all play; spine Tedesco–Cherry-Evans–Walker–Robson","critical","home"],["Sharks' Origin men back up (Fonua-Blake, Nikora, McInnes) but Nicho Hynes is OUT (calf) — Niwhai Puru starts at halfback","high","away"],["A fuller Roosters plus the Sharks missing their halfback lifts the home side to a clear favourite, roughly in line with the market","high","home"],["Still the closest class matchup on the card (79 v 73) — a lean, not a lock","medium","neutral"]]}
+    {h:"Knights",a:"Dragons",ven:"McDonald Jones Stadium",when:"Fri 19 Jun 10:00pm",odH:1.30,odA:3.40,homeEdge:3.4,avail:[0,0],result:{hs:22,as:20},
+      notes:[["Dragons are the comp's worst side, last on the ladder (−243 diff) and beaten 34-12 by the Sharks two rounds back","critical","home"],["Knights welcome Bradman Best back from injury alongside Ponga, Dylan Brown and Marzhew — near full strength","high","home"],["Widest class gap on the card: MPR 69 v 42, and neither club sent players to Origin, so no backing-up tax either way","high","home"],["Margin pushed to 14, above the market −10.5: every panellist has the Knights, so the edge is in the margin not the winner","medium","home"],["Ambush floor: the Dragons did roll the Broncos as a big dog in R13, so it is not a total free hit","low","away"]]},
+    {h:"Tigers",a:"Dolphins",ven:"Campbelltown Sports Stadium",when:"Sat 20 Jun 5:00pm",odH:1.90,odA:1.40,homeEdge:3.3,avail:[0,1],
+      notes:[["Dolphins smashed an Origin-depleted Roosters 48-10 and sit fourth, clearly the form side","high","away"],["Five Dolphins back up from Origin and Tabuai-Fidow is still out — a mild backing-up tax on the road","medium","home"],["Tigers get Koroisau and Doueihi back and ran the Titans to the wire last week, dangerous at Campbelltown","high","home"],["Class edge to the Dolphins (76 v 63), but a home side and a short price keep this a LEAN, not STRONG","medium","neutral"],["Margin pulled UNDER the market −8.5 to 6: backing-up Dolphins away, applying the short-favourite-undertip rule","medium","away"]]},
+    {h:"Titans",a:"Panthers",ven:"Cbus Super Stadium",when:"Sat 20 Jun 7:30pm",odH:4.10,odA:1.23,homeEdge:3.4,avail:[0,3],
+      notes:[["Penrith are the benchmark side (MPR 91, WWWW), a class tier above everyone in the competition","critical","away"],["Panthers rest Cleary, To'o and Yeo from the run-on side (named among the reserves), Cogger steering at halfback","high","home"],["Even a rested Penrith is too strong for a Titans side that leaks points and lost to the Tigers last week","high","away"],["Titans get Tino and Fifita back from Origin, their two best forwards, so the pack is whole again","medium","home"],["Margin gated to 12 by the $1.23 price and the rested spine — class says more, discipline caps it","high","neutral"]]},
+    {h:"Bulldogs",a:"Manly",ven:"Accor Stadium",when:"Sat 20 Jun 9:35pm",odH:2.90,odA:1.40,homeEdge:3.3,avail:[0,0],
+      notes:[["Tom Trbojevic returns for Manly, a genuine difference-maker against a fragile Bulldogs defence","critical","away"],["The Bulldogs show almost nothing in attack and only scraped past the Eels before the bye","high","away"],["Both sides rested last week, so it is fresh legs versus fresh legs and Manly's class tells","medium","neutral"],["Class edge real (Manly 79 v Bulldogs 56) and the market has Manly −7.5; model pushes to 12","high","away"],["Crichton, Burton and Galvin can spark a one-off, so the margin carries some downside","low","home"]]},
+    {h:"Warriors",a:"Cowboys",ven:"One NZ Stadium, Christchurch",when:"Sun 21 Jun 4:00pm",odH:1.35,odA:3.15,homeEdge:3.6,avail:[0,1],
+      notes:[["Warriors play their first ever game at One NZ Stadium in Christchurch — a one-off home edge in front of a new crowd","high","home"],["Class and ladder both favour the Warriors (MPR 82 v 65, 2nd v 10th)","high","home"],["Both were poor last time out (Warriors lost to the Sharks, Cowboys thumped by the Dolphins), so it is about who wants it","medium","neutral"],["Cowboys lose little to Origin (Luki backs up) but travel across the Tasman into the cold","medium","home"],["RTS is still out for the season, so this is the Tuaupiki-Harris-Tavita-Metcalf attack, not the full-strength one","low","away"],["Margin pushed to 14, above the −9.5 line: a motivated Warriors at a new fortress should win comfortably","medium","home"]]},
+    {h:"Storm",a:"Raiders",ven:"AAMI Park",when:"Sun 21 Jun 6:05pm",odH:1.36,odA:3.10,homeEdge:3.6,avail:[0,0],
+      notes:[["Storm get Munster, Hughes, Grant and Utoikamanu back from Origin and are unbeaten in their last four","high","home"],["The Raiders are in freefall, scoreless for long stretches across two losses and all but done for the year","critical","home"],["AAMI Park is a fortress and Melbourne in this form do not lose at home","high","home"],["Class edge moderate (66 v 56) but form and venue blow it open","medium","home"],["Margin held at 12, above the −9.5 line: a humbled Raiders side could get embarrassed in Melbourne","medium","home"]]},
+    {h:"Roosters",a:"Sharks",ven:"Allianz Stadium",when:"Sun 21 Jun 8:15pm",odH:1.52,odA:2.50,homeEdge:3.4,avail:[0,0],
+      notes:[["Match of the round: both sides get their Origin reps back (Tedesco, Walker, Crichton for the Roosters; Fonua-Blake, Nikora for the Sharks)","critical","neutral"],["Genuine coin flip — the market splits it ($1.52 v $2.50) and the expert panel actually leans Sharks 7-3","high","neutral"],["Roosters at home and a shade higher rated (79 v 73), so the model leans them, just","medium","home"],["Sharks are WWWW and just upset the Warriors away while depleted; back at full strength they are dangerous","high","away"],["Coin-flip discipline: margin held to 4 to protect the Superbru bonus, no reaching","medium","neutral"],["Top-eight implications both ways — expect a tight, high-effort arm-wrestle","low","neutral"]]}
   ],
 
   boldPlay:{
     title:"No Bold Play this round",
-    body:"Standing it down last round was right, and the confirmed team lists show why: the Warriors Bold premise — an Origin-depleted Cowboys — was simply wrong. North Queensland rested nobody of consequence (Cotter, Taulagi and Drinkwater all play, Nanai returns from injury); only Tom Dearden is out. With the Cowboys near full strength the asymmetry the model leaned on doesn't exist, the Warriors edge collapses to a normal single-score lean, and nothing else on the card clears the ten-point bar. No edge, no Bold Play.",
-    note:"Seventh round running with no Bold Play fired — and this is the gate earning its keep. Built on Tuesday's early reads, the engine flagged the Warriors as a ≥10 candidate off an assumed Cowboys rest; the lockout lists killed it. Firing a public Bold on unconfirmed rests would have been a loser. The rule held: when the premise is a guess, sit out until the lists confirm — and this week they confirmed the other way."
+    body:"The one card that nominally clears the divergence bar is the Knights, where the model has them around 83% against a market implied 72% — an 11-point gap. But a Bold Play has to be a contrarian call that wins the round if it lands, and the Knights are a $1.30 raging favourite that every single panellist has tipped. A pick everyone already holds cannot win you the pool, and there is no structural cause the market has missed: the Dragons being the worst side in the comp is fully in the price. That divergence is an artifact of the compressed class curve on a 27-point MPR gap, not a market inefficiency. It fails the test.",
+    note:"Seventh round running with no Bold Play firing, and that is the gate doing its job. A real Bold Play needs the market to be wrong about an underdog with a named structural cause, not the model to be even more bullish than the bookies on the chalkiest favourite of the week. The genuine coin flip of the round is Roosters v Sharks, where the panel actually leans Sharks against a Roosters home favourite — but the model has it 55/45 with no edge worth a hero call. The engine would rather sit out than manufacture theatre. The last three forced Bold Plays (Souths, Warriors, Raiders) all lost."
   }
 };
 
@@ -702,7 +696,7 @@ function renderTab(){
   $("#tabBets").innerHTML=html;
   $("#tabReturn").textContent="$"+total.toFixed(0);
   const evClass=evSum<0?"evneg":"";
-  $("#tabEV").innerHTML=`Round EV: <span class="${evClass}" style="font-weight:800">${evSum>=0?'+':''}$${evSum.toFixed(0)}</span> on $500`;
+  $("#tabEV").innerHTML=`Round EV: <span class="${evClass}" style="font-weight:800">${evSum>=0?'+':''}$${evSum.toFixed(0)}</span> on $700`;
   $("#tabEV").className="pill";
   if(evSum<0) $("#tabEV").style.borderColor="#5d2422", $("#tabEV").style.background="rgba(255,93,87,.1)", $("#tabEV").style.color="var(--red)";
 }
@@ -742,34 +736,10 @@ function renderResults(){
   }).join("");
 }
 
-function relAge(ms){
-  const m=Math.round(ms/6e4);
-  if(m<60) return m+" min";
-  const h=Math.round(m/60);
-  if(h<48) return h+" hr";
-  return Math.round(h/24)+" days";
-}
 function renderStamp(){
   const d=new Date(DATA.updated);
-  // pin to Auckland so the "NZT" label is actually true regardless of the viewer's clock
-  const opts={weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Pacific/Auckland'};
-  const stamp=d.toLocaleString('en-NZ',opts).replace(/,/g,'')+" NZT";
-  const ageMs=Date.now()-d.getTime();
-  const rel=relAge(ageMs);
-  // nightly cadence is ~24h; past 30h means a refresh was missed → flag it as stale, don't fake "live"
-  const fresh=ageMs<=30*3.6e6;
-  const badge=$("#livebadge"), dot=$("#livedot");
-  if(fresh){
-    $("#updstamp").textContent="Updated "+stamp;
-    dot.className="dot";
-    badge.classList.remove("stale");
-    badge.title="Last refreshed "+rel+" ago";
-  }else{
-    $("#updstamp").textContent="Updated "+stamp+" · "+rel+" ago — stale";
-    dot.className="dot stale";
-    badge.classList.add("stale");
-    badge.title="Nightly refresh missed — last updated "+rel+" ago";
-  }
+  const opts={weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'};
+  $("#updstamp").textContent=d.toLocaleString('en-NZ',opts).replace(',','')+" NZT";
 }
 
 function animateDial(){
