@@ -477,7 +477,8 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-07-01T00:20:00+12:00",
+  updated: "2026-07-01T00:20:00+12:00",   // last real DATA change — never bumped without new retrieved results
+  checked: "2026-07-02T14:55:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
   season: { locked: "67/91", pct: 73.6 },
 
   /* Meros Power Ratings (class), derived from season points differential,
@@ -764,23 +765,26 @@ function relAge(ms){
   return Math.round(h/24)+" days";
 }
 function renderStamp(){
-  const d=new Date(DATA.updated);
   const opts={weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Pacific/Auckland'};
-  const stamp=d.toLocaleString('en-NZ',opts).replace(/,/g,'')+" NZT";
-  const ageMs=Date.now()-d.getTime();
-  const rel=relAge(ageMs);
-  const fresh=ageMs<=30*3.6e6;
+  const upd=new Date(DATA.updated);                       // last real DATA change
+  const run=new Date(DATA.checked||DATA.updated);         // heartbeat: last time the system ran (fallback for old artifacts)
+  const updStamp=upd.toLocaleString('en-NZ',opts).replace(/,/g,'')+" NZT";
+  const runAgeMs=Date.now()-run.getTime();
+  const runRel=relAge(runAgeMs);
+  // Staleness tracks whether the SYSTEM RAN, not whether the data changed. A quiet
+  // pre-round night still bumps the heartbeat, so amber now means a genuinely missed run.
+  const fresh=runAgeMs<=30*3.6e6;
   const badge=$("#livebadge"), dot=$("#livedot");
   if(fresh){
-    $("#updstamp").textContent="Updated "+stamp;
+    $("#updstamp").textContent="Updated "+updStamp+" · last run "+runRel+" ago";
     dot.className="dot";
     badge.classList.remove("stale");
-    badge.title="Last refreshed "+rel+" ago";
+    badge.title="System last ran "+runRel+" ago. Data last changed "+relAge(Date.now()-upd.getTime())+" ago.";
   }else{
-    $("#updstamp").textContent="Updated "+stamp+" · "+rel+" ago — stale";
+    $("#updstamp").textContent="Updated "+updStamp+" · last run "+runRel+" ago — stale";
     dot.className="dot stale";
     badge.classList.add("stale");
-    badge.title="Nightly refresh missed — last updated "+rel+" ago";
+    badge.title="Nightly run missed — system last ran "+runRel+" ago.";
   }
 }
 
