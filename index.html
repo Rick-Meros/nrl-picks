@@ -477,8 +477,8 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-07-01T00:20:00+12:00",   // last real DATA change — never bumped without new retrieved results
-  checked: "2026-07-03T02:04:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
+  updated: "2026-07-04T02:02:00+12:00",   // last real DATA change — never bumped without new retrieved results
+  checked: "2026-07-04T02:02:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
   season: { locked: "67/91", pct: 73.6 },
 
   /* Meros Power Ratings (class), derived from season points differential,
@@ -545,8 +545,8 @@ const DATA = {
   ],
 
   /* R18 fixtures, recomputed on confirmed team lists (dropped Tue 30 Jun). Odds confirmed
-     for Panthers-Rabbitohs, Broncos-Sharks and Knights-Dolphins (Bet365 via Stats Insider);
-     Dragons-Tigers and Eels-Manly stay indicative — no confirmed TAB H2H surfaced.
+     for all five games as of 4 Jul (Bet365 via Stats Insider) — Dragons-Tigers and
+     Eels-Manly firmed to real H2H prices overnight, replacing the earlier indicative figures.
      avail: [homeOuts, awayOuts]. Positive availDiff favours the home team. */
   nextR15:[
     {h:"Panthers",a:"Rabbitohs",ven:"CommBank Stadium, Parramatta",when:"Fri 3 Jul 10:05pm",
@@ -558,12 +558,12 @@ const DATA = {
        ["Panthers have lost back-to-back for the first time all season (Titans, Cowboys) — model reads a genuinely live Rabbitohs at home","medium","home"]
      ]},
     {h:"Dragons",a:"Tigers",ven:"Jubilee Oval, Kogarah",when:"Sat 4 Jul 7:30pm",
-     odH:2.40,odA:1.62,homeEdge:3.2,avail:[0,2],
+     odH:2.45,odA:1.52,homeEdge:3.2,avail:[0,2],
      notes:[
        ["Tigers lose Luai (delayed concussion symptoms) and May (shoulder) — Madden shifts to five-eighth","high","away"],
        ["Tigers 21-point class advantage (MPR 61 vs 40) still the biggest talent gap on the card despite the outs","critical","away"],
        ["Dragons rooted to the bottom of the ladder and on a season-long losing run, no reported outs this week","high","home"],
-       ["Odds indicative ($2.40/$1.62) — no confirmed TAB H2H found tonight; margin-tip consensus still has Tigers favoured","medium","neutral"]
+       ["Odds now confirmed ($2.45 Dragons / $1.52 Tigers via Stats Insider) — model sits close to the market, div +3, no edge","medium","neutral"]
      ]},
     {h:"Broncos",a:"Sharks",ven:"Suncorp Stadium, Brisbane",when:"Sat 4 Jul 9:35pm",
      odH:2.60,odA:1.45,homeEdge:3.5,avail:[6,3],
@@ -574,12 +574,12 @@ const DATA = {
        ["Confirmed odds ($2.60/$1.45) — model at 73% vs market ~69% implied, div +9, just under the Bold Play bar","medium","neutral"]
      ]},
     {h:"Eels",a:"Manly",ven:"CommBank Stadium, Parramatta",when:"Sun 5 Jul 4:05pm",
-     odH:2.50,odA:1.55,homeEdge:3.3,avail:[1,2],
+     odH:3.10,odA:1.35,homeEdge:3.3,avail:[1,2],
      notes:[
        ["31-point MPR gulf (79 v 48) — biggest class mismatch on the R18 card, Sea Eagles dominant across every metric","critical","away"],
        ["Eels lose Moses to Origin, their only change; Manly lose Olakau'atu to Origin plus Brooks (season-ending, unrelated) — two out","medium","neutral"],
        ["Eels have lost 4 of their last 5, averaging under 14 points a game in that stretch — no form bounce in sight","high","home"],
-       ["No confirmed TAB H2H tonight — only margin/props surfaced (Manly 13+ margin, Trbojevic 2+ tries), consistent with a big Manly favourite","medium","neutral"]
+       ["Odds now confirmed ($3.10 Eels / $1.35 Manly via Bet365) — market has caught up further than the earlier indicative price, div down to +8, still shy of the Bold Play bar","medium","neutral"]
      ]},
     {h:"Knights",a:"Dolphins",ven:"McDonald Jones Stadium, Newcastle",when:"Sun 5 Jul 6:05pm",
      odH:2.05,odA:1.68,homeEdge:3.4,avail:[2,6],
@@ -594,7 +594,7 @@ const DATA = {
   boldPlay:{
     title:"No Bold Play this round",
     body:"Two games touch the ≥10 divergence bar on confirmed team lists: Broncos v Sharks (+9, just under) and Knights v Dolphins (+10, right on it — the model flips the winner off Dolphins' six-man Origin hit). Neither clears the bar cleanly enough to fire. Knights-Dolphins is the closer call: the pick itself flips, but confidence sits at only 55%, barely past a coin flip, and the market ($1.68 Dolphins) may already be adjusting to the same Origin news the model is reading — that's the shape of a market catching up, not a market being wrong. The gate needs real conviction, not a bare-minimum number.",
-    note:"Ninth consecutive round with no Bold Play since the gate was tightened in v7. Knights v Dolphins is the one to watch through the week — if Dolphins drift further as more of the six absences firm up and the model's edge holds at 55%+, it's still not Bold Play shape (too close to a coin flip for a marquee call). Panthers v Rabbitohs flipped STRONG→LEAN on the same confirmed-lists refresh (Panthers resting three Origin players), model now sits at div 0 with the market — no edge, no call to make beyond the honest LEAN."
+    note:"Ninth consecutive round with no Bold Play since the gate was tightened in v7. Knights v Dolphins is the one to watch through the week — if Dolphins drift further as more of the six absences firm up and the model's edge holds at 55%+, it's still not Bold Play shape (too close to a coin flip for a marquee call). Panthers v Rabbitohs flipped STRONG→LEAN on the same confirmed-lists refresh (Panthers resting three Origin players), model now sits at div 0 with the market — no edge, no call to make beyond the honest LEAN. Self-audit catch (4 Jul): Eels v Manly was carrying an unflagged +13 divergence on the 1 Jul indicative odds ($2.50/$1.55) — above the Bold Play bar and missed in that build's sanity pass. Now moot: confirmed Bet365 odds ($3.10/$1.35) show the market has already priced in the same Sea Eagles dominance the model saw, closing the gap to +8. No Bold Play would have fired anyway (STRONG tier, not a contrarian cause), but the gate check should catch a live ≥10 reading before the market closes it, not after — flagged for the next build."
   }
 };
 
