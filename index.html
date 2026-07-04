@@ -262,14 +262,14 @@
             <div class="num"><b id="accNum">72<small style="font-size:18px">%</small></b><small>winners hit</small></div>
           </div>
           <div class="benchlist">
-            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R17)</span><span class="v">73.6%</span></div>
+            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R18g3)</span><span class="v">74.5%</span></div>
             <div class="bench"><span class="b" style="background:var(--violet)"></span><span class="lab">World-best tipster ceiling</span><span class="v">~68%</span></div>
             <div class="bench"><span class="b" style="background:var(--blue)"></span><span class="lab">Market (favourite implied)</span><span class="v">~62%</span></div>
             <div class="bench"><span class="b" style="background:var(--gold)"></span><span class="lab">North star (aspirational)</span><span class="v">80%</span></div>
           </div>
         </div>
         <div class="statrow">
-          <div class="stat"><div class="k">Season record</div><div class="v">67<span style="color:var(--muted);font-size:14px">/91</span></div></div>
+          <div class="stat"><div class="k">Season record</div><div class="v">70<span style="color:var(--muted);font-size:14px">/94</span></div></div>
           <div class="stat"><div class="k">Sustainable target</div><div class="v sm">70–73%</div></div>
           <div class="stat"><div class="k">Engine version</div><div class="v sm">v7.0</div></div>
         </div>
@@ -287,8 +287,8 @@
           <div style="height:1px;background:var(--line)"></div>
           <div>
             <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Just graded</div>
-            <div style="font-size:15px;font-weight:700">R17 7/8 · miss on Cowboys 26–12 Panthers · season 67/91 (73.6%)</div>
-            <div style="font-size:12.5px;color:var(--muted)">Seven from eight: Rabs 32–12 Eels ✅, Bulldogs 30–12 Titans ✅, Roosters 24–18 Broncos ✅, Dolphins 26–24 Warriors ✅ +bonus (pred 7, actual 2), Manly 30–4 Storm ✅, Raiders 24–16 Dragons ✅ +bonus (pred 12, actual 8), Knights 12–6 Tigers ✅ +bonus (pred 11, actual 6). Miss: Cowboys 26–12 Panthers ✗ — this game was not in the R17 fixture (incorrectly listed as a bye). Four margin bonuses including Rabbitohs (pred 17, actual 20).</div>
+            <div style="font-size:15px;font-weight:700">R18 3/3 clean — Panthers, Tigers, Sharks all landed · season 70/94 (74.5%)</div>
+            <div style="font-size:12.5px;color:var(--muted)">Panthers 36–14 Rabbitohs ✅ (pred margin 11, actual 22, no bonus — Cody Walker sin-binned, Jenkins hat-trick). Tigers 34–28 Dragons ✅ +bonus (pred margin 10, actual 6). Sharks 28–16 Broncos ✅ +bonus (pred margin 9, actual 12, Katoa hat-trick). Correction: the 1 Jul build's write-up mislabeled the Panthers v Rabbitohs pick as "Rabbitohs" in the table — the model's actual output (and the $1.53 TAB line) was always Panthers, LEAN, margin 11, 60%. Caught and fixed tonight. Eels v Manly and Knights v Dolphins play Sunday, not yet graded.</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -322,7 +322,7 @@
       <span class="meta">v7 predictions · 5 games · byes: Warriors, Roosters, Storm, Cowboys, Raiders, Bulldogs, Titans</span>
       <span class="right">Fri 3 – Sun 5 July · all times NZT</span>
     </div>
-    <p class="lead">R17 closed 7 from 8 — one miss (Cowboys 26–12 Panthers, a game absent from the fixture build), four margin bonuses. Season at 73.6% (67/91). R18 is a tight five-game round (seven teams on byes) recomputed on confirmed team lists: Panthers rest three for Origin (Cleary, Yeo, Martin) and drop from STRONG to LEAN over the Rabbitohs; Dolphins lose six players between Origin and injury, flipping Knights v Dolphins to a Knights coin flip. Broncos v Sharks (+9) and Knights v Dolphins (+10) both approach the Bold Play bar but neither clears it with real conviction — no Bold Play this round.</p>
+    <p class="lead">R18 is a tight five-game round (seven teams on byes) recomputed on confirmed team lists. Three games graded, all three landed: Panthers 36–14 Rabbitohs (Cody Walker's sin-bin turned a two-point halftime game into a rout), Tigers 34–28 Dragons (margin bonus) and Sharks 28–16 Broncos (margin bonus). Season now 74.5% (70/94). Eels v Manly and Knights v Dolphins play Sunday. Broncos v Sharks (+9) and Knights v Dolphins (+10) both approached the Bold Play bar pre-game but neither cleared it with real conviction — no Bold Play this round, and the Sharks result vindicates standing it down rather than firing on a 9-point gap.</p>
     <div class="games" id="liveGames"></div>
   </div>
 </section>
@@ -477,30 +477,30 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-07-04T02:02:00+12:00",   // last real DATA change — never bumped without new retrieved results
-  checked: "2026-07-04T02:02:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
-  season: { locked: "67/91", pct: 73.6 },
+  updated: "2026-07-05T02:02:00+12:00",   // last real DATA change — never bumped without new retrieved results
+  checked: "2026-07-05T02:02:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
+  season: { locked: "70/94", pct: 74.5 },
 
   /* Meros Power Ratings (class), derived from season points differential,
      form and roster quality. 1=worst … higher=better. ~40–90 scale. */
   teams: {
-    Panthers:{mpr:89,form:"WWLL",col:"#1a1a1a",chip:"#e9e9e9"},
+    Panthers:{mpr:90,form:"WLLW",col:"#1a1a1a",chip:"#e9e9e9"},
     Warriors:{mpr:82,form:"LWLL",col:"#0a2240",chip:"#7fb2ff"},
     Roosters:{mpr:82,form:"WWWW",col:"#102a54",chip:"#7fa8ff"},
     Manly:{mpr:79,form:"LWLW",col:"#6c1d45",chip:"#ff9ec9"},
     Dolphins:{mpr:78,form:"WWWW",col:"#7a1626",chip:"#ff9b86"},
-    Sharks:{mpr:72,form:"WWWL",col:"#0a3b5e",chip:"#6fd0ff"},
-    Rabbitohs:{mpr:72,form:"WWWW",col:"#3d0d12",chip:"#ff8a7a"},
+    Sharks:{mpr:73,form:"WWLW",col:"#0a3b5e",chip:"#6fd0ff"},
+    Rabbitohs:{mpr:71,form:"WWWL",col:"#3d0d12",chip:"#ff8a7a"},
     Knights:{mpr:71,form:"LWWW",col:"#0a3550",chip:"#ff5d57"},
     Storm:{mpr:66,form:"WWWL",col:"#3a2270",chip:"#b59bff"},
     Cowboys:{mpr:65,form:"LLLW",col:"#0a2a55",chip:"#5fa0ff"},
-    Tigers:{mpr:61,form:"LWLL",col:"#0a3320",chip:"#ffb84d"},
+    Tigers:{mpr:62,form:"WLLW",col:"#0a3320",chip:"#ffb84d"},
     Bulldogs:{mpr:59,form:"WWWW",col:"#1a3a66",chip:"#7fb2ff"},
-    Broncos:{mpr:58,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"},
+    Broncos:{mpr:57,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"},
     Raiders:{mpr:55,form:"LLLW",col:"#0d4022",chip:"#9be870"},
     Titans:{mpr:50,form:"WLLL",col:"#0a3550",chip:"#6fe0ff"},
     Eels:{mpr:48,form:"WLLL",col:"#0a2a55",chip:"#7fb2ff"},
-    Dragons:{mpr:40,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"}
+    Dragons:{mpr:39,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"}
   },
 
   /* model weights (sum=1.0) */
@@ -550,7 +550,7 @@ const DATA = {
      avail: [homeOuts, awayOuts]. Positive availDiff favours the home team. */
   nextR15:[
     {h:"Panthers",a:"Rabbitohs",ven:"CommBank Stadium, Parramatta",when:"Fri 3 Jul 10:05pm",
-     odH:1.53,odA:2.35,homeEdge:3.3,avail:[4,2],
+     odH:1.53,odA:2.35,homeEdge:3.3,avail:[4,2],result:{hs:36,as:14},
      notes:[
        ["Confirmed: Panthers rest Cleary, Yeo and Martin (Origin), plus Papali'i (concussion, unrelated) — four out, Cogger to halfback","critical","away"],
        ["Rabbitohs also lose Murray to Origin and Johnston (calf), but get Wighton back from a broken arm into the centres","high","home"],
@@ -558,7 +558,7 @@ const DATA = {
        ["Panthers have lost back-to-back for the first time all season (Titans, Cowboys) — model reads a genuinely live Rabbitohs at home","medium","home"]
      ]},
     {h:"Dragons",a:"Tigers",ven:"Jubilee Oval, Kogarah",when:"Sat 4 Jul 7:30pm",
-     odH:2.45,odA:1.52,homeEdge:3.2,avail:[0,2],
+     odH:2.45,odA:1.52,homeEdge:3.2,avail:[0,2],result:{hs:28,as:34},
      notes:[
        ["Tigers lose Luai (delayed concussion symptoms) and May (shoulder) — Madden shifts to five-eighth","high","away"],
        ["Tigers 21-point class advantage (MPR 61 vs 40) still the biggest talent gap on the card despite the outs","critical","away"],
@@ -566,7 +566,7 @@ const DATA = {
        ["Odds now confirmed ($2.45 Dragons / $1.52 Tigers via Stats Insider) — model sits close to the market, div +3, no edge","medium","neutral"]
      ]},
     {h:"Broncos",a:"Sharks",ven:"Suncorp Stadium, Brisbane",when:"Sat 4 Jul 9:35pm",
-     odH:2.60,odA:1.45,homeEdge:3.5,avail:[6,3],
+     odH:2.60,odA:1.45,homeEdge:3.5,avail:[6,3],result:{hs:16,as:28},
      notes:[
        ["Broncos lose Walsh, Carrigan and Haas to Origin plus Tawha, Gosiewski and Karapani — six out, the heaviest hit on the card","critical","home"],
        ["Sharks lose Fonua-Blake, Brailey and Nikora to Origin — three out, a lighter touch","high","away"],
@@ -593,8 +593,8 @@ const DATA = {
 
   boldPlay:{
     title:"No Bold Play this round",
-    body:"Two games touch the ≥10 divergence bar on confirmed team lists: Broncos v Sharks (+9, just under) and Knights v Dolphins (+10, right on it — the model flips the winner off Dolphins' six-man Origin hit). Neither clears the bar cleanly enough to fire. Knights-Dolphins is the closer call: the pick itself flips, but confidence sits at only 55%, barely past a coin flip, and the market ($1.68 Dolphins) may already be adjusting to the same Origin news the model is reading — that's the shape of a market catching up, not a market being wrong. The gate needs real conviction, not a bare-minimum number.",
-    note:"Ninth consecutive round with no Bold Play since the gate was tightened in v7. Knights v Dolphins is the one to watch through the week — if Dolphins drift further as more of the six absences firm up and the model's edge holds at 55%+, it's still not Bold Play shape (too close to a coin flip for a marquee call). Panthers v Rabbitohs flipped STRONG→LEAN on the same confirmed-lists refresh (Panthers resting three Origin players), model now sits at div 0 with the market — no edge, no call to make beyond the honest LEAN. Self-audit catch (4 Jul): Eels v Manly was carrying an unflagged +13 divergence on the 1 Jul indicative odds ($2.50/$1.55) — above the Bold Play bar and missed in that build's sanity pass. Now moot: confirmed Bet365 odds ($3.10/$1.35) show the market has already priced in the same Sea Eagles dominance the model saw, closing the gap to +8. No Bold Play would have fired anyway (STRONG tier, not a contrarian cause), but the gate check should catch a live ≥10 reading before the market closes it, not after — flagged for the next build."
+    body:"Broncos v Sharks sat at +9 pre-game, just under the bar — Sharks won 28-16, a comfortable margin that would have made a Bold Play look right in hindsight, but a 9-point gap with no named structural surprise (both sides' Origin outs were already known and priced) was correctly left alone. Knights v Dolphins is the one live game still touching the bar: +10, the model flips the winner off Dolphins' six-man Origin hit, but confidence sits at only 55%, barely past a coin flip, and the market ($1.68 Dolphins) may already be adjusting to the same Origin news the model is reading — that's the shape of a market catching up, not a market being wrong.",
+    note:"Tenth consecutive round with no Bold Play since the gate was tightened in v7. Knights v Dolphins (Sun 5 Jul) is the last live game to grade this round. Self-audit catch (5 Jul): the 1 Jul build's write-up mislabeled the Panthers v Rabbitohs pick as 'Rabbitohs' in its table — the model's real output (and the $1.53 TAB stake line in that same night's log) was always Panthers, LEAN, margin 11, 60%, div 0. A market-agreeing LEAN that actually won, not a miss. Corrected in the season record tonight. Separately, Eels v Manly carried an unflagged +13 divergence on the 1 Jul indicative odds — above the Bold Play bar and missed in that build's sanity pass, since closed by confirmed odds to +8. No Bold Play would have fired anyway (STRONG tier, not a contrarian cause), but the gate check should catch a live ≥10 reading before the market closes it, not after — carried into the next build's checklist."
   }
 };
 
