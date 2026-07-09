@@ -322,7 +322,7 @@
       <span class="meta">v7 predictions · 7 games · byes: Broncos, Panthers, Dragons</span>
       <span class="right">Fri 10 – Sun 12 July · all times NZT</span>
     </div>
-    <p class="lead">Origin III (NSW 30–12 QLD, Suncorp, Wed 8 Jul) settled the series and released the reps back to their clubs — the defining shape of R19 is how much strength just walked back in the door. Dolphins get Bostock, Tabuai-Fidow, Plath, Stone, Cobbo and Flegler all back; Sharks get Fonua-Blake, Brailey, Nikora, Puru and Stonestreet back — that game (Dolphins v Sharks) reverts to something close to a full-strength contest for the first time in weeks. Knights get both Ponga and Best back, tipping their coin flip with Rabbitohs (still without Latrell Mitchell) back the other way. Titans get Fa'asuamaleaui and Fifita back too, though the Storm class gap still dwarfs it. No game clears the Bold Play bar — the closest sit at +8 (Bulldogs, Manly, Storm), all comfortably-priced favourites already, not contrarian value. Twelfth consecutive round with no Bold Play.</p>
+    <p class="lead">Origin III (NSW 30–12 QLD, Suncorp, Wed 8 Jul) settled the series and released the reps back to their clubs — the defining shape of R19 is how much strength just walked back in the door. Dolphins get Bostock, Tabuai-Fidow, Plath, Stone, Cobbo and Flegler all back; Sharks get Fonua-Blake, Brailey, Nikora, Puru and Stonestreet back — that game (Dolphins v Sharks) reverts to something close to a full-strength contest for the first time in weeks. Knights get both Ponga and Best back, tipping their coin flip with Rabbitohs (still without Latrell Mitchell) back the other way. Titans get Fa'asuamaleaui and Fifita back too, though the Storm class gap still dwarfs it. No game clears the Bold Play bar — the closest sit at +8 (Bulldogs, Storm), all comfortably-priced favourites already, not contrarian value. Twelfth consecutive round with no Bold Play.</p>
     <div class="games" id="liveGames"></div>
   </div>
 </section>
@@ -477,8 +477,8 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-07-09T11:23:00+12:00",   // last real DATA change — never bumped without new retrieved results
-  checked: "2026-07-09T11:23:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
+  updated: "2026-07-10T02:07:00+12:00",   // last real DATA change — never bumped without new retrieved results
+  checked: "2026-07-10T02:07:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
   season: { locked: "71/96", pct: 74.0 },
 
   /* Meros Power Ratings (class), derived from season points differential,
@@ -587,11 +587,11 @@ const DATA = {
        ["Genuine coin flip, margin capped 1-4 per discipline — no bonus-margin greed on a 50/50 game","medium","neutral"]
      ]},
     {h:"Manly",a:"Cowboys",ven:"4 Pines Park, Brookvale",when:"Sun 12 Jul 6:05pm",
-     odH:1.56,odA:2.45,homeEdge:3.4,avail:[1,1],
+     odH:1.56,odA:2.45,homeEdge:3.4,avail:[1,0],
      notes:[
        ["Manly still without Luke Brooks (long-term injury) — Joey Walsh holds five-eighth again after last week's cohesion issues in a loss to the Eels","high","home"],
-       ["Cowboys captain Tom Dearden (ankle) is targeting a return but not yet confirmed in the side — treated as still out until the final team sheet says otherwise","medium","away"],
-       ["13-point MPR gap (78 v 65) plus the Brookvale fortress factor underpins a STRONG Manly pick at 69%, div +8 — priced in, not a contrarian case","high","home"],
+       ["Cowboys captain Tom Dearden (ankle/MCL) is confirmed in the 17 off the interchange bench — his first game back since Round 10 — so the away outs count drops from 1 to 0; he's not among the run-on 13 but he is playing","medium","away"],
+       ["13-point MPR gap (78 v 65) plus the Brookvale fortress factor still underpins a Manly pick, now trimmed to LEAN at 67%, div +6 — Dearden's return closes some of the gap the earlier still-out assumption had priced in","high","home"],
        ["Cowboys had the week off after upsetting Panthers in R17 — fresh legs, but on the road against a well-rested class favourite","medium","neutral"]
      ]},
     {h:"Storm",a:"Titans",ven:"AAMI Park, Melbourne",when:"Sun 12 Jul 8:15pm",
@@ -606,8 +606,8 @@ const DATA = {
 
   boldPlay:{
     title:"No Bold Play this round",
-    body:"R19 is the mirror image of the last few Origin-hit rounds: instead of players going out, they're all coming back in at once. Dolphins (six back) and Sharks (five back) both return to something close to full strength for the first time in weeks; Knights get Ponga and Best back; Titans get Fa'asuamaleaui and Fifita back. That leaves almost no residual availability asymmetry to exploit — the three games that touch the closest divergence (Bulldogs +8, Manly +8, Storm +8) are all comfortably-priced home favourites the market already has right, not market-wrong contrarian cases. The one live coin flip on the card, Rabbitohs v Knights, sits at only +3 divergence and 53% conviction — nowhere near Bold Play shape even before considering it's a genuine 50/50 game. Twelfth consecutive round with no Bold Play.",
-    note:"R18 closed 4/5 (Panthers, Tigers, Sharks, Knights landed; three margin bonuses; Eels upset Manly the only miss) — season 71/96 (74.0%), detailed above. Watch items for next run: (1) Tedesco's final clearance for Roosters v Eels — named in the side after a Category 2 HIA fail in the Origin decider, but worth confirming nothing changes on final teams; (2) Tom Dearden's actual availability for Cowboys v Sea Eagles, currently encoded as still out; (3) grade all seven R19 results as they land, verifying each against the exact round/venue/date per the R16 lesson."
+    body:"R19 is the mirror image of the last few Origin-hit rounds: instead of players going out, they're all coming back in at once. Dolphins (six back) and Sharks (five back) both return to something close to full strength for the first time in weeks; Knights get Ponga and Best back; Titans get Fa'asuamaleaui and Fifita back; Cowboys captain Tom Dearden is back too, off the bench for his first game since Round 10. That leaves almost no residual availability asymmetry to exploit — the two games that touch the closest divergence (Bulldogs +8, Storm +8) are comfortably-priced home favourites the market already has right, not market-wrong contrarian cases. The one live coin flip on the card, Rabbitohs v Knights, sits at only +3 divergence and 53% conviction — nowhere near Bold Play shape even before considering it's a genuine 50/50 game. Twelfth consecutive round with no Bold Play.",
+    note:"R18 closed 4/5 (Panthers, Tigers, Sharks, Knights landed; three margin bonuses; Eels upset Manly the only miss) — season 71/96 (74.0%), detailed above. Late-mail check this run: Tedesco is confirmed named at fullback for Roosters v Eels (a stray search snippet claiming he'd be withheld after his Origin HIA doesn't match the actual published team list, so it's treated as unconfirmed noise, not acted on) — pick unchanged. Tom Dearden is confirmed in the Cowboys' 17 off the bench for Sea Eagles v Cowboys, his first game since Round 10 — away outs trimmed 1→0, Manly's pick softens STRONG→LEAN (69%→67%, div +8→+6), still the same side. Next run: grade all seven R19 results as they land, verifying each against the exact round/venue/date per the R16 lesson."
   }
 };
 
