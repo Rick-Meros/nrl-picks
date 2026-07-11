@@ -262,14 +262,14 @@
             <div class="num"><b id="accNum">72<small style="font-size:18px">%</small></b><small>winners hit</small></div>
           </div>
           <div class="benchlist">
-            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R19g1)</span><span class="v">74.2%</span></div>
+            <div class="bench"><span class="b" style="background:var(--green)"></span><span class="lab">Engine v7 (R5–R19g3)</span><span class="v">73.7%</span></div>
             <div class="bench"><span class="b" style="background:var(--violet)"></span><span class="lab">World-best tipster ceiling</span><span class="v">~68%</span></div>
             <div class="bench"><span class="b" style="background:var(--blue)"></span><span class="lab">Market (favourite implied)</span><span class="v">~62%</span></div>
             <div class="bench"><span class="b" style="background:var(--gold)"></span><span class="lab">North star (aspirational)</span><span class="v">80%</span></div>
           </div>
         </div>
         <div class="statrow">
-          <div class="stat"><div class="k">Season record</div><div class="v">72<span style="color:var(--muted);font-size:14px">/97</span></div></div>
+          <div class="stat"><div class="k">Season record</div><div class="v">73<span style="color:var(--muted);font-size:14px">/99</span></div></div>
           <div class="stat"><div class="k">Sustainable target</div><div class="v sm">70–73%</div></div>
           <div class="stat"><div class="k">Engine version</div><div class="v sm">v7.0</div></div>
         </div>
@@ -287,8 +287,8 @@
           <div style="height:1px;background:var(--line)"></div>
           <div>
             <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase">Just graded</div>
-            <div style="font-size:15px;font-weight:700">R19 1/7 graded — Warriors landed · season 72/97 (74.2%)</div>
-            <div style="font-size:12.5px;color:var(--muted)">Warriors 32–6 Tigers ✅ (Campbelltown, pred margin 10, actual 26 — no bonus, three unanswered second-half tries; Fisher-Harris, Khan-Pereira x2, Leiataua, Egan the try scorers). Six games still to play: Dolphins v Sharks, Bulldogs v Raiders, Roosters v Eels (all Sat 11 Jul), Rabbitohs v Knights, Sea Eagles v Cowboys, Storm v Titans (Sun 12 Jul).</div>
+            <div style="font-size:15px;font-weight:700">R19 3/7 graded: Sharks upset the Dolphins 66-0, Roosters landed, season 73/99 (73.7%)</div>
+            <div style="font-size:12.5px;color:var(--muted)">Warriors 32-6 Tigers ✅ (Campbelltown, pred margin 10, actual 26, no bonus). Sharks 66-0 Dolphins ❌ (Kayo Stadium, Redcliffe: a club-record demolition; our pick was Dolphins by 7 LEAN 63%, model and market both wrong side, no structural tell for a blowout this size). Roosters 28-12 Eels ✅ (Allianz Stadium, pred margin 12, actual 16, within 5, margin bonus; Tupou hat-trick on his 300th game). Bulldogs v Raiders (Sat 11 Jul) result unconfirmed tonight: sources collided, treated as pending. Rabbitohs v Knights, Sea Eagles v Cowboys, Storm v Titans (Sun 12 Jul) still to play.</div>
           </div>
           <div style="height:1px;background:var(--line)"></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -477,19 +477,19 @@
    Data object is what the nightly task rewrites.
    ============================================================ */
 const DATA = {
-  updated: "2026-07-11T02:20:00+12:00",   // last real DATA change — never bumped without new retrieved results
-  checked: "2026-07-11T02:20:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
-  season: { locked: "72/97", pct: 74.2 },
+  updated: "2026-07-12T02:20:00+12:00",   // last real DATA change — never bumped without new retrieved results
+  checked: "2026-07-12T02:20:00+12:00",   // heartbeat: last time the system ran — bumped + deployed every run, incl. NO DEPLOY nights
+  season: { locked: "73/99", pct: 73.7 },
 
   /* Meros Power Ratings (class), derived from season points differential,
      form and roster quality. 1=worst … higher=better. ~40–90 scale. */
   teams: {
     Panthers:{mpr:90,form:"WLLW",col:"#1a1a1a",chip:"#e9e9e9"},
     Warriors:{mpr:83,form:"WLLW",col:"#0a2240",chip:"#7fb2ff"},
-    Roosters:{mpr:82,form:"WWWW",col:"#102a54",chip:"#7fa8ff"},
+    Roosters:{mpr:83,form:"WWWW",col:"#102a54",chip:"#7fa8ff"},
     Manly:{mpr:78,form:"WLWL",col:"#6c1d45",chip:"#ff9ec9"},
-    Dolphins:{mpr:77,form:"WWWL",col:"#7a1626",chip:"#ff9b86"},
-    Sharks:{mpr:73,form:"WWLW",col:"#0a3b5e",chip:"#6fd0ff"},
+    Dolphins:{mpr:76,form:"WWLL",col:"#7a1626",chip:"#ff9b86"},
+    Sharks:{mpr:74,form:"WLWW",col:"#0a3b5e",chip:"#6fd0ff"},
     Rabbitohs:{mpr:71,form:"WWWL",col:"#3d0d12",chip:"#ff8a7a"},
     Knights:{mpr:72,form:"WWWW",col:"#0a3550",chip:"#ff5d57"},
     Storm:{mpr:66,form:"WWWL",col:"#3a2270",chip:"#b59bff"},
@@ -499,7 +499,7 @@ const DATA = {
     Broncos:{mpr:57,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"},
     Raiders:{mpr:55,form:"LLLW",col:"#0d4022",chip:"#9be870"},
     Titans:{mpr:50,form:"WLLL",col:"#0a3550",chip:"#6fe0ff"},
-    Eels:{mpr:49,form:"LLLW",col:"#0a2a55",chip:"#7fb2ff"},
+    Eels:{mpr:48,form:"LLWL",col:"#0a2a55",chip:"#7fb2ff"},
     Dragons:{mpr:39,form:"LLLL",col:"#5a0d18",chip:"#ff8e7e"}
   },
 
@@ -555,7 +555,7 @@ const DATA = {
        ["Warriors have won 3 of their last 4 against the Tigers at this venue; no structural reason to fight the favourite here","medium","away"]
      ]},
     {h:"Dolphins",a:"Sharks",ven:"Kayo Stadium, Redcliffe",when:"Sat 11 Jul 5:00pm",
-     odH:1.48,odA:2.55,homeEdge:3.5,avail:[0,0],
+     odH:1.48,odA:2.55,homeEdge:3.5,avail:[0,0],result:{hs:0,as:66},
      notes:[
        ["Dolphins get SIX back from Origin/injury — Bostock, Tabuai-Fidow, Plath, Stone, Cobbo and Flegler — the first fully assembled Dolphins spine in weeks","critical","home"],
        ["Sharks get FIVE back too — Fonua-Blake, Brailey, Nikora, Puru and Stonestreet — so this reverts to something close to the two sides' true full-strength gap, not an Origin-skewed read","high","neutral"],
@@ -571,7 +571,7 @@ const DATA = {
        ["Bulldogs have won 4 straight; Raiders are 1 win from their last 3 on the road","medium","home"]
      ]},
     {h:"Roosters",a:"Eels",ven:"Allianz Stadium, Sydney",when:"Sat 11 Jul 9:35pm",
-     odH:1.20,odA:4.50,homeEdge:3.5,avail:[3,0],
+     odH:1.20,odA:4.50,homeEdge:3.5,avail:[3,0],result:{hs:28,as:12},
      notes:[
        ["Tedesco failed a Category 2 HIA in Wednesday's Origin decider (head clash with Nikora) but was not stood down under the mandatory rule (Cat 2, not Cat 1) — named in the round 19 side; worth a final check before kickoff","high","home"],
        ["Roosters also carry Lindsay Collins and Junior Pauga in concussion protocol and Nat Butcher suspended (to R20) — three out, still a deep enough roster to field a full-strength spine","medium","home"],
@@ -607,7 +607,7 @@ const DATA = {
   boldPlay:{
     title:"No Bold Play this round",
     body:"R19 is the mirror image of the last few Origin-hit rounds: instead of players going out, they're all coming back in at once. Dolphins (six back) and Sharks (five back) both return to something close to full strength for the first time in weeks; Knights get Ponga and Best back; Titans get Fa'asuamaleaui and Fifita back; Cowboys captain Tom Dearden is back too, off the bench for his first game since Round 10. That leaves almost no residual availability asymmetry to exploit — the two games that touch the closest divergence (Bulldogs +8, Storm +8) are comfortably-priced home favourites the market already has right, not market-wrong contrarian cases. The one live coin flip on the card, Rabbitohs v Knights, sits at only +3 divergence and 53% conviction — nowhere near Bold Play shape even before considering it's a genuine 50/50 game. Twelfth consecutive round with no Bold Play.",
-    note:"R19 opener graded tonight: Warriors beat Tigers 32–6 at Campbelltown (pick landed, predicted margin 10 vs actual 26, no bonus) — season 72/97 (74.2%), up from 71/96 (74.0%) after R18. Re-checked team lists for Saturday's three games before touching anything: no material late scratches beyond what's already encoded — Tedesco confirmed named at fullback for Roosters v Eels, Moses backs up from Origin for the Eels, Josh Papalii and Daniel Tupou both return but neither changes an avail count already priced. No Bold Play case created by tonight's grade (Tigers v Warriors was never a bar-adjacent game). Next run: grade the three Saturday games (Dolphins v Sharks, Bulldogs v Raiders, Roosters v Eels) and the three Sunday games (Rabbitohs v Knights, Sea Eagles v Cowboys, Storm v Titans) as they land, verifying each against the exact round/venue/date per the R16 lesson."
+    note:"Two more R19 games graded tonight. Sharks 66-0 Dolphins at Kayo Stadium, a club-record demolition (Braydon Trindall masterclass on his birthday, 24-0 at half, Nicho Hynes 30 points, both sides confirmed back near full Origin strength beforehand). Our pick was Dolphins by 7 LEAN 63%, a clean MISS with no structural tell that a blowout this size was coming; the model and the market ($1.48) were both simply wrong side. Roosters 28-12 Eels at Allianz Stadium: pick landed (STRONG 86%, predicted margin 12 vs actual 16, within 5, margin bonus), Daniel Tupou scoring a hat-trick in his 300th game. Bulldogs v Raiders (Sat 11 Jul, Accor Stadium) could not be confirmed tonight: search results returned contradictory scorelines, one of which traced back to a prior-year Raiders-Bulldogs meeting (the same search-confabulation shape flagged repeatedly this season), so it's held as unconfirmed rather than guessed, per the grading discipline. Season 73/99 (73.7%), up from 72/97 (74.2%): the Dolphins miss outweighs the Roosters win on the percentage even though both graded tonight. No Bold Play case created by tonight's grades (neither game was bar-adjacent at pick time). Next run: confirm Bulldogs v Raiders against a primary source, grade the three Sunday games (Rabbitohs v Knights, Sea Eagles v Cowboys, Storm v Titans), then close R19 and run the full self-audit."
   }
 };
 
